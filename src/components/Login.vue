@@ -6,15 +6,15 @@
                     <form class="m-0" name="loginForm">
                         <div class="card-body">
                             <h3 class="card-title text-center card-title-custom-login">Betriebs Login</h3>
-                            <div class="form-group">
-                                <label class="label-login" for="username">Username</label>
-                                <input type="text" class="form-control text-center input-login" name="username"
-                                       id="username" placeholder="Username" autofocus required>
+                            <div class="form-group text-left">
+                                <label class="label-login" for="betriebsnummer">Betriebsnummer</label>
+                                <input type="text" class="form-control text-center input-login" name="betriebsnummer"
+                                       id="betriebsnummer" placeholder="Betriebsnummer" autofocus required>
                             </div>
-                            <div class="form-group">
-                                <label class="label-login" for="password">Password</label>
+                            <div class="form-group text-left">
+                                <label class="label-login" for="password">Passwort</label>
                                 <input type="password" class="form-control text-center input-login" name="password"
-                                       id="password" placeholder="Password" required>
+                                       id="password" placeholder="Passwort" required>
                             </div>
                             <button type="submit" class="btn btn-secondary btn-block btn_login_custom">login</button>
                         </div>
@@ -37,11 +37,14 @@
         border-radius: 15px !important;
     }
 
+    .btn_login_custom{
+        border: none !important;
+    }
+
     .btn.btn-secondary.btn-block.btn_login_custom:hover,
     .btn.btn-secondary.btn-block.btn_login_custom:active,
     .btn.btn-secondary.btn-block.btn_login_custom:focus {
         background-color: red;
-        border: none;
     }
 
     .label-login {
