@@ -1,12 +1,12 @@
 <template>
     <div>
         <div id="image"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col mt-4 rounded-lg" id="menu">
-                </div>
-            </div>
-        </div>
+        <b-container>
+            <b-row>
+                <b-col class="mt-5 rounded-lg" id="menu">
+                </b-col>
+            </b-row>
+        </b-container>
     </div>
 </template>
 
