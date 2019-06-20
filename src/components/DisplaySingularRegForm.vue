@@ -1,18 +1,20 @@
 <template>
-    <div>
 
+    <Layout>
         <h1>{{ form.registrationNumber }}</h1>
-
-    </div>
+    </Layout>
 </template>
 
 <script>
 
+
     import FormData from '../assets/sampleRegistrationForm';
+    import Layout from "./StandardLayout";
 
     export default {
-        name: "Singularregform",
-        data(){
+        name: "singularRegForm",
+        components: {Layout},
+        data() {
             return {
                 form: null
             }
