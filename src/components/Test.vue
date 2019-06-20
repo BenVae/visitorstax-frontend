@@ -1,14 +1,15 @@
 <template>
    <Layout>
-       test
+       <Title name="Test"/>
    </Layout>
 </template>
 
 <script>
-    import Layout from "./StandardLayout";
+    import Layout from "./utils/StandardLayout";
+    import Title from "./utils/Title";
     export default {
         name: "Test",
-        components: {Layout}
+        components: {Title, Layout}
     }
 </script>
 
