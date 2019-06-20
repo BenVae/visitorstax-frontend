@@ -44,7 +44,7 @@
     .btn.btn-secondary.btn-block.btn_login_custom:hover,
     .btn.btn-secondary.btn-block.btn_login_custom:active,
     .btn.btn-secondary.btn-block.btn_login_custom:focus {
-        background-color: red;
+        background-color: #E40521;
     }
 
     .label-login {
@@ -58,7 +58,7 @@
 
     .card-title-custom-login {
         margin-bottom: 8%;
-        border-bottom: 3px solid red;
+        border-bottom: 3px solid #E40521;
     }
 
 </style>

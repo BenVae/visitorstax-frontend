@@ -3,7 +3,7 @@
         <b-navbar toggleable="lg" type="light" class="navbar">
             <b-navbar-brand href="#">
                 <router-link to="/">
-                    <img class="pl-5" id="navbar-pic" height="70" src="../assets/Constance_logo.png"
+                    <img class="pl-5" id="navbar-pic" height="70" src="../../assets/Constance_logo.png"
                          alt="Konstanz Logo">
                 </router-link>
             </b-navbar-brand>
@@ -22,7 +22,7 @@
                     <b-nav-item>Meldescheine</b-nav-item>
 
                     <!-- Vermieter -->
-                    <b-nav-item id="new-form">neuen Schein</b-nav-item>
+                    <b-nav-item id="new-form"><router-link to="/meldeschein/anlegen">neuer Meldeschein</router-link></b-nav-item>
 
                     <!-- Stadt -->
                     <b-nav-item>Betriebe</b-nav-item>
