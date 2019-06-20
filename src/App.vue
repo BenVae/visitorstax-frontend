@@ -1,16 +1,15 @@
 <template>
     <div id="app">
         <Navbar/>
-        <Menubackground/>
+        <router-view/>
     </div>
 </template>
 
 <script>
     import Navbar from "./components/Navbar";
-    import Menubackground from "./components/Layout";
 
     export default {
-        components: {Menubackground, Navbar}
+        components: {Navbar}
     }
 
 </script>
