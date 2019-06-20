@@ -8,6 +8,7 @@
 <script>
     import Navbar from "./components/Navbar";
     import Menubackground from "./components/Menubackground";
+
     export default {
         components: {Menubackground, Navbar}
     }
