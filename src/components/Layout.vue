@@ -12,20 +12,12 @@
 
 <script>
     export default {
-        name: "menubackground"
+        name: "Layout"
     }
 </script>
 <style lang="scss" scoped>
     #menu {
         background: rgba(255, 255, 255, 0.9);
         min-height: 80vh;
-    }
-
-    #image {
-        position: fixed;
-        background: url("../assets/Constance.png");
-        background-size: cover;
-        height: 100vh;
-        width: 100vw;
     }
 </style>
