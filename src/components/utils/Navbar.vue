@@ -3,7 +3,7 @@
         <b-navbar toggleable="lg" type="light" class="navbar">
             <b-navbar-brand href="#">
                 <router-link to="/">
-                    <img class="pl-5" id="navbar-pic" height="70" src="../../assets/Constance_logo.png"
+                    <img class="pl-5" id="navbar-pic" height="50" src="../../assets/Constance_logo.png"
                          alt="Konstanz Logo">
                 </router-link>
             </b-navbar-brand>

@@ -9,10 +9,12 @@ import VueGoodTablePlugin from 'vue-good-table'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-good-table/dist/vue-good-table.css'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
+Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
 Vue.use(VueGoodTablePlugin);
-
 
 Vue.config.productionTip = false;
 
