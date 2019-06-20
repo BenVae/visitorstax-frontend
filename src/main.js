@@ -5,10 +5,13 @@ import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import 'vue-material-design-icons/styles.css'
 import VueGoodTablePlugin from 'vue-good-table'
+import moment from 'moment';
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-good-table/dist/vue-good-table.css'
+
+Object.defineProperty(Vue.prototype, 'moment', { value: moment });
 
 Vue.use(BootstrapVue);
 Vue.use(VueGoodTablePlugin);
