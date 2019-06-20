@@ -22,7 +22,7 @@
                     <b-nav-item>Meldescheine</b-nav-item>
 
                     <!-- Vermieter -->
-                    <b-nav-item id="new-form">neuen Schein</b-nav-item>
+                    <b-nav-item id="new-form"><router-link to="/meldeschein/anlegen">neuer Meldeschein</router-link></b-nav-item>
 
                     <!-- Stadt -->
                     <b-nav-item>Betriebe</b-nav-item>
