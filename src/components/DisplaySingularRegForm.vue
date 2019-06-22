@@ -1,5 +1,4 @@
 <template>
-
     <Layout>
         <h1>{{ form.registrationNumber }}</h1>
     </Layout>
@@ -9,7 +8,7 @@
 
 
     import FormData from '../assets/sampleRegistrationForm';
-    import Layout from "./StandardLayout";
+    import Layout from "./utils/StandardLayout";
 
     export default {
         name: "singularRegForm",

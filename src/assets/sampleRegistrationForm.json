@@ -1,4 +1,5 @@
-{
+[
+  {
   "registrationNumber": "666666",
   "businessObject": {
     "address": {
@@ -32,4 +33,41 @@
   "partnerSurname": "Schäfer",
   "partnerDateOfBirth": "1989-10-27",
   "nationality": "deutsch"
-}
+  },
+  {
+    "registrationNumber": "666667",
+    "businessObject": {
+      "address": {
+        "streetAndNumber": "Seestraße 18"
+      },
+      "business": {
+        "id": "123456789"
+      }
+    },
+    "isSubmitted": "false",
+    "arrivalDate": "2019-04-20",
+    "departureDate": "2019-04-29",
+    "guest": {
+      "name": "Hans",
+      "surname": "Schäfer",
+      "dateOfBirth": "1986-08-13",
+      "placeOfBirth": "Kempten",
+      "nationality": "deutsch",
+      "adress": {
+        "streetAndNumber": "Rheinstraße 87",
+        "zipCode": "47051",
+        "city": "Duisburg",
+        "country": "Deutschland"
+      },
+      "passportSerialNumber": "T22000129"
+    },
+    "foreignIdentityChecked": "true",
+    "foreignIdentityIdentical": "true",
+    "registrationFormTyp": "F",
+    "partnerName": "Natalie",
+    "partnerSurname": "Schäfer",
+    "partnerDateOfBirth": "1989-10-27",
+    "nationality": "deutsch"
+  }
+]
+
