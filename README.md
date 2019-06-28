@@ -25,5 +25,8 @@ npm run test
 npm run lint
 ```
 
+### Used Packages
+*  vuejs-datepicker: [doku](https://github.com/charliekassel/vuejs-datepicker#readme)
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

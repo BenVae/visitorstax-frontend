@@ -14,6 +14,6 @@
 <style scoped>
     .title-boarder-bottom{
         border-bottom: 3px solid #E40521;
-        padding: 0 16px 8px;
+        padding: 2px 16px;
     }
 </style>

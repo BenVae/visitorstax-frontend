@@ -3,7 +3,9 @@
         <b-container>
             <b-row>
                 <b-col class="mt-5 rounded-lg" id="menu">
-                    <slot/>
+                    <b-container>
+                        <slot/>
+                    </b-container>
                 </b-col>
             </b-row>
         </b-container>
