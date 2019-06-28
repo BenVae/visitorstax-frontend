@@ -31,5 +31,10 @@
   "partnerName": "Natalie",
   "partnerSurname": "Schäfer",
   "partnerDateOfBirth": "1989-10-27",
-  "nationality": "deutsch"
+  "nationality": "deutsch",
+  "childrenYearOfBirth" : [
+    2007,
+    2002,
+    2010
+  ]
 }
