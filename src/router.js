@@ -8,27 +8,27 @@ import RegForm from "./components/DisplaySingularRegForm";
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'test',
-      component: Test
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '/Meldeschein',
-      name: 'Meldeschein',
-      component: RegForm
-    },
-      {
-          path: '/meldeschein/anlegen',
-          component: RegistraionForm,
-      }
-  ]
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [
+        {
+            path: '/',
+            name: 'test',
+            component: Test
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login
+        },
+        {
+            path: '/Meldeschein',
+            name: 'Meldeschein',
+            component: RegForm
+        },
+        {
+            path: '/meldeschein/anlegen',
+            component: RegistraionForm,
+        }
+    ]
 })
