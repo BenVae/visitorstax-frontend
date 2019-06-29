@@ -1,15 +1,13 @@
 <template>
-    <div>
-        <b-container>
-            <b-row>
-                <b-col class="mt-5 rounded-lg" id="menu">
-                    <b-container>
-                        <slot/>
-                    </b-container>
-                </b-col>
-            </b-row>
-        </b-container>
-    </div>
+    <v-container>
+        <v-layout row>
+            <v-flex mt-5 rounded-lg id="menu">
+                <v-container>
+                    <slot/>
+                </v-container>
+            </v-flex>
+        </v-layout>
+    </v-container>
 </template>
 
 <script>
