@@ -1,6 +1,6 @@
 <template>
     <h1 class="text-center my-3">
-        <span class="title-boarder-bottom">{{name}}</span>
+        <span class="title-border-bottom">{{name}}</span>
     </h1>
 </template>
 
@@ -12,8 +12,8 @@
 </script>
 
 <style scoped>
-    .title-boarder-bottom{
+    .title-border-bottom{
         border-bottom: 3px solid #E40521;
-        padding: 0 16px 8px;
+        padding: 2px 16px;
     }
 </style>
