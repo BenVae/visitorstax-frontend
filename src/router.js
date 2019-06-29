@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Test from "./components/Test";
 import Login from "./components/Login";
 import RegistraionForm from "./components/RegistraionForm";
-import RegForm from "./components/DisplaySingularRegForm";
+import ShowRegFormHost from "./components/host/DisplaySingularFormHost.vue";
 
 Vue.use(Router);
 
@@ -24,7 +24,7 @@ export default new Router({
         {
             path: '/Meldeschein',
             name: 'Meldeschein',
-            component: RegForm
+            component: ShowRegFormHost
         },
         {
             path: '/meldeschein/anlegen',

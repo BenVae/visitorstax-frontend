@@ -1,45 +1,79 @@
 <template>
+    <b-container>
+        <div class="complete-form mt-5">
+            <!--
+            <b-row class="justify-content-center text-center top-buffer mb-3">
+                <b-col cols="4" id="ankunft">
+                    {{moment(form.arrivalDate).locale('de').calendar()}} bis
+                    {{moment(form.departureDate).locale('de').calendar()}}
+                </b-col>
+                <b-col cols="1"/>
+                <b-col cols="4">Objekt: {{form.businessObject.address.streetAndNumber}}</b-col>
+            </b-row>
+            <RowWithDescription name="Gast"/>
+            <b-row class="justify-content-center text-center top-buffer">
+                <b-col cols="4">
+                    Vorname: {{form.guest.name}}
+                </b-col>
+                <b-col cols="1"/>
+                <b-col cols="4">
+                    Familienname: {{form.guest.surname}}
+                </b-col>
+            </b-row>
+            <RowWithDescription name="Adresse"/>
+            -->
 
-    <Layout>
-        <b-container>
-            <Title :name="title"></Title>
-            <div class="complete-form mt-5">
-                <b-row class="justify-content-center text-center top-buffer mb-3">
-                    <b-col cols="4" id="ankunft">
-                        {{moment(form.arrivalDate).locale('de').calendar()}} bis
-                        {{moment(form.departureDate).locale('de').calendar()}}
-                    </b-col>
-                    <b-col cols="1"/>
-                    <b-col cols="4">Objekt: {{form.businessObject.address.streetAndNumber}}</b-col>
-                </b-row>
-                <RowWithDescription name="Gast"/>
-                <b-row class="justify-content-center text-center top-buffer">
-                    <b-col cols="4">
-                        Vorname: {{form.guest.name}}
-                    </b-col>
-                    <b-col cols="1"/>
-                    <b-col cols="4">
-                        Familienname: {{form.guest.surname}}
-                    </b-col>
-                </b-row>
-                <RowWithDescription name="Adresse"/>
-                <template v-if=""
+            <div class="card">
+                <div class="card-header">
+                    {{moment(form.arrivalDate).locale('de').calendar()}} -
+                    {{moment(form.departureDate).locale('de').calendar()}}
+                    <span class="float-right mr-5">{{form.businessObject.address.streetAndNumber}}</span>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item justify-content-around">
+                            <div class="section pb-0">
+                                <small>Gast</small>
+                            </div>
+                            <div class="row justify-content-center text-center">
+                                <div class="col-md-4 col-xs-12">{{form.guest.name}} {{form.guest.surname}}</div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4 col-xs-12">geboren
+                                    {{moment(form.guest.dateOfBirth).locale('de').calendar()}}
+                                </div>
+                            </div>
+                            <hr class="px-5">
+                            <div class="row justify-content-center text-center">
+                                <div class="col-md-4 col-xs-12">Passnummer: {{form.guest.passportSerialNumber}}</div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4 col-xs-12">Nationalität: {{form.guest.nationality}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <small class="sectionTitle">Adresse</small>
+                            <div class="row justify-content-center text-center">
+                                <div class="col-4">{{form.guest.adress.streetAndNumber}}</div>
+                                <div class="col-2"></div>
+                                <div class="col-4">{{form.guest.adress.zipCode}} {{form.guest.adress.city}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </b-container>
-    </Layout>
+
+        </div>
+    </b-container>
 </template>
 
 <script>
 
     import FormData from '../assets/sampleRegistrationForm';
-    import Layout from "./utils/StandardLayout";
-    import Title from "./utils/Title";
     import RowWithDescription from "./utils/RowWithDescription";
 
 
     export default {
         name: "singularRegForm",
-        components: {RowWithDescription, Title, Layout},
+        components: {RowWithDescription},
         data() {
             return {
                 form: null,
@@ -65,4 +99,8 @@
         margin-top: 10px;
     }
 
+    .sectionTitle {
+        margin-left: -20px;
+        margin-top: -12px;
+    }
 </style>
