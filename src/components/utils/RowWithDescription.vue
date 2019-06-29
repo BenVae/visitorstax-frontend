@@ -1,18 +1,17 @@
 <template>
-    <div class="row-with-description">
-        <b-row>
-            <b-col>
+    <v-container pt-0>
+        <v-layout row pt-0 class="row-with-description">
+            <v-flex pa-0>
                 <small>{{name}}</small>
-            </b-col>
-            <b-col class="text-right" v-if="isInUse">
-                <CloseIcon class="icon-2x"/>
-            </b-col>
-        </b-row>
-        <b-row class="mb-2 justify-content-md-center">
-            <slot/>
-        </b-row>
-    </div>
-
+            </v-flex>
+            <v-flex pa-0 text-sm-right v-if="hasSpouse">
+                <CloseIcon
+                v-on:click="toggleSpouseBoolean"
+                />
+            </v-flex>
+        </v-layout>
+        <slot/>
+    </v-container>
 </template>
 
 <script>
@@ -23,7 +22,12 @@
         components: {CloseIcon},
         props: {
             name: String,
-            isInUse: Boolean
+            hasSpouse: Boolean
+        },
+        methods: {
+            toggleSpouseBoolean() {
+                this.$emit('updateSpouse');
+            }
         }
     }
 </script>
@@ -31,15 +35,5 @@
 <style>
     .row-with-description {
         border-top: 1px solid darkgray;
-    }
-
-    .material-design-icon.icon-2x {
-        height: 1.5em;
-        width: 1.5em;
-    }
-
-    .material-design-icon.icon-2x > .material-design-icon__svg {
-        height: 1.5em;
-        width: 1.5em;
     }
 </style>

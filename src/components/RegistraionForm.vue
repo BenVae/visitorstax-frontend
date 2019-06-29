@@ -1,63 +1,142 @@
 <template>
     <Layout>
         <Title name="Meldeschein anlegen"/>
-        <b-row class="pt-3 justify-content-center">
-            <b-col md="3" sm="6">
-                    <v-select
-                            :items="items"
-                            label="Art"
-                    ></v-select>
-            </b-col>
-            <b-col md="3" sm="6">
-                    <v-select
-                            :items="mietobjekte"
-                            label="Mietobjekt"
-                    ></v-select>
-            </b-col>
-        </b-row>
-        <b-row class="pt-3 justify-content-md-center mb-3">
-            <b-col md="6">
-                <HotelDatePicker
-                        format="DD.MM.YYYY"
-                        :i18n="ptBr"
-                        @check-in-changed="setCheckinDate"
-                        @check-out-changed="setCheckoutDate">
-                </HotelDatePicker>
-            </b-col>
-        </b-row>
-        <RowWithDescription name="Gast">
-            <b-col md="3" sm="6">
-                <v-text-field
-                        label="Vorname (nur Rufname)"
+        <v-form>
+            <v-container>
+                <v-layout row justify-center>
+                    <v-flex sm6 md3>
+                        <v-select
+                                :items="items"
+                                label="Art"
+                        ></v-select>
+                    </v-flex>
+                    <v-flex sm6 md3>
+                        <v-select
+                                :items="mietobjekte"
+                                label="Mietobjekt"
+                        ></v-select>
+                    </v-flex>
+                </v-layout>
+                <v-layout row justify-center>
+                    <v-flex md6>
+                        <HotelDatePicker
+                                format="DD.MM.YYYY"
+                                :i18n="ptBr"
+                                @check-in-changed="setCheckinDate"
+                                @check-out-changed="setCheckoutDate">
+                        </HotelDatePicker>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+            <row-with-description name="Gast">
+                <v-layout row justify-center>
+                    <v-flex sm6 md3>
+                        <v-text-field
+                                label="Vorname (nur Rufname)"
                         >
-                </v-text-field>
-            </b-col>
-            <b-col md="3" sm="6">
-                <v-text-field
-                        label="Familienname">
-                </v-text-field>
-            </b-col>
-            <div class="w-100 d-none d-md-block"></div>
-            <b-col md="2" sm="4">
-                <BirthdayPicker/>
-            </b-col>
-            <b-col md="2" sm="4">
-                <v-text-field
-                        label="Passnummer">
-                </v-text-field>
-            </b-col>
-            <b-col md="2" sm="4">
-                <v-text-field
-                        label="Nationalität">
-                </v-text-field>
-            </b-col>
-        </RowWithDescription>
-        <RowWithDescription name="Ehegatte/Lebenspartner"
-                            :is-in-use="isInUse">
-            <b-col class="text-center" v-if="!isInUse">
-                <CloseIcon class="icon-2x"></CloseIcon>
-            </b-col>
-        </RowWithDescription>
+                        </v-text-field>
+                    </v-flex>
+                    <v-flex sm6 md3>
+                        <v-text-field
+                                label="Familienname">
+                        </v-text-field>
+                    </v-flex>
+                </v-layout>
+                <v-layout row justify-center>
+                    <v-flex sm4 md2>
+                        <BirthdayPicker/>
+                    </v-flex>
+                    <v-flex sm4 md2>
+                        <v-text-field
+                                label="Passnummer">
+                        </v-text-field>
+                    </v-flex>
+                    <v-flex sm4 md2>
+                        <v-text-field
+                                label="Nationalität">
+                        </v-text-field>
+                    </v-flex>
+                </v-layout>
+            </row-with-description>
+            <row-with-description name="Ehegatte/Lebenspartner"
+                                  :has-spouse="hasSpouse"
+                                  @updateSpouse="toggleSpouseBoolean">
+                <v-flex class="text-center"
+                        v-if="!hasSpouse">
+                    <plus-icon
+                            v-on:click="toggleSpouseBoolean"
+                            :size="48"
+                            fill-color="#607D8B"
+                    />
+                </v-flex>
+                <template v-else>
+                    <v-layout row justify-center>
+                        <v-flex sm6 md3>
+                            <v-text-field
+                                    label="Vorname (nur Rufname)"
+                            >
+                            </v-text-field>
+                        </v-flex>
+                        <v-flex sm6 md3>
+                            <v-text-field
+                                    label="Familienname">
+                            </v-text-field>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout row justify-center>
+                        <v-flex sm4 md2>
+                            <birthday-picker/>
+                        </v-flex>
+                        <v-flex sm4 md2>
+                            <v-text-field
+                                    label="Passnummer">
+                            </v-text-field>
+                        </v-flex>
+                        <v-flex sm4 md2>
+                            <v-text-field
+                                    label="Nationalität">
+                            </v-text-field>
+                        </v-flex>
+                    </v-layout>
+                </template>
+            </row-with-description>
+            <row-with-description
+                    name="Adresse">
+                <v-layout row justify-center>
+                    <v-flex sm6 md3>
+                        <v-text-field
+                                label="Straße/Hausnummer">
+                        </v-text-field>
+                    </v-flex>
+                    <v-flex sm4 md2>
+                        <v-text-field
+                                label="Postleizahl">
+                        </v-text-field>
+                    </v-flex>
+                    <v-flex sm4 md2>
+                        <v-text-field
+                                label="Wohnort">
+                        </v-text-field>
+                    </v-flex>
+                </v-layout>
+            </row-with-description>
+            <row-with-description
+                    name="Kinder">
+                <v-layout row justify-center>
+                    <v-flex sm6 md3>
+                        <v-text-field
+                                label="Anzahl Kinder"
+                                type="number"
+                                max="5">
+                            <v-tooltip slot="prepend" bottom>
+                                <v-icon slot="activator" color="grey" dark>info</v-icon>
+                                <span>Bitte nur Kinder unter 16 Jahren eintragen. Kinder über 16 benötigen einen eigenen Meldeschein</span>
+                            </v-tooltip>
+                        </v-text-field>
+                    </v-flex>
+                </v-layout>
+            </row-with-description>
+        </v-form>
     </Layout>
 </template>
 
@@ -67,12 +146,11 @@
     import RowWithDescription from "./utils/RowWithDescription";
     import HotelDatePicker from 'vue-hotel-datepicker'
     import BirthdayPicker from "./utils/BirthdayPicker";
-    import CloseIcon from "vue-material-design-icons/Close";
-
+    import PlusIcon from "vue-material-design-icons/Plus";
 
     export default {
         name: "RegistrationForm",
-        components: {BirthdayPicker, RowWithDescription, Title, Layout, HotelDatePicker, CloseIcon},
+        components: {PlusIcon, BirthdayPicker, RowWithDescription, Title, Layout, HotelDatePicker},
         methods: {
             customFormatter(date) {
                 return this.$moment(date).format('DD.MM.YYYY');
@@ -83,8 +161,11 @@
             setCheckoutDate(newDate) {
                 this.endDate = this.customFormatter(newDate);
             },
-            save (date) {
+            save(date) {
                 this.$refs.menu.save(date)
+            },
+            toggleSpouseBoolean() {
+                this.hasSpouse = !this.hasSpouse;
             }
         },
         data: () => ({
@@ -94,7 +175,7 @@
             endDate: "",
             dateOfBirth: "",
             range: {},
-            isInUse: false,
+            hasSpouse: false,
             ptBr: {
                 night: 'Nacht',
                 nights: 'Nächte',
@@ -107,7 +188,7 @@
             menu: false
         }),
         watch: {
-            menu (val) {
+            menu(val) {
                 val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
             }
         },

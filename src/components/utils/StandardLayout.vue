@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout row>
-            <v-flex mt-5 rounded-lg id="menu">
+            <v-flex rounded-lg id="menu">
                 <v-container>
                     <slot/>
                 </v-container>

@@ -4,7 +4,6 @@ import './plugins/vuetify'
 import router from './router'
 import store from './store'
 import BootstrapVue from 'bootstrap-vue'
-import 'vue-material-design-icons/styles.css'
 import VueGoodTablePlugin from 'vue-good-table'
 import HotelDatePicker from 'vue-hotel-datepicker'
 
