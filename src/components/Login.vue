@@ -5,7 +5,7 @@
                 <v-card rounded-lg class="card-login-custom">
                     <v-card-text>
                         <h3 class="card-title-custom-login text-xs-center">
-                            Betriebs Login
+                            Vermieter Login
                         </h3>
                         <v-form>
                             <v-text-field
