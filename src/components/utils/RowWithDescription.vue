@@ -5,9 +5,9 @@
                 <small>{{name}}</small>
             </v-flex>
             <v-flex pa-0 text-sm-right v-if="hasSpouse">
-                <CloseIcon
-                v-on:click="toggleSpouseBoolean"
-                />
+                <close-icon
+                        v-on:click="toggleSpouseBoolean">
+                </close-icon>
             </v-flex>
         </v-layout>
         <slot/>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+
     import CloseIcon from "vue-material-design-icons/Close";
 
     export default {
@@ -35,5 +36,14 @@
 <style>
     .row-with-description {
         border-top: 1px solid darkgray;
+    }
+
+    .orders-layout {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 50%;
+        overflow: auto;
     }
 </style>

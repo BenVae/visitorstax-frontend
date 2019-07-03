@@ -125,15 +125,30 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
+                                v-model="amountChilds"
                                 label="Anzahl Kinder"
                                 type="number"
-                                max="5">
+                                max="5"
+                                min="0"
+                        >
                             <v-tooltip slot="prepend" bottom>
                                 <v-icon slot="activator" color="grey" dark>info</v-icon>
                                 <span>Bitte nur Kinder unter 16 Jahren eintragen. Kinder über 16 benötigen einen eigenen Meldeschein</span>
                             </v-tooltip>
                         </v-text-field>
                     </v-flex>
+                    <v-flex sm6 md3
+                            v-for="index in childrenSize"
+                            :key="index">
+                        <v-text-field
+
+                                label="Kind"
+                                type="number"
+                                max="16"
+                                min="0">
+                        </v-text-field>
+                    </v-flex>
+
                 </v-layout>
             </row-with-description>
         </v-form>
@@ -168,6 +183,11 @@
                 this.hasSpouse = !this.hasSpouse;
             }
         },
+        computed: {
+            childrenSize: function () {
+                return this.amountChilds;
+            }
+        },
         data: () => ({
             items: ['Regulär', 'Gruppe'],
             mietobjekte: ['Alemannstr. 5', 'Hohneckerstr. 10'],
@@ -176,6 +196,7 @@
             dateOfBirth: "",
             range: {},
             hasSpouse: false,
+            amountChilds: 0,
             ptBr: {
                 night: 'Nacht',
                 nights: 'Nächte',
@@ -198,5 +219,10 @@
 <style lang="scss" scoped>
     .white-background {
         background-color: #FFF !important;
+    }
+
+    .scroll-here {
+        overflow: auto;
+        height: 740px;
     }
 </style>
