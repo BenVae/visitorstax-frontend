@@ -1,32 +1,99 @@
 <template>
     <standard-layout>
-        <b-container fluid>
-            <Title name="Meldescheine"/>
-            <b-row class="mt-3">
-                <b-col md="4" class="my-1">
-                    <b-form-group label="Filter:" class="mb-0">
-                        <b-input-group>
-                            <b-form-input v-model="filter" placeholder="Type to Search"></b-form-input>
-                        </b-input-group>
-                    </b-form-group>
-                </b-col>
-                <b-col md="4" class="my-1">
-                    <b-form-group label="Ankunft:" class="mb-0">
-                        <b-input-group>
-                            <input type="date" v-model="ankunftFilter"/>
-                        </b-input-group>
-                    </b-form-group>
-                </b-col>
-                <b-col md="4" class="my-1">
-                    <b-form-group label="Abreise:" class="mb-0">
-                        <b-input-group>
-                            <input type="date" v-model="abfahrtFilter"/>
-                        </b-input-group>
-                    </b-form-group>
-                </b-col>
-            </b-row>
-            <b-table striped hover bordered :filter="filter" :fields="fields" :items="form"/>
-        </b-container>
+        <Title name="Meldescheine"/>
+        <v-container>
+        <v-card>
+            <v-card-title>
+                <v-layout row >
+                    <v-flex xs12 md4 px-4>
+                        <v-text-field
+                                v-model="search"
+                                prepend-inner-icon="search"
+                                label="Suche"
+                                hide-details
+                        ></v-text-field>
+                    </v-flex>
+                    <v-flex xs12 md4 px-4>
+                        <v-menu
+                                v-model="menu1"
+                                :close-on-content-click="false"
+                                :nudge-right="40"
+                                lazy
+                                transition="scale-transition"
+                                offset-y
+                                full-width
+                                min-width="290px"
+                        >
+                            <template v-slot:activator="{ on }">
+                                <v-text-field
+
+                                        label="Ankunft"
+                                        prepend-inner-icon="event"
+                                        readonly
+                                        v-on="on"
+                                        clearable
+                                        v-model="computeArrivalDateFormat"
+                                ></v-text-field>
+                            </template>
+                            <v-date-picker v-model="arrivalDate"
+                                           @input="menu1 = false"
+                                           color="red lighten-1"
+                            ></v-date-picker>
+                        </v-menu>
+                    </v-flex>
+                    <v-flex xs12 md4 px-4 pr-4>
+                        <v-menu
+                                v-model="menu2"
+                                :close-on-content-click="false"
+                                :nudge-right="40"
+                                lazy
+                                transition="scale-transition"
+                                offset-y
+                                full-width
+                                min-width="290px"
+                        >
+                            <template v-slot:activator="{ on }">
+                                <v-text-field
+                                        label="Abfahrt"
+                                        prepend-inner-icon="event"
+                                        readonly
+                                        v-on="on"
+                                        clearable
+                                        v-model="computeDepartureDateFormat"
+                                ></v-text-field>
+                            </template>
+                            <v-date-picker v-model="departureDate"
+                                           form
+                                           @input="menu2 = false"
+                                           color="red lighten-1"
+                            ></v-date-picker>
+                        </v-menu>
+                    </v-flex>
+                </v-layout>
+            </v-card-title>
+            <v-data-table
+                    :headers="headers"
+                    :items="items"
+                    :search="search"
+                    :pagination.sync="pagination"
+                    :rows-per-page-items="[]"
+            >
+                <template v-slot:items="props">
+                    <td>{{ props.item.registrationNumber }}</td>
+                    <td class="text-xs-left">{{ props.item.guest.surname }}</td>
+                    <td class="text-xs-left">{{ props.item.guest.name }}</td>
+                    <td class="text-xs-left">{{ props.item.arrivalDate }}</td>
+                    <td class="text-xs-left">{{ props.item.departureDate }}</td>
+                    <td class="text-xs-left">{{ props.item.registrationFormTyp }}</td>
+                </template>
+                <template v-slot:no-results>
+                    <v-alert :value="true" color="error" icon="warning">
+                        Die Suche "{{ search }}" war leider Ergebnislos.
+                    </v-alert>
+                </template>
+            </v-data-table>
+        </v-card>
+        </v-container>
     </standard-layout>
 </template>
 
@@ -40,17 +107,54 @@
         components: {Title, StandardLayout},
         data() {
             return {
-                form: null,
-                fields:[{key:'registrationNumber',label:'Ms-Nr.', sortable:true},{key:'guest.surname', label:'Nachname'},{key:'guest.name',label:'Vorname'},
-                    {key:'arrivalDate',label:'Ankunft'},{key:'departureDate',label:'Abreise'},{key:'registrationFormTyp',label:'Typ'}],
-                filter:null,
-                abfahrtFilter:null,
-                ankunftFilter:null
+                pagination:{rowsPerPage:8},
+                items: null,
+                search: '',
+                arrivalDate: null,
+                departureDate: null,
+                menu1:false,
+                menu2: false,
+                headers:[
+                    {
+                        text: 'Ms-Nr.',
+                        value: 'registrationNumber'
+                    },
+                    {
+                        text: 'Name',
+                        value: 'guest.surname'
+                    },
+                    {
+                        text: 'Vorname',
+                        value: 'guest.name'
+                    },
+                    {
+                        text: 'Ankunft',
+                        value: 'arrivalDate'
+                    },
+                    {
+                        text: 'Abfahrt',
+                        value: 'departureDate'
+                    },
+                    {
+                        text: 'Typ',
+                        value: 'registrationFormTyp'
+                    }
+                ]
             }
         },
-        mounted() {
-            this.form = FormData
+        beforeMount() {
+            this.items = FormData
         },
+        computed:{
+            computeArrivalDateFormat () {
+                if(this.arrivalDate == null) return null
+                return this.$moment(new Date().toISOString().substr(0, 10)).format('DD.MM.YYYY')
+            },
+            computeDepartureDateFormat () {
+                if(this.departureDate == null) return null
+                return this.$moment(new Date().toISOString().substr(0, 10)).format('DD.MM.YYYY')
+            }
+        }
     }
 </script>
 
