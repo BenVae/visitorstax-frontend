@@ -1,27 +1,6 @@
 <template>
     <b-container>
         <div class="complete-form mt-5">
-            <!--
-            <b-row class="justify-content-center text-center top-buffer mb-3">
-                <b-col cols="4" id="ankunft">
-                    {{moment(form.arrivalDate).locale('de').calendar()}} bis
-                    {{moment(form.departureDate).locale('de').calendar()}}
-                </b-col>
-                <b-col cols="1"/>
-                <b-col cols="4">Objekt: {{form.businessObject.address.streetAndNumber}}</b-col>
-            </b-row>
-            <RowWithDescription name="Gast"/>
-            <b-row class="justify-content-center text-center top-buffer">
-                <b-col cols="4">
-                    Vorname: {{form.guest.name}}
-                </b-col>
-                <b-col cols="1"/>
-                <b-col cols="4">
-                    Familienname: {{form.guest.surname}}
-                </b-col>
-            </b-row>
-            <RowWithDescription name="Adresse"/>
-            -->
 
             <div class="card">
                 <div class="card-header">
