@@ -197,6 +197,9 @@
                     </v-layout>
                 </template>
             </row-with-description>
+            <v-layout align-end justify-end>
+                <v-btn color="blue-grey" dark>weiter</v-btn>
+            </v-layout>
         </v-form>
     </Layout>
 </template>
@@ -234,7 +237,11 @@
         },
         computed: {
             childrenSize: function () {
-                return this.amountChilds;
+                let childArray = [];
+                for (let index = 0; index < this.amountChilds; index++) {
+                    childArray.push('');
+                }
+                return childArray;
             },
             amountPersons: function () {
                 return this.hasSpouse ? 2 : 1;
@@ -250,6 +257,7 @@
             hasSpouse: false,
             business: false,
             amountChilds: 0,
+            children: [],
             ptBr: {
                 night: 'Nacht',
                 nights: 'Nächte',

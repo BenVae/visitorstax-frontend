@@ -2,7 +2,9 @@
     <v-container class="v-container">
         <v-layout row fill-height>
             <v-flex rounded-lg id="menu">
-                <v-container class="content">
+                <v-container
+                        class="content"
+                        :class="{'px-5': $vuetify.breakpoint.mdAndUp}">
                     <slot/>
                 </v-container>
             </v-flex>
@@ -42,5 +44,11 @@
     ::-webkit-scrollbar-thumb {
         background-color: darkgrey;
         outline: 1px solid slategrey;
+        border-radius: 3px;
     }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: gray;
+    }
+
 </style>
