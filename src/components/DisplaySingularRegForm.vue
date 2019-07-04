@@ -32,9 +32,7 @@
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item justify-content-around">
-                            <div class="section pb-0">
-                                <small>Gast</small>
-                            </div>
+                            <small class="sectionTitle">Gast</small>
                             <div class="row justify-content-center text-center">
                                 <div class="col-md-4 col-xs-12">{{form.guest.name}} {{form.guest.surname}}</div>
                                 <div class="col-md-2"></div>
@@ -52,9 +50,9 @@
                         <li class="list-group-item">
                             <small class="sectionTitle">Adresse</small>
                             <div class="row justify-content-center text-center">
-                                <div class="col-4">{{form.guest.adress.streetAndNumber}}</div>
-                                <div class="col-2"></div>
-                                <div class="col-4">{{form.guest.adress.zipCode}} {{form.guest.adress.city}}</div>
+                                <div class="col-md-4 col-xs-12">{{form.guest.adress.streetAndNumber}}</div>
+                                <div class="col-md-2"></div>
+                                <div class="col-md-4 col-xs-12">{{form.guest.adress.zipCode}} {{form.guest.adress.city}}</div>
                             </div>
                         </li>
                     </ul>
@@ -101,6 +99,6 @@
 
     .sectionTitle {
         margin-left: -20px;
-        margin-top: -12px;
+        color: gray;
     }
 </style>
