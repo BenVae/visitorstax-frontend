@@ -26,7 +26,6 @@
                         >
                             <template v-slot:activator="{ on }">
                                 <v-text-field
-
                                         label="Ankunft"
                                         prepend-inner-icon="event"
                                         readonly
@@ -35,9 +34,10 @@
                                         v-model="computeArrivalDateFormat"
                                 ></v-text-field>
                             </template>
-                            <v-date-picker v-model="arrivalDate"
-                                           @input="menu1 = false"
-                                           color="red lighten-1"
+                            <v-date-picker
+                                    v-model="arrivalDate"
+                                    @input="menu1 = false"
+                                    color="red lighten-1"
                             ></v-date-picker>
                         </v-menu>
                     </v-flex>
@@ -80,11 +80,11 @@
             >
                 <template v-slot:items="props">
                     <td>{{ props.item.registrationNumber }}</td>
-                    <td class="text-xs-left">{{ props.item.guest.surname }}</td>
-                    <td class="text-xs-left">{{ props.item.guest.name }}</td>
-                    <td class="text-xs-left">{{ props.item.arrivalDate }}</td>
-                    <td class="text-xs-left">{{ props.item.departureDate }}</td>
-                    <td class="text-xs-left">{{ props.item.registrationFormTyp }}</td>
+                    <td>{{ props.item.guest.surname }}</td>
+                    <td>{{ props.item.guest.name }}</td>
+                    <td>{{ $moment(props.item.arrivalDate).format('DD.MM.YYYY') }}</td>
+                    <td>{{ $moment(props.item.departureDate).format('DD.MM.YYYY') }}</td>
+                    <td>{{ props.item.registrationFormTyp }}</td>
                 </template>
                 <template v-slot:no-results>
                     <v-alert :value="true" color="error" icon="warning">

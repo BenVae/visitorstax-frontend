@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout row>
-            <v-flex mt-5 rounded-lg id="menu">
+            <v-flex mt-5 rounded-lg id="menu" class="layout-flow">
                 <v-container>
                     <slot/>
                 </v-container>
@@ -19,5 +19,8 @@
     #menu {
         background: rgba(255, 255, 255, 0.9);
         min-height: 80vh;
+    }
+    .layout-flow{
+        overflow: auto;
     }
 </style>
