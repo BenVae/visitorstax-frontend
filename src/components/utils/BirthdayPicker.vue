@@ -43,6 +43,9 @@
         },
         computed: {
             customFormatter: function () {
+                if (this.date === null){
+                    return null;
+                }
                 return this.$moment(this.date).format('DD.MM.YYYY');
             },
         },

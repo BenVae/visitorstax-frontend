@@ -25,8 +25,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    {{moment(form.arrivalDate).locale('de').calendar()}} -
-                    {{moment(form.departureDate).locale('de').calendar()}}
+                    {{customFormatter(form.arrivalDate)}} - {{customFormatter(form.departureDate)}}
                     <span class="float-right mr-5">{{form.businessObject.address.streetAndNumber}}</span>
                 </div>
                 <div class="card-body">
@@ -39,7 +38,7 @@
                                 <div class="col-md-4 col-xs-12">{{form.guest.name}} {{form.guest.surname}}</div>
                                 <div class="col-md-2"></div>
                                 <div class="col-md-4 col-xs-12">geboren
-                                    {{moment(form.guest.dateOfBirth).locale('de').calendar()}}
+                                    {{customFormatter(form.guest.dateOfBirth)}}
                                 </div>
                             </div>
                             <hr class="px-5">
@@ -67,13 +66,11 @@
 
 <script>
 
-    import FormData from '../assets/sampleRegistrationForm';
-    import RowWithDescription from "./utils/RowWithDescription";
-
+    import FormData from '../assets/singleSampleRegistrationForm';
 
     export default {
         name: "singularRegForm",
-        components: {RowWithDescription},
+        components: {},
         data() {
             return {
                 form: null,
@@ -81,9 +78,14 @@
                 hasChildren: null
             }
         },
-        mounted() {
-            this.form = FormData,
-                this.title = "Meldeschein #" + this.form.registrationNumber;
+        methods: {
+            customFormatter(date) {
+                return this.$moment(date).format('DD.MM.YYYY');
+            },
+        },
+        beforeMount() {
+            this.form = FormData;
+            this.title = "Meldeschein #" + this.form.registrationNumber;
 
         },
     }
