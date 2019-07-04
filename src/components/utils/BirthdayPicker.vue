@@ -12,7 +12,7 @@
     >
         <template v-slot:activator="{ on }">
             <v-text-field
-                    v-model="date"
+                    v-model="customFormatter"
                     label="Birthday date"
                     prepend-inner-icon="event"
                     readonly
@@ -41,12 +41,14 @@
                 val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
             }
         },
+        computed: {
+            customFormatter: function () {
+                return this.$moment(this.date).format('DD.MM.YYYY');
+            },
+        },
         methods: {
             save (date) {
                 this.$refs.menu.save(date)
-            },
-            customFormatter(date) {
-                return this.$moment(date).format('DD.MM.YYYY');
             },
         }
     }

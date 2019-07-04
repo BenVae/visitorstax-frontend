@@ -59,8 +59,8 @@
                 </v-layout>
             </row-with-description>
             <row-with-description name="Ehegatte/Lebenspartner"
-                                  :has-spouse="hasSpouse"
-                                  @updateSpouse="toggleSpouseBoolean">
+                                  :closable="hasSpouse"
+                                  @destroyCloseIcon="toggleSpouseBoolean">
                 <v-flex class="text-center"
                         v-if="!hasSpouse">
                     <plus-icon
@@ -151,6 +151,52 @@
 
                 </v-layout>
             </row-with-description>
+            <row-with-description name="Geschäftlichte Tätigkeit"
+                                  :closable="business"
+                                  @destroyCloseIcon="toggleBusinessBoolean">
+                <v-flex class="text-center"
+                        v-if="!business">
+                    <plus-icon
+                            v-on:click="toggleBusinessBoolean"
+                            :size="48"
+                            fill-color="#607D8B"
+                    />
+                </v-flex>
+                <template v-else>
+                    <v-layout row justify-center>
+                        <v-flex sm6 md3>
+                            <v-text-field
+                                    label="Anzahl geschäftl. tätiger Personen"
+                                    type="number"
+                                    min="0"
+                                    :max="amountPersons"
+                            >
+                            </v-text-field>
+                        </v-flex>
+                        <v-flex sm6 md3>
+                            <v-text-field
+                                    label="Auftragsfirma">
+                            </v-text-field>
+                        </v-flex>
+                    </v-layout>
+                    <v-layout row justify-center>
+                        <v-flex sm6 md3>
+                            <v-text-field
+                                    label="Anzahl Tagungsbesucher"
+                                    type="number"
+                                    min="0"
+                                    :max="amountPersons"
+                            >
+                            </v-text-field>
+                        </v-flex>
+                        <v-flex sm6 md3>
+                            <v-text-field
+                                    label="Tätigkeitsfeld">
+                            </v-text-field>
+                        </v-flex>
+                    </v-layout>
+                </template>
+            </row-with-description>
         </v-form>
     </Layout>
 </template>
@@ -181,11 +227,17 @@
             },
             toggleSpouseBoolean() {
                 this.hasSpouse = !this.hasSpouse;
+            },
+            toggleBusinessBoolean() {
+                this.business = !this.business;
             }
         },
         computed: {
             childrenSize: function () {
                 return this.amountChilds;
+            },
+            amountPersons: function () {
+                return this.hasSpouse ? 2 : 1;
             }
         },
         data: () => ({
@@ -196,6 +248,7 @@
             dateOfBirth: "",
             range: {},
             hasSpouse: false,
+            business: false,
             amountChilds: 0,
             ptBr: {
                 night: 'Nacht',

@@ -19,7 +19,7 @@
                 <b-navbar-nav class="ml-auto pr-5">
                     <!-- Vermieter und Stadt -->
                     <b-nav-item>Start</b-nav-item>
-                    <b-nav-item>Meldescheine</b-nav-item>
+                    <b-nav-item><router-link to="/meldescheine">Meldescheine</router-link></b-nav-item>
 
                     <!-- Vermieter -->
                     <b-nav-item id="new-form"><router-link to="/meldeschein/anlegen">neuer Meldeschein</router-link></b-nav-item>

@@ -4,9 +4,9 @@
             <v-flex pa-0>
                 <small>{{name}}</small>
             </v-flex>
-            <v-flex pa-0 text-sm-right v-if="hasSpouse">
+            <v-flex pa-0 text-sm-right v-if="closable">
                 <close-icon
-                        v-on:click="toggleSpouseBoolean">
+                        v-on:click="toggleButtonVisibility">
                 </close-icon>
             </v-flex>
         </v-layout>
@@ -23,11 +23,11 @@
         components: {CloseIcon},
         props: {
             name: String,
-            hasSpouse: Boolean
+            closable: Boolean
         },
         methods: {
-            toggleSpouseBoolean() {
-                this.$emit('updateSpouse');
+            toggleButtonVisibility() {
+                this.$emit('destroyCloseIcon');
             }
         }
     }
