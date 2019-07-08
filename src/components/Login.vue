@@ -2,7 +2,7 @@
     <v-container fluid fill-height>
         <v-layout align-center justify-center>
             <v-flex xs12 sm8 md6 lg4>
-                <v-card rounded-lg class="card-login-custom">
+                <v-card rounded-lg>
                     <v-card-text>
                         <h3 class="card-title-custom-login text-xs-center">
                             Vermieter Login

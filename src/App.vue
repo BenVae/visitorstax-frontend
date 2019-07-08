@@ -15,7 +15,10 @@
 </script>
 
 <style lang="scss">
-    * i{ font-family: 'Material Icons',serif; }
+    * i {
+        font-family: 'Material Icons', serif;
+    }
+
     #app {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -24,5 +27,9 @@
         background-size: cover;
         height: 100vh;
         width: 100vw;
+    }
+
+    .show-pointer {
+        cursor: pointer;
     }
 </style>

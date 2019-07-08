@@ -13,7 +13,7 @@
         <template v-slot:activator="{ on }">
             <v-text-field
                     v-model="customFormatter"
-                    label="Birthday date"
+                    label="Geburtsdatum"
                     prepend-inner-icon="event"
                     readonly
                     v-on="on"

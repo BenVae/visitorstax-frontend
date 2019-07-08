@@ -30,22 +30,22 @@
             </v-container>
             <row-with-description name="Gast">
                 <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                    <v-flex sm4 md2>
                         <v-text-field
                                 label="Vorname (nur Rufname)"
                         >
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm6 md3>
+                    <v-flex sm4 md2>
                         <v-text-field
                                 label="Familienname">
                         </v-text-field>
                     </v-flex>
-                </v-layout>
-                <v-layout row justify-center>
                     <v-flex sm4 md2>
                         <BirthdayPicker/>
                     </v-flex>
+                </v-layout>
+                <v-layout row justify-center>
                     <v-flex sm4 md2>
                         <v-text-field
                                 label="Passnummer">
@@ -56,6 +56,11 @@
                                 label="Nationalität">
                         </v-text-field>
                     </v-flex>
+                    <v-flex sm4 md2>
+                        <v-text-field
+                                label="Geburtsort">
+                        </v-text-field>
+                    </v-flex>
                 </v-layout>
             </row-with-description>
             <row-with-description name="Ehegatte/Lebenspartner"
@@ -64,6 +69,7 @@
                 <v-flex class="text-center"
                         v-if="!hasSpouse">
                     <plus-icon
+                            class="show-pointer"
                             v-on:click="toggleSpouseBoolean"
                             :size="48"
                             fill-color="#607D8B"
@@ -71,22 +77,21 @@
                 </v-flex>
                 <template v-else>
                     <v-layout row justify-center>
-                        <v-flex sm6 md3>
+                        <v-flex sm4 md2>
                             <v-text-field
-                                    label="Vorname (nur Rufname)"
-                            >
+                                    label="Vorname (nur Rufname)">
                             </v-text-field>
                         </v-flex>
-                        <v-flex sm6 md3>
+                        <v-flex sm4 md2>
                             <v-text-field
                                     label="Familienname">
                             </v-text-field>
                         </v-flex>
+                        <v-flex sm4 md2>
+                            <BirthdayPicker/>
+                        </v-flex>
                     </v-layout>
                     <v-layout row justify-center>
-                        <v-flex sm4 md2>
-                            <birthday-picker/>
-                        </v-flex>
                         <v-flex sm4 md2>
                             <v-text-field
                                     label="Passnummer">
@@ -95,6 +100,11 @@
                         <v-flex sm4 md2>
                             <v-text-field
                                     label="Nationalität">
+                            </v-text-field>
+                        </v-flex>
+                        <v-flex sm4 md2>
+                            <v-text-field
+                                    label="Geburtsort">
                             </v-text-field>
                         </v-flex>
                     </v-layout>
@@ -129,27 +139,27 @@
                                 label="Anzahl Kinder"
                                 type="number"
                                 max="5"
-                                min="0"
-                        >
+                                min="0">
                             <v-tooltip slot="prepend" bottom>
                                 <v-icon slot="activator" color="grey" dark>info</v-icon>
                                 <span>Bitte nur Kinder unter 16 Jahren eintragen. Kinder über 16 benötigen einen eigenen Meldeschein</span>
                             </v-tooltip>
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm6 md3
-                            v-for="index in childrenSize"
+                </v-layout>
+                <v-layout row justify-center>
+                    <v-flex sm4 md2
+                            v-for="(items, index) in childrenSize"
                             :key="index">
                         <v-text-field
-
                                 label="Kind"
                                 type="number"
                                 max="16"
                                 min="0">
                         </v-text-field>
                     </v-flex>
-
                 </v-layout>
+
             </row-with-description>
             <row-with-description name="Geschäftlichte Tätigkeit"
                                   :closable="business"
@@ -157,6 +167,7 @@
                 <v-flex class="text-center"
                         v-if="!business">
                     <plus-icon
+                            class="show-pointer"
                             v-on:click="toggleBusinessBoolean"
                             :size="48"
                             fill-color="#607D8B"

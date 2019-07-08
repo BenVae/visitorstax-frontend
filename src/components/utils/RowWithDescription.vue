@@ -6,6 +6,7 @@
             </v-flex>
             <v-flex pa-0 text-sm-right v-if="closable">
                 <close-icon
+                        class="show-pointer"
                         v-on:click="toggleButtonVisibility">
                 </close-icon>
             </v-flex>
