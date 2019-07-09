@@ -40,6 +40,16 @@
 
         </div>
     </b-container>
+    <v-container>
+        <v-card>
+            <v-card-title>
+                {{moment(form.arrivalDate).locale('de').calendar()}} -
+                {{moment(form.departureDate).locale('de').calendar()}}
+                <v-spacer></v-spacer>
+                {{form.businessObject.address.streetAndNumber}}
+            </v-card-title>
+        </v-card>
+    </v-container>
 </template>
 
 <script>
