@@ -32,6 +32,7 @@
                                         v-on="on"
                                         clearable
                                         v-model="computeArrivalDateFormat"
+                                        @click:clear="deleteArrival"
                                 ></v-text-field>
                             </template>
                             <v-date-picker
@@ -60,6 +61,7 @@
                                         v-on="on"
                                         clearable
                                         v-model="computeDepartureDateFormat"
+                                        @click:clear="deleteDeparture()"
                                 ></v-text-field>
                             </template>
                             <v-date-picker v-model="departureDate"
@@ -73,10 +75,10 @@
             </v-card-title>
             <v-data-table
                     :headers="headers"
-                    :items="items"
-                    :search="search"
+                    :items="compileSearch"
                     :pagination.sync="pagination"
-                    :rows-per-page-items="[]"
+                    :rows-per-page-items="['']"
+                    :search="search"
             >
                 <template v-slot:items="props">
                     <td>{{ props.item.registrationNumber }}</td>
@@ -146,14 +148,50 @@
             this.items = FormData
         },
         computed:{
-            computeArrivalDateFormat () {
-                if(this.arrivalDate == null) return null
-                return this.$moment(new Date().toISOString().substr(0, 10)).format('DD.MM.YYYY')
+            computeArrivalDateFormat: {
+                get: function () {
+                    if(this.arrivalDate == null) return null
+                    return this.$moment(this.arrivalDate).format('DD.MM.YYYY')
+                },
+                set: function () {
+
+                }
             },
-            computeDepartureDateFormat () {
-                if(this.departureDate == null) return null
-                return this.$moment(new Date().toISOString().substr(0, 10)).format('DD.MM.YYYY')
+            computeDepartureDateFormat: {
+                get: function () {
+                    if(this.departureDate == null) return null
+                    return this.$moment(this.departureDate).format('DD.MM.YYYY')
+                },
+                set: function () {
+
+                }
+            },
+            compileSearch (){
+                if(this.arrivalDate == null && this.departureDate == null){
+                    return this.items
+                } else if(this.arrivalDate != null && this.departureDate == null) {
+                    return this.items.filter(item =>
+                        Date.parse(item.arrivalDate) >= Date.parse(this.arrivalDate)
+                    )
+                } else if(this.arrivalDate == null && this.departureDate != null) {
+                    return this.items.filter(item =>
+                        Date.parse(item.departureDate) <= Date.parse(this.departureDate)
+                    )
+                } else{
+                    return this.items.filter(item =>
+                        Date.parse(item.arrivalDate) >= Date.parse(this.arrivalDate) && Date.parse(item.departureDate) <= Date.parse(this.departureDate)
+                    )
+                }
+            },
+        },
+        methods:{
+            deleteDeparture(){
+                this.departureDate = null
+            },
+            deleteArrival(){
+                this.arrivalDate = null
             }
+
         }
     }
 </script>
