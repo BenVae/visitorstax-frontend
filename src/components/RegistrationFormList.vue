@@ -87,6 +87,7 @@
                     <td>{{ $moment(props.item.arrivalDate).format('DD.MM.YYYY') }}</td>
                     <td>{{ $moment(props.item.departureDate).format('DD.MM.YYYY') }}</td>
                     <td>{{ props.item.registrationFormTyp }}</td>
+                    <td>{{ props.item.tax }}</td>
                 </template>
                 <template v-slot:no-results>
                     <v-alert :value="true" color="error" icon="warning">
@@ -140,6 +141,10 @@
                     {
                         text: 'Typ',
                         value: 'registrationFormTyp'
+                    },
+                    {
+                        text: 'Kurtaxe',
+                        value: 'tax'
                     }
                 ]
             }
@@ -154,7 +159,6 @@
                     return this.$moment(this.arrivalDate).format('DD.MM.YYYY')
                 },
                 set: function () {
-
                 }
             },
             computeDepartureDateFormat: {
@@ -163,7 +167,6 @@
                     return this.$moment(this.departureDate).format('DD.MM.YYYY')
                 },
                 set: function () {
-
                 }
             },
             compileSearch (){
@@ -191,7 +194,6 @@
             deleteArrival(){
                 this.arrivalDate = null
             }
-
         }
     }
 </script>
