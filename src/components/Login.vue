@@ -11,15 +11,12 @@
                             <v-text-field
                                     autofocus
                                     prepend-icon="person"
-                                    name="login"
                                     label="Betriebsnummer"
                                     type="text"
                             ></v-text-field>
                             <v-text-field
                                     prepend-icon="lock"
-                                    name="password"
                                     label="Password"
-                                    id="password"
                                     type="password"
                             ></v-text-field>
                         </v-form>
