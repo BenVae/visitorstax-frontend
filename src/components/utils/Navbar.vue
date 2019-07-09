@@ -12,7 +12,7 @@
 
             <b-collapse id="nav-collapse" is-nav>
 
-                <!-- Right aligned nav items -->
+                <!-- Right aligned nav types -->
                 <b-navbar-nav class="ml-auto pr-5">
                     <!-- Vermieter und Stadt -->
                     <b-nav-item>Start</b-nav-item>

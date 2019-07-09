@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <Title name="Meldeschein anlegen"/>
+        <Title name="Gruppen-Meldeschein anlegen"/>
         <v-form>
             <v-container>
                 <v-layout row justify-center>
@@ -30,7 +30,7 @@
                     </v-flex>
                 </v-layout>
             </v-container>
-            <row-with-description name="Gast">
+            <row-with-description name="Reiseleiter">
                 <v-layout row justify-center>
                     <v-flex sm4 md2>
                         <v-text-field
@@ -65,53 +65,6 @@
                     </v-flex>
                 </v-layout>
             </row-with-description>
-            <row-with-description name="Ehegatte/Lebenspartner"
-                                  :closable="hasSpouse"
-                                  @destroyCloseIcon="toggleSpouseBoolean">
-                <v-flex class="text-center"
-                        v-if="!hasSpouse">
-                    <plus-icon
-                            class="show-pointer"
-                            v-on:click="toggleSpouseBoolean"
-                            :size="48"
-                            fill-color="#607D8B"
-                    />
-                </v-flex>
-                <template v-else>
-                    <v-layout row justify-center>
-                        <v-flex sm4 md2>
-                            <v-text-field
-                                    label="Vorname (nur Rufname)">
-                            </v-text-field>
-                        </v-flex>
-                        <v-flex sm4 md2>
-                            <v-text-field
-                                    label="Familienname">
-                            </v-text-field>
-                        </v-flex>
-                        <v-flex sm4 md2>
-                            <BirthdayPicker/>
-                        </v-flex>
-                    </v-layout>
-                    <v-layout row justify-center>
-                        <v-flex sm4 md2>
-                            <v-text-field
-                                    label="Passnummer">
-                            </v-text-field>
-                        </v-flex>
-                        <v-flex sm4 md2>
-                            <v-text-field
-                                    label="Nationalität">
-                            </v-text-field>
-                        </v-flex>
-                        <v-flex sm4 md2>
-                            <v-text-field
-                                    label="Geburtsort">
-                            </v-text-field>
-                        </v-flex>
-                    </v-layout>
-                </template>
-            </row-with-description>
             <row-with-description
                     name="Adresse">
                 <v-layout row justify-center>
@@ -133,31 +86,36 @@
                 </v-layout>
             </row-with-description>
             <row-with-description
-                    name="Kinder">
+                    name="Gruppe">
                 <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                    <v-flex sm6 md4 lg3>
                         <v-text-field
-                                v-model="amountChilds"
-                                label="Anzahl Kinder"
+                                v-model="amountVisitorstax"
+                                label="Anzahl Kurtaxepflichtiger"
                                 type="number"
-                                max="5"
+                                max="100"
                                 min="0">
                             <v-tooltip slot="prepend" bottom>
                                 <v-icon slot="activator" color="grey" dark>info</v-icon>
-                                <span>Bitte nur Kinder unter 16 Jahren eintragen. Kinder über 16 benötigen einen eigenen Meldeschein</span>
+                                <span>Kurtaxepflichtig sind alle Ortsfremden Personen, die nicht explizit von den Kurtaxen befreit sind</span>
                             </v-tooltip>
                         </v-text-field>
                     </v-flex>
-                </v-layout>
-                <v-layout row justify-center>
-                    <v-flex sm4 md2
-                            v-for="(items, index) in childrenSize"
-                            :key="index">
+                    <v-flex sm6 md4 lg3>
                         <v-text-field
-                                label="Kind"
+                                v-model="amountVisitorstaxLiable"
+                                label="Anzahl Kurtaxebefreiter"
                                 type="number"
-                                max="16"
+                                max="100"
                                 min="0">
+                            <v-tooltip slot="prepend" bottom>
+                                <v-icon slot="activator" color="grey" dark>info</v-icon>
+                                <span>Von den Kurtaxenbefreit sind: <br>
+                                    - Kinder unter 16 Jahren<br>
+                                    - Schwerbehinderte mit einem Ausweis mit dem Merkmal "RF"<br>
+                                    - Personen die eine Geschäftliche Tätigkeit in Konstanz ausführen
+                                </span>
+                            </v-tooltip>
                         </v-text-field>
                     </v-flex>
                 </v-layout>
@@ -226,7 +184,7 @@
     import PlusIcon from "vue-material-design-icons/Plus";
 
     export default {
-        name: "RegistrationForm",
+        name: "GroupRegistrationForm",
         components: {PlusIcon, BirthdayPicker, RowWithDescription, Title, Layout, HotelDatePicker},
         methods: {
             customFormatter(date) {
@@ -248,33 +206,24 @@
                 this.business = !this.business;
             },
             registrationFormTypeChanged(type) {
-                if (type === 'Gruppe') this.$router.push({path: '/gruppenMeldeschein/anlegen'});
+                if (type === 'Regulär') this.$router.push({path: '/meldeschein/anlegen'});
             }
         },
         computed: {
-            childrenSize: function () {
-                let childArray = [];
-                for (let index = 0; index < this.amountChildren; index++) {
-                    childArray.push('');
-                }
-                return childArray;
-            },
             amountPersons: function () {
                 return this.hasSpouse ? 2 : 1;
             }
         },
         data: () => ({
             types: ['Regulär', 'Gruppe'],
-            type: 'Regulär',
+            type: 'Gruppe',
             mietobjekte: ['Alemannstr. 5', 'Hohneckerstr. 10'],
             startDate: "",
             endDate: "",
             dateOfBirth: "",
             range: {},
-            hasSpouse: false,
             business: false,
             amountChildren: 0,
-            children: [],
             ptBr: {
                 night: 'Nacht',
                 nights: 'Nächte',

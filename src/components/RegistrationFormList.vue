@@ -108,7 +108,7 @@
         data() {
             return {
                 pagination:{rowsPerPage:8},
-                items: null,
+                types: null,
                 search: '',
                 arrivalDate: null,
                 departureDate: null,

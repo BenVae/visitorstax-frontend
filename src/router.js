@@ -6,6 +6,7 @@ import RegistraionForm from "./components/registrationform/RegistraionForm";
 import ShowRegFormHost from "./components/host/DisplaySingularFormHost";
 import RegistrationFormList from "./components/RegistrationFormList";
 import IdCheck from "./components/registrationform/IdCheck";
+import GroupRegistraionForm from "./components/registrationform/GroupRegistraionForm";
 
 Vue.use(Router);
 
@@ -36,6 +37,10 @@ export default new Router({
         {
             path: '/meldeschein/anlegen',
             component: RegistraionForm,
+        },
+        {
+            path: '/gruppenMeldeschein/anlegen',
+            component: GroupRegistraionForm,
         },
         {
             path: '/idCheck',
