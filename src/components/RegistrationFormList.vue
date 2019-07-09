@@ -81,6 +81,7 @@
                     :search="search"
             >
                 <template v-slot:items="props">
+                    <tr @click="displaySingleRegistrationForm(props.item)">
                     <td>{{ props.item.registrationNumber }}</td>
                     <td>{{ props.item.guest.surname }}</td>
                     <td>{{ props.item.guest.name }}</td>
@@ -88,6 +89,7 @@
                     <td>{{ $moment(props.item.departureDate).format('DD.MM.YYYY') }}</td>
                     <td>{{ props.item.registrationFormTyp }}</td>
                     <td>{{ props.item.tax }}</td>
+                    </tr>
                 </template>
                 <template v-slot:no-results>
                     <v-alert :value="true" color="error" icon="warning">
@@ -193,6 +195,9 @@
             },
             deleteArrival(){
                 this.arrivalDate = null
+            },
+            displaySingleRegistrationForm(itemProp){
+                alert(itemProp)
             }
         }
     }
