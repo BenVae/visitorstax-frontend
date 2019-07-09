@@ -1,66 +1,147 @@
 <template>
-    <b-container>
-        <div class="complete-form mt-5">
-
-            <div class="card">
-                <div class="card-header">
-                    {{moment(form.arrivalDate).locale('de').calendar()}} -
-                    {{moment(form.departureDate).locale('de').calendar()}}
-                    <span class="float-right mr-5">{{form.businessObject.address.streetAndNumber}}</span>
-                </div>
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item justify-content-around">
-                            <small class="sectionTitle">Gast</small>
-                            <div class="row justify-content-center text-center">
-                                <div class="col-md-4 col-xs-12">{{form.guest.name}} {{form.guest.surname}}</div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4 col-xs-12">geboren
-                                    {{moment(form.guest.dateOfBirth).locale('de').calendar()}}
-                                </div>
-                            </div>
-                            <hr class="px-5">
-                            <div class="row justify-content-center text-center">
-                                <div class="col-md-4 col-xs-12">Passnummer: {{form.guest.passportSerialNumber}}</div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4 col-xs-12">Nationalität: {{form.guest.nationality}}</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <small class="sectionTitle">Adresse</small>
-                            <div class="row justify-content-center text-center">
-                                <div class="col-md-4 col-xs-12">{{form.guest.adress.streetAndNumber}}</div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4 col-xs-12">{{form.guest.adress.zipCode}} {{form.guest.adress.city}}</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </b-container>
+    <!--
     <v-container>
-        <v-card>
+        <v-card :elevation="15">
             <v-card-title>
-                {{moment(form.arrivalDate).locale('de').calendar()}} -
-                {{moment(form.departureDate).locale('de').calendar()}}
-                <v-spacer></v-spacer>
+                {{customFormatter(form.arrivalDate)}} - {{customFormatter(form.departureDate)}}
+                <v-spacer/>
                 {{form.businessObject.address.streetAndNumber}}
             </v-card-title>
+            <v-card-text>
+                <v-layout row justify-center text-xs-center>
+                    <v-flex xs12 sm4>
+                        {{form.guest.name}} {{form.guest.surname}}
+                    </v-flex>
+                    <v-flex sm1 md2/>
+                    <v-flex xs12 sm4>
+                        geboren {{customFormatter(form.guest.dateOfBirth)}}
+                    </v-flex>
+                </v-layout>
+                <v-divider/>
+                <v-layout row justify-center text-xs-center>
+                    <v-flex xs12 sm4>
+                        Passnummer: {{form.guest.passportSerialNumber}}
+                    </v-flex>
+                    <v-flex sm1 md2/>
+                    <v-flex xs12 sm4>
+                        Nationalität: {{form.guest.nationality}}
+                    </v-flex>
+                </v-layout>
+                <v-divider/>
+                <v-layout row justify-center text-xs-center>
+                    <v-flex xs12 sm4>
+                        {{form.guest.adress.streetAndNumber}}
+                    </v-flex>
+                    <v-flex sm1 md2/>
+                    <v-flex xs12 sm4>
+                        {{form.guest.adress.zipCode}} {{form.guest.adress.city}}
+                    </v-flex>
+                </v-layout>
+                <v-divider/>
+                <v-layout v-if="form.registrationFormTyp==='F'" row justify-center text-xs-center>
+                </v-layout>
+                <v-layout v-else-if="form.registrationFormTyp==='G'" row justify-center text-xs-center>
+                </v-layout>
+                <v-layout v-else>
+                    Something went wrong :(
+                </v-layout>
+            </v-card-text>
+        </v-card>
+    </v-container>
+    -->
+
+    <v-container>
+        <v-card elevation="10" color="#e9e9e9">
+            <v-card-title>
+                {{customFormatter(form.arrivalDate)}} - {{customFormatter(form.departureDate)}}
+                <v-spacer/>
+                {{form.businessObject.address.streetAndNumber}}
+            </v-card-title>
+            <v-container grid-list-lg>
+                <v-layout row>
+                    <v-flex xs12 md8 mb-3>
+                        <v-card elevation="4">
+                            <v-layout row justify-center text-xs-center pt-3>
+                                <v-flex xs12 sm4>
+                                    {{form.guest.name}} {{form.guest.surname}}
+                                </v-flex>
+                                <v-flex sm1 md2/>
+                                <v-flex xs12 sm4>
+                                    geboren {{customFormatter(form.guest.dateOfBirth)}}
+                                </v-flex>
+                            </v-layout>
+                            <v-divider/>
+                            <v-layout row justify-center text-xs-center pb-3>
+                                <v-flex xs12 sm4>
+                                    Passnummer: {{form.guest.passportSerialNumber}}
+                                </v-flex>
+                                <v-flex sm1 md2/>
+                                <v-flex xs12 sm4>
+                                    Nationalität: {{form.guest.nationality}}
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+                    <v-flex xs12 md4 :class="{'mb-3': $vuetify.breakpoint.smAndDown}">
+                        <v-card elevation="4">
+                            <v-layout row justify-center text-xs-center pt-3>
+                                <v-flex xs12>
+                                    {{form.guest.adress.streetAndNumber}}
+                                </v-flex>
+                                <v-divider/>
+                            </v-layout>
+                            <v-divider/>
+                            <v-layout row justify-center text-xs-center pb-3>
+                                <v-flex xs12>
+                                    {{form.guest.adress.zipCode}} {{form.guest.adress.city}}
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+                <v-layout v-if="form.registrationFormType==='F'">
+                    <v-flex xs12 sm8>
+                        <v-card v-if="form.hasOwnProperty('partnerName')" elevation="4">
+                            <v-layout row justify-center text-xs-center pt-3>
+                                <v-flex xs12>
+                                    {{form.partnerName}} {{form.partnerSurname}}
+                                </v-flex>
+                                <v-flex xs12 sm6>
+                                    geboren {{customFormatter(form.guest.dateOfBirth)}}
+                                </v-flex>
+                                <v-flex xs12 sm6>
+                                    Nationalität: {{form.nationality}}
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+                    <v-flex xs12 sm4>
+                        <v-card v-if="form.hasOwnProperty('childrenYearOfBirth')" elevation="4">
+                            <v-layout row justify-center text-xs-center pt-3>
+                                <v-flex xs12>
+                                    Anzahl Kinder: {{form.childrenYearOfBirth.length}}
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+                <v-layout v-else-if="form.registrationFormType==='G'">
+                </v-layout>
+                <v-layout v-else>
+                    Oh no
+                </v-layout>
+            </v-container>
         </v-card>
     </v-container>
 </template>
 
 <script>
 
-    import FormData from '../assets/sampleRegistrationForm';
-    import RowWithDescription from "./utils/RowWithDescription";
-
+    import FormData from '../assets/singleSampleRegistrationForm';
 
     export default {
         name: "singularRegForm",
-        components: {RowWithDescription},
+        components: {},
         data() {
             return {
                 form: null,
@@ -68,9 +149,18 @@
                 hasChildren: null
             }
         },
-        mounted() {
-            this.form = FormData,
-                this.title = "Meldeschein #" + this.form.registrationNumber;
+        methods: {
+            customFormatter(date) {
+                return this.$moment(date).format('DD.MM.YYYY');
+            },
+            isFamily() {
+                if (this.form.registrationFormTyp === "F") return true;
+
+            }
+        },
+        beforeMount() {
+            this.form = FormData;
+            this.title = "Meldeschein #" + this.form.registrationNumber;
 
         },
     }
@@ -88,6 +178,6 @@
 
     .sectionTitle {
         margin-left: -20px;
-        color: gray;
+        margin-top: -12px;
     }
 </style>
