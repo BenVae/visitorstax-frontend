@@ -28,7 +28,7 @@
     },
     "foreignIdentityChecked": "true",
     "foreignIdentityIdentical": "true",
-    "registrationFormTyp": "F",
+    "registrationFormType": "F",
     "partnerName": "Natalie",
     "partnerSurname": "Schäfer",
     "partnerDateOfBirth": "1989-10-27",
@@ -37,7 +37,8 @@
       2007,
       2002,
       2010
-    ]
+    ],
+    "tax": "22,50"
   }
 ]
 

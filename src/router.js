@@ -28,18 +28,13 @@ export default new Router({
             component: RegistrationFormList
         },
         {
-            path: '/Meldeschein',
-            name: 'Meldeschein',
-            component: ShowRegFormHost
-        },
-        {
             path: '/meldeschein/anlegen',
             component: RegistraionForm,
         },
         {
             path: '/Meldeschein',
             name: 'Meldeschein',
-            component: DisplaySingularFormHost,
+            component: ShowRegFormHost,
             props: true
         },
     ]

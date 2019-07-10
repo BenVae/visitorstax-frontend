@@ -87,7 +87,7 @@
                     <td>{{ props.item.guest.name }}</td>
                     <td>{{ $moment(props.item.arrivalDate).format('DD.MM.YYYY') }}</td>
                     <td>{{ $moment(props.item.departureDate).format('DD.MM.YYYY') }}</td>
-                    <td>{{ props.item.registrationFormTyp }}</td>
+                    <td>{{ props.item.registrationFormType}}</td>
                     <td>{{ props.item.tax }}</td>
                     </tr>
                 </template>
@@ -142,10 +142,10 @@
                     },
                     {
                         text: 'Typ',
-                        value: 'registrationFormTyp'
+                        value: 'registrationFormType'
                     },
                     {
-                        text: 'Kurtaxe',
+                        text: 'Kurtaxe in €',
                         value: 'tax'
                     }
                 ]
