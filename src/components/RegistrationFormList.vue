@@ -4,7 +4,7 @@
         <v-container>
         <v-card>
             <v-card-title>
-                <v-layout row >
+                <v-layout row>
                     <v-flex xs12 md4 px-4>
                         <v-text-field
                                 v-model="search"
@@ -197,7 +197,7 @@
                 this.arrivalDate = null
             },
             displaySingleRegistrationForm(itemProp){
-                alert(itemProp)
+                this.$router.push({name: 'Meldeschein', params: {item: itemProp}})
             }
         }
     }

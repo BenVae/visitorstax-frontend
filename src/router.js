@@ -30,6 +30,12 @@ export default new Router({
       {
           path: '/meldeschein/anlegen',
           component: RegistraionForm,
-      }
+      },
+    {
+      path: '/Meldeschein',
+      name: 'Meldeschein',
+      component: RegistraionForm,
+      props: true
+    },
   ]
 })
