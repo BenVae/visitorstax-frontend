@@ -34,7 +34,7 @@ export default new Router({
     {
       path: '/Meldeschein',
       name: 'Meldeschein',
-      component: RegistraionForm,
+      component: DisplaySingularFormHost,
       props: true
     },
   ]
