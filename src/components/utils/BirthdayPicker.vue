@@ -12,9 +12,9 @@
     >
         <template v-slot:activator="{ on }">
             <v-text-field
-                    v-model="date"
+                    v-model="customFormatter"
                     label="Birthday date"
-                    prepend-icon="event"
+                    prepend-inner-icon="event"
                     readonly
                     v-on="on"
             ></v-text-field>
@@ -23,7 +23,7 @@
                 ref="picker"
                 v-model="date"
                 :max="new Date().toISOString().substr(0, 10)"
-                min="1950-01-01"
+                min="1920-01-01"
                 color="red lighten-1"
                 @change="save"
         ></v-date-picker>
@@ -41,10 +41,18 @@
                 val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
             }
         },
+        computed: {
+            customFormatter: function () {
+                if (this.date === null){
+                    return null;
+                }
+                return this.$moment(this.date).format('DD.MM.YYYY');
+            },
+        },
         methods: {
             save (date) {
                 this.$refs.menu.save(date)
-            }
+            },
         }
     }
 </script>

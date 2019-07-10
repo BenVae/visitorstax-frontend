@@ -15,9 +15,8 @@
 </script>
 
 <style lang="scss">
-    @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+    * i{ font-family: 'Material Icons',serif; }
     #app {
-        font-family: 'Roboto', sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         position: fixed;

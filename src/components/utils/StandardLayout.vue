@@ -1,8 +1,8 @@
 <template>
-    <v-container>
-        <v-layout row>
-            <v-flex mt-5 rounded-lg id="menu" class="layout-flow">
-                <v-container>
+    <v-container class="v-container">
+        <v-layout row fill-height>
+            <v-flex rounded-lg id="menu">
+                <v-container class="content">
                     <slot/>
                 </v-container>
             </v-flex>
@@ -17,10 +17,30 @@
 </script>
 <style lang="scss" scoped>
     #menu {
+        display: flex;
         background: rgba(255, 255, 255, 0.9);
         min-height: 80vh;
+        position: relative;
+        overflow-y: scroll;
+        overflow-x: hidden;
     }
-    .layout-flow{
-        overflow: auto;
+
+    .content {
+        box-sizing: border-box;
+        width: 100%;
+        position: absolute;
+    }
+
+    ::-webkit-scrollbar {
+        width: 0.6em;
+    }
+
+    ::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        outline: 1px solid slategrey;
     }
 </style>
