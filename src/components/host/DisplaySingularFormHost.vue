@@ -1,7 +1,7 @@
 <template>
     <Layout>
         <Title :name="title"/>
-        <SingularRegForm/>
+        <SingularRegForm :propform="form"/>
     </Layout>
 </template>
 
@@ -9,21 +9,21 @@
     import Layout from "../utils/StandardLayout";
     import Title from "../utils/Title";
     import SingularRegForm from "../DisplaySingularRegForm";
-    import FormData from "../../assets/singleSampleRegistrationForm";
 
 
     export default {
         name: "singularRegFormHost",
         components: {SingularRegForm, Title, Layout},
+        props: {
+          form: Object
+        },
 
         data() {
             return {
-                form: null,
                 title: null
             }
         },
         beforeMount() {
-            this.form = FormData;
             this.title = "Meldeschein #" + this.form.registrationNumber
         }
     }

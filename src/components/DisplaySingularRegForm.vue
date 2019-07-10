@@ -1,76 +1,165 @@
 <template>
-    <b-container>
-        <div class="complete-form mt-5">
-            <!--
-            <b-row class="justify-content-center text-center top-buffer mb-3">
-                <b-col cols="4" id="ankunft">
-                    {{moment(form.arrivalDate).locale('de').calendar()}} bis
-                    {{moment(form.departureDate).locale('de').calendar()}}
-                </b-col>
-                <b-col cols="1"/>
-                <b-col cols="4">Objekt: {{form.businessObject.address.streetAndNumber}}</b-col>
-            </b-row>
-            <RowWithDescription name="Gast"/>
-            <b-row class="justify-content-center text-center top-buffer">
-                <b-col cols="4">
-                    Vorname: {{form.guest.name}}
-                </b-col>
-                <b-col cols="1"/>
-                <b-col cols="4">
-                    Familienname: {{form.guest.surname}}
-                </b-col>
-            </b-row>
-            <RowWithDescription name="Adresse"/>
-            -->
+    <v-container>
 
-            <div class="card">
-                <div class="card-header">
-                    {{customFormatter(form.arrivalDate)}} - {{customFormatter(form.departureDate)}}
-                    <span class="float-right mr-5">{{form.businessObject.address.streetAndNumber}}</span>
-                </div>
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item justify-content-around">
-                            <div class="section pb-0">
-                                <small>Gast</small>
-                            </div>
-                            <div class="row justify-content-center text-center">
-                                <div class="col-md-4 col-xs-12">{{form.guest.name}} {{form.guest.surname}}</div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4 col-xs-12">geboren
-                                    {{customFormatter(form.guest.dateOfBirth)}}
-                                </div>
-                            </div>
-                            <hr class="px-5">
-                            <div class="row justify-content-center text-center">
-                                <div class="col-md-4 col-xs-12">Passnummer: {{form.guest.passportSerialNumber}}</div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-4 col-xs-12">Nationalität: {{form.guest.nationality}}</div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <small class="sectionTitle">Adresse</small>
-                            <div class="row justify-content-center text-center">
-                                <div class="col-4">{{form.guest.adress.streetAndNumber}}</div>
-                                <div class="col-2"></div>
-                                <div class="col-4">{{form.guest.adress.zipCode}} {{form.guest.adress.city}}</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </b-container>
+        <v-card elevation="10" color="#e9e9e9">
+            <v-card-title>
+                {{customFormatter(propform.arrivalDate)}} - {{customFormatter(propform.departureDate)}}
+                <v-spacer/>
+                <template v-if="propform.registrationFormType==='F'">
+                    <span class="title">Familie</span>
+                    <v-spacer/>
+                </template>
+                <template v-else-if="propform.registrationFormType==='G'">
+                    <span class="title">Gruppe</span>
+                    <v-spacer/>
+                </template>
+                <template v-else>
+                    <space class="title">Fehler bei Meldescheinverarbeitung</space>
+                    <v-spacer/>
+                </template>
+                {{propform.businessObject.address.streetAndNumber}}
+            </v-card-title>
+            <v-container grid-list-lg>
+                <v-layout row>
+                    <v-flex xs12 md8 mb-3>
+                        <v-card elevation="4">
+                            <v-icon>person</v-icon>
+                            <v-layout row justify-center text-xs-center>
+                                <v-flex xs12 sm4>
+                                    {{propform.guest.name}} {{propform.guest.surname}}
+                                </v-flex>
+                                <v-flex sm1 md2/>
+                                <v-flex xs12 sm4>
+                                    geboren {{customFormatter(propform.guest.dateOfBirth)}}
+                                </v-flex>
+                            </v-layout>
+                            <v-divider/>
+                            <v-layout row justify-center text-xs-center pb-3>
+                                <v-flex xs12 sm4>
+                                    Passnummer: {{propform.guest.passportSerialNumber}}
+                                </v-flex>
+                                <v-flex sm1 md2/>
+                                <v-flex xs12 sm4>
+                                    Nationalität: {{propform.guest.nationality}}
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+                    <v-flex xs12 md4 :class="{'mb-3': $vuetify.breakpoint.smAndDown}">
+                        <v-card elevation="4">
+                            <v-icon>local_offer</v-icon>
+                            <v-layout row justify-center text-xs-center>
+                                <v-flex xs12>
+                                    {{propform.guest.adress.streetAndNumber}}
+                                </v-flex>
+                                <v-divider/>
+                            </v-layout>
+                            <v-divider/>
+                            <v-layout row justify-center text-xs-center pb-3>
+                                <v-flex xs12>
+                                    {{propform.guest.adress.zipCode}} {{propform.guest.adress.city}}
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+                <v-layout v-if="propform.registrationFormType==='F'" row>
+                    <v-flex xs12 sm8>
+                        <v-card v-if="propform.hasOwnProperty('partnerName')" elevation="4">
+                            <v-icon>loyalty</v-icon>
+                            <v-layout row justify-center text-xs-center>
+                                <v-flex xs12>
+                                    {{propform.partnerName}} {{propform.partnerSurname}}
+                                </v-flex>
+                                <v-flex xs12 sm6>
+                                    geboren {{customFormatter(propform.guest.dateOfBirth)}}
+                                </v-flex>
+                                <v-flex xs12 sm6>
+                                    Nationalität: {{propform.nationality}}
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+                    <v-flex xs12 sm4>
+                        <v-card v-if="propform.hasOwnProperty('childrenYearOfBirth')" elevation="4">
+                            <v-icon>group</v-icon>
+                            <v-layout row justify-center text-xs-center>
+                                <v-flex xs12>
+                                    Anzahl Kinder: {{propform.childrenYearOfBirth.length}}
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+                <v-layout v-else-if="propform.registrationFormType==='G'" row>
+                    <v-flex xs12 mb-3>
+                        <v-card>
+                            <v-icon>group</v-icon>
+                            <v-layout row justify-center text-xs-center>
+                                <v-flex xs12>
+                                    Gesamtzahl Mitreisende: {{propform.amountOfFellowPassengers}}
+                                </v-flex>
+                            </v-layout>
+                            <v-divider/>
+                            <v-layout row justify-center text-xs-center pb-3>
+                                <v-flex md6>
+                                    Kurtaxepflichtige Gäste: {{propform.amountPayTax}}
+                                </v-flex>
+                                <v-flex md6>
+                                    Kurtaxebefreite Gäste: {{propform.amountTaxFree}}
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+                    <v-flex xs12 sm6 :class="{'mb-3': $vuetify.breakpoint.smAndDown}">
+                        <v-card>
+                            <v-layout row justify-center text-xs-center>
+                                <v-flex xs12>
+                                    Passnummern zahlender Gäste
+                                </v-flex>
+                            </v-layout>
+                            <v-divider/>
+                            <v-layout row justify-center text-xs-center>
+                                <v-flex v-for="ID in propform.payTaxIDs" xs12>
+                                    {{ID}}
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+                    <v-flex xs12 sm6>
+                        <v-card>
+                            <v-layout row justify-center text-xs-center>
+                                <v-flex xs12>
+                                    Passnummern befreiter Gäste
+                                </v-flex>
+                            </v-layout>
+                            <v-divider/>
+                            <v-layout row justify-center text-xs-center>
+                                <v-flex v-for="ID in propform.taxFreeIDs" xs12>
+                                    {{ID}}
+                                </v-flex>
+                            </v-layout>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+                <v-layout v-else>
+                    Oh no
+                </v-layout>
+            </v-container>
+        </v-card>
+    </v-container>
 </template>
 
 <script>
 
-    import FormData from '../assets/singleSampleRegistrationForm';
+    import FormData from '../assets/singleSampleRegistrationFormB';
 
     export default {
         name: "singularRegForm",
         components: {},
+        props: {
+            propform: Object
+        },
         data() {
             return {
                 form: null,
@@ -80,12 +169,12 @@
         },
         methods: {
             customFormatter(date) {
-                return this.$moment(date).format('DD.MM.YYYY');
-            },
+                return date;
+            }
         },
         beforeMount() {
             this.form = FormData;
-            this.title = "Meldeschein #" + this.form.registrationNumber;
+            this.title = "Meldeschein #" + this.propform.registrationNumber;
 
         },
     }

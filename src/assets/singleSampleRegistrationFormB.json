@@ -27,14 +27,26 @@
   },
   "foreignIdentityChecked": "true",
   "foreignIdentityIdentical": "true",
-  "registrationFormType": "F",
-  "partnerName": "Natalie",
-  "partnerSurname": "Schäfer",
-  "partnerDateOfBirth": "1989-10-27",
-  "nationality": "deutsch",
-  "childrenYearOfBirth": [
-    "2007",
-    "2002",
-    "2010"
+  "registrationFormType": "G",
+  "amountOfFellowPassengers": "14",
+  "amountPayTax": "9",
+  "amountTaxFree": "5",
+  "payTaxIDs": [
+    "T22000130",
+    "T22000131",
+    "T22000132",
+    "T22000133",
+    "T22000134",
+    "T22000135",
+    "T22000136",
+    "T22000137",
+    "T22000138"
+  ],
+  "taxFreeIDs": [
+    "T22000138",
+    "T22000139",
+    "T22000140",
+    "T22000141",
+    "T22000142"
   ]
 }
