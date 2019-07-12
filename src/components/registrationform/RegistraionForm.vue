@@ -137,7 +137,7 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
-                                v-model="amountChilds"
+                                v-model="amountChildren"
                                 label="Anzahl Kinder"
                                 type="number"
                                 max="5"
@@ -154,7 +154,7 @@
                             v-for="(items, index) in childrenSize"
                             :key="index">
                         <v-text-field
-                                label="Kind"
+                                :label="`Geburtsjahr Kind ${index + 1}`"
                                 type="number"
                                 max="16"
                                 min="0">
