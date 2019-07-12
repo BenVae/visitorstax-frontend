@@ -169,7 +169,7 @@
         },
         methods: {
             customFormatter(date) {
-                return date;
+                return this.$moment(date).format('DD.MM.YYYY');
             }
         },
         beforeMount() {
