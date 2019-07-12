@@ -4,7 +4,7 @@
         <v-container>
         <v-card>
             <v-card-title>
-                <v-layout row >
+                <v-layout row>
                     <v-flex xs12 md4 px-4>
                         <v-text-field
                                 v-model="search"
@@ -32,6 +32,7 @@
                                         v-on="on"
                                         clearable
                                         v-model="computeArrivalDateFormat"
+                                        @click:clear="deleteArrival"
                                 ></v-text-field>
                             </template>
                             <v-date-picker
@@ -60,6 +61,7 @@
                                         v-on="on"
                                         clearable
                                         v-model="computeDepartureDateFormat"
+                                        @click:clear="deleteDeparture()"
                                 ></v-text-field>
                             </template>
                             <v-date-picker v-model="departureDate"
@@ -73,18 +75,21 @@
             </v-card-title>
             <v-data-table
                     :headers="headers"
-                    :items="items"
-                    :search="search"
+                    :items="compileSearch"
                     :pagination.sync="pagination"
-                    :rows-per-page-items="[]"
+                    :rows-per-page-items="['']"
+                    :search="search"
             >
                 <template v-slot:items="props">
+                    <tr @click="displaySingleRegistrationForm(props.item)">
                     <td>{{ props.item.registrationNumber }}</td>
                     <td>{{ props.item.guest.surname }}</td>
                     <td>{{ props.item.guest.name }}</td>
                     <td>{{ $moment(props.item.arrivalDate).format('DD.MM.YYYY') }}</td>
                     <td>{{ $moment(props.item.departureDate).format('DD.MM.YYYY') }}</td>
-                    <td>{{ props.item.registrationFormTyp }}</td>
+                    <td>{{ props.item.registrationFormType}}</td>
+                    <td>{{ props.item.tax }}</td>
+                    </tr>
                 </template>
                 <template v-slot:no-results>
                     <v-alert :value="true" color="error" icon="warning">
@@ -137,7 +142,11 @@
                     },
                     {
                         text: 'Typ',
-                        value: 'registrationFormTyp'
+                        value: 'registrationFormType'
+                    },
+                    {
+                        text: 'Kurtaxe in €',
+                        value: 'tax'
                     }
                 ]
             }
@@ -146,18 +155,53 @@
             this.items = FormData
         },
         computed:{
-            computeArrivalDateFormat () {
-                if(this.arrivalDate == null) return null;
-                return this.$moment(new Date().toISOString().substr(0, 10)).format('DD.MM.YYYY')
+            computeArrivalDateFormat: {
+                get: function () {
+                    if(this.arrivalDate == null) return null
+                    return this.$moment(this.arrivalDate).format('DD.MM.YYYY')
+                },
+                set: function () {
+                }
             },
-            computeDepartureDateFormat () {
-                if(this.departureDate == null) return null;
-                return this.$moment(new Date().toISOString().substr(0, 10)).format('DD.MM.YYYY')
+            computeDepartureDateFormat: {
+                get: function () {
+                    if(this.departureDate == null) return null
+                    return this.$moment(this.departureDate).format('DD.MM.YYYY')
+                },
+                set: function () {
+                }
+            },
+            compileSearch (){
+                if(this.arrivalDate == null && this.departureDate == null){
+                    return this.items
+                } else if(this.arrivalDate != null && this.departureDate == null) {
+                    return this.items.filter(item =>
+                        Date.parse(item.arrivalDate) >= Date.parse(this.arrivalDate)
+                    )
+                } else if(this.arrivalDate == null && this.departureDate != null) {
+                    return this.items.filter(item =>
+                        Date.parse(item.departureDate) <= Date.parse(this.departureDate)
+                    )
+                } else{
+                    return this.items.filter(item =>
+                        Date.parse(item.arrivalDate) >= Date.parse(this.arrivalDate) && Date.parse(item.departureDate) <= Date.parse(this.departureDate)
+                    )
+                }
+            },
+        },
+        methods:{
+            deleteDeparture(){
+                this.departureDate = null
+            },
+            deleteArrival(){
+                this.arrivalDate = null
+            },
+            displaySingleRegistrationForm(itemProp){
+                this.$router.push({name: 'Meldeschein', params: {form: itemProp}})
             }
         }
     }
 </script>
 
 <style scoped>
-
 </style>

@@ -38,6 +38,12 @@ export default new Router({
             component: RegistraionForm,
         },
         {
+            path: '/Meldeschein',
+            name: 'Meldeschein',
+            component: ShowRegFormHost,
+            props: true
+        },
+        {
             path: '/idCheck',
             component: IdCheck,
         }
