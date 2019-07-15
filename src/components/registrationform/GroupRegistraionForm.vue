@@ -32,7 +32,7 @@
             </v-container>
             <row-with-description name="Reiseleiter">
                 <v-layout row justify-center>
-                    <v-flex sm4 md2>
+                    <v-flex sm6 md3>
                         <v-text-field
                                 label="Vorname (nur Rufname)"
                         >
@@ -48,7 +48,7 @@
                     </v-flex>
                 </v-layout>
                 <v-layout row justify-center>
-                    <v-flex sm4 md2>
+                    <v-flex sm6 md3>
                         <v-text-field
                                 label="Passnummer">
                         </v-text-field>
@@ -64,9 +64,6 @@
                         </v-text-field>
                     </v-flex>
                 </v-layout>
-            </row-with-description>
-            <row-with-description
-                    name="Adresse">
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
@@ -91,7 +88,7 @@
                     <v-table-overflow>
 
                     </v-table-overflow>
-                    <table style="width:100%">
+                    <table style="width:100%" class="ma-3">
                         <tr>
                             <th style="width: 40%">
                                 Kategorie
@@ -100,27 +97,36 @@
                                 Anzahl
                             </th>
                             <th style="width: 40%">
-                                Ausweisnummern
+                                <v-tooltip slot="prepend" bottom>
+                                    <v-icon slot="activator" color="grey" dark>info</v-icon>
+                                    <span>Bitte geben Sie die Passnummern aller Personen kommersepariert ein.<br>
+                                        Beispiel: Passnummer1, Passnummer2, ...<br>
+                                    </span>
+                                </v-tooltip>
+                                Passnummern
                             </th>
                         </tr>
                         <tr>
                             <td>
-                                Erwachsene (Freizeit)
+                                Erwachsene (Urlaub)
                             </td>
                             <td>
                                 <v-text-field
                                         style="width: 100px"
                                         placeholder="0"
                                         clearable
-                                        v-model="amountAdultFree"
+                                        v-model="amountAdultHoliday"
                                         type="number"
                                         max="100"
                                         min="0">
                                 </v-text-field>
                             </td>
-                            <td>
-                                <v-text-field>
-                                </v-text-field>
+                            <td rowspan="4">
+                                <v-textarea
+                                        solo
+                                        auto-grow
+                                        placeholder="Beispiel: Passnummer1, Passnummer2, ..."
+                                ></v-textarea>
                             </td>
                         </tr>
                         <tr>
@@ -136,10 +142,6 @@
                                         type="number"
                                         max="100"
                                         min="0">
-                                </v-text-field>
-                            </td>
-                            <td>
-                                <v-text-field>
                                 </v-text-field>
                             </td>
                         </tr>
@@ -158,10 +160,6 @@
                                         min="0">
                                 </v-text-field>
                             </td>
-                            <td>
-                                <v-text-field>
-                                </v-text-field>
-                            </td>
                         </tr>
                         <tr>
                             <td>
@@ -172,14 +170,10 @@
                                         style="width: 100px"
                                         placeholder="0"
                                         clearable
-                                        v-model="amountDisabled"
+                                        v-model="amountHandicapped"
                                         type="number"
                                         max="100"
                                         min="0">
-                                </v-text-field>
-                            </td>
-                            <td>
-                                <v-text-field>
                                 </v-text-field>
                             </td>
                         </tr>
@@ -189,7 +183,7 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md4 lg3>
                         <v-text-field
-                                v-model="amountAdultFree"
+                                v-model="amountAdultHoliday"
                                 label="Anzahl Erwachsene (Freizeit)"
                                 type="number"
                                 max="100"
@@ -218,7 +212,7 @@
                     </v-flex>
                     <v-flex sm6 md4 lg3>
                         <v-text-field
-                                v-model="amountDisabled"
+                                v-model="amountHandicapped"
                                 label="Anzahl Schwerbehinderte (RF)"
                                 type="number"
                                 max="100"
@@ -229,51 +223,27 @@
                 -->
             </row-with-description>
             <row-with-description name="Geschäftlichte Tätigkeit"
-                                  :closable="business"
-                                  @destroyCloseIcon="toggleBusinessBoolean">
-                <v-flex class="text-center"
-                        v-if="!business">
-                    <plus-icon
-                            class="show-pointer"
-                            v-on:click="toggleBusinessBoolean"
-                            :size="48"
-                            fill-color="#607D8B"
-                    />
-                </v-flex>
-                <template v-else>
-                    <v-layout row justify-center>
-                        <v-flex sm6 md3>
-                            <v-text-field
-                                    label="Anzahl geschäftl. tätiger Personen"
-                                    type="number"
-                                    min="0"
-                                    :max="amountLiable"
-                            >
-                            </v-text-field>
-                        </v-flex>
-                        <v-flex sm6 md3>
-                            <v-text-field
-                                    label="Auftragsfirma">
-                            </v-text-field>
-                        </v-flex>
-                    </v-layout>
-                    <v-layout row justify-center>
-                        <v-flex sm6 md3>
-                            <v-text-field
-                                    label="Anzahl Tagungsbesucher"
-                                    type="number"
-                                    min="0"
-                                    :max="amountLiable"
-                            >
-                            </v-text-field>
-                        </v-flex>
-                        <v-flex sm6 md3>
-                            <v-text-field
-                                    label="Tätigkeitsfeld">
-                            </v-text-field>
-                        </v-flex>
-                    </v-layout>
-                </template>
+                                  v-if="hasBusinessVisitors">
+                <v-layout row justify-center>
+                    <v-flex sm6 md3>
+                        <v-text-field
+                                label="Anzahl Tagungsbesucher"
+                                type="number"
+                                min="0"
+                                :max="maxConferenceVisitor">
+                        </v-text-field>
+                    </v-flex>
+                    <v-flex sm6 md3>
+                        <v-text-field
+                                label="Tätigkeitsfeld">
+                        </v-text-field>
+                    </v-flex>
+                    <v-flex sm6 md3>
+                        <v-text-field
+                                label="Auftragsfirma">
+                        </v-text-field>
+                    </v-flex>
+                </v-layout>
             </row-with-description>
             <v-layout align-end justify-end>
                 <v-btn color="blue-grey" dark>weiter</v-btn>
@@ -288,11 +258,10 @@
     import RowWithDescription from "../utils/RowWithDescription";
     import HotelDatePicker from 'vue-hotel-datepicker'
     import BirthdayPicker from "../utils/BirthdayPicker";
-    import PlusIcon from "vue-material-design-icons/Plus";
 
     export default {
         name: "GroupRegistrationForm",
-        components: {PlusIcon, BirthdayPicker, RowWithDescription, Title, Layout, HotelDatePicker},
+        components: {BirthdayPicker, RowWithDescription, Title, Layout, HotelDatePicker},
         methods: {
             customFormatter(date) {
                 return this.$moment(date).format('DD.MM.YYYY');
@@ -324,8 +293,8 @@
             business: false,
             amountChildren: null,
             amountAdultBusiness: null,
-            amountAdultFree: null,
-            amountDisabled: null,
+            amountAdultHoliday: null,
+            amountHandicapped: null,
             ptBr: {
                 night: 'Nacht',
                 nights: 'Nächte',
@@ -337,6 +306,14 @@
             date: null,
             menu: false
         }),
+        computed: {
+            maxConferenceVisitor: function () {
+                return this.amountAdultBusiness;
+            },
+            hasBusinessVisitors: function () {
+                return this.amountAdultBusiness > 0;
+            }
+        },
         watch: {
             menu(val) {
                 val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))

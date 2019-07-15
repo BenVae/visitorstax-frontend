@@ -32,7 +32,7 @@
             </v-container>
             <row-with-description name="Gast">
                 <v-layout row justify-center>
-                    <v-flex sm4 md2>
+                    <v-flex sm6 md3>
                         <v-text-field
                                 label="Vorname (nur Rufname)"
                         >
@@ -48,7 +48,7 @@
                     </v-flex>
                 </v-layout>
                 <v-layout row justify-center>
-                    <v-flex sm4 md2>
+                    <v-flex sm6 md3>
                         <v-text-field
                                 label="Passnummer">
                         </v-text-field>
@@ -79,7 +79,7 @@
                 </v-flex>
                 <template v-else>
                     <v-layout row justify-center>
-                        <v-flex sm4 md2>
+                        <v-flex sm6 md3>
                             <v-text-field
                                     label="Vorname (nur Rufname)">
                             </v-text-field>
@@ -94,7 +94,7 @@
                         </v-flex>
                     </v-layout>
                     <v-layout row justify-center>
-                        <v-flex sm4 md2>
+                        <v-flex sm6 md3>
                             <v-text-field
                                     label="Passnummer">
                             </v-text-field>
@@ -182,7 +182,7 @@
                                     label="Anzahl geschäftl. tätiger Personen"
                                     type="number"
                                     min="0"
-                                    :max="amountPersons"
+                                    :max="amountAdults"
                             >
                             </v-text-field>
                         </v-flex>
@@ -198,7 +198,7 @@
                                     label="Anzahl Tagungsbesucher"
                                     type="number"
                                     min="0"
-                                    :max="amountPersons"
+                                    :max="amountAdults"
                             >
                             </v-text-field>
                         </v-flex>
@@ -259,7 +259,7 @@
                 }
                 return childArray;
             },
-            amountLiable: function () {
+            amountAdults: function () {
                 return this.hasSpouse ? 2 : 1;
             }
         },
