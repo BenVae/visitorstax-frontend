@@ -1,6 +1,5 @@
 <template>
-    <v-container>
-
+    <v-container v-if="propform!=null">
         <v-card elevation="10" color="#e9e9e9">
             <v-card-title>
                 {{customFormatter(propform.arrivalDate)}} - {{customFormatter(propform.departureDate)}}
@@ -148,11 +147,12 @@
             </v-container>
         </v-card>
     </v-container>
+    <v-container v-else>
+        <h1>Leider wurde kein Meldeschein ausgewählt.</h1>
+    </v-container>
 </template>
 
 <script>
-
-    import FormData from '../assets/singleSampleRegistrationFormB';
 
     export default {
         name: "singularRegForm",
@@ -162,7 +162,6 @@
         },
         data() {
             return {
-                form: null,
                 title: null,
                 hasChildren: null
             }
@@ -171,12 +170,7 @@
             customFormatter(date) {
                 return this.$moment(date).format('DD.MM.YYYY');
             }
-        },
-        beforeMount() {
-            this.form = FormData;
-            this.title = "Meldeschein #" + this.propform.registrationNumber;
-
-        },
+        }
     }
 </script>
 

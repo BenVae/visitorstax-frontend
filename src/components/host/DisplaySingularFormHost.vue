@@ -24,7 +24,11 @@
             }
         },
         beforeMount() {
-            this.title = "Meldeschein #" + this.form.registrationNumber
+            if(typeof this.form != "undefined") {
+                this.title = "Meldeschein #" + this.form.registrationNumber
+            }else {
+                this.title = "Fehler"
+            }
         }
     }
 
