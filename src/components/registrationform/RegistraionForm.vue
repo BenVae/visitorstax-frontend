@@ -259,7 +259,7 @@
                 }
                 return childArray;
             },
-            amountPersons: function () {
+            amountLiable: function () {
                 return this.hasSpouse ? 2 : 1;
             }
         },

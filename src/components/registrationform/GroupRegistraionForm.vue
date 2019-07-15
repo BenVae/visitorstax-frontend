@@ -88,38 +88,145 @@
             <row-with-description
                     name="Gruppe">
                 <v-layout row justify-center>
+                    <v-table-overflow>
+
+                    </v-table-overflow>
+                    <table style="width:100%">
+                        <tr>
+                            <th style="width: 40%">
+                                Kategorie
+                            </th>
+                            <th style="width: 20%">
+                                Anzahl
+                            </th>
+                            <th style="width: 40%">
+                                Ausweisnummern
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                Erwachsene (Freizeit)
+                            </td>
+                            <td>
+                                <v-text-field
+                                        style="width: 100px"
+                                        placeholder="0"
+                                        clearable
+                                        v-model="amountAdultFree"
+                                        type="number"
+                                        max="100"
+                                        min="0">
+                                </v-text-field>
+                            </td>
+                            <td>
+                                <v-text-field>
+                                </v-text-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Erwachsene (Geschäftlich)
+                            </td>
+                            <td>
+                                <v-text-field
+                                        style="width: 100px"
+                                        placeholder="0"
+                                        clearable
+                                        v-model="amountAdultBusiness"
+                                        type="number"
+                                        max="100"
+                                        min="0">
+                                </v-text-field>
+                            </td>
+                            <td>
+                                <v-text-field>
+                                </v-text-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Anzahl Kinder (unter 16)
+                            </td>
+                            <td>
+                                <v-text-field
+                                        style="width: 100px"
+                                        placeholder="0"
+                                        clearable
+                                        v-model="amountChildren"
+                                        type="number"
+                                        max="100"
+                                        min="0">
+                                </v-text-field>
+                            </td>
+                            <td>
+                                <v-text-field>
+                                </v-text-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Anzahl Schwerbehinderte (RF)
+                            </td>
+                            <td>
+                                <v-text-field
+                                        style="width: 100px"
+                                        placeholder="0"
+                                        clearable
+                                        v-model="amountDisabled"
+                                        type="number"
+                                        max="100"
+                                        min="0">
+                                </v-text-field>
+                            </td>
+                            <td>
+                                <v-text-field>
+                                </v-text-field>
+                            </td>
+                        </tr>
+                    </table>
+                </v-layout>
+                <!--
+                <v-layout row justify-center>
                     <v-flex sm6 md4 lg3>
                         <v-text-field
-                                v-model="amountVisitorstax"
-                                label="Anzahl Kurtaxepflichtiger"
+                                v-model="amountAdultFree"
+                                label="Anzahl Erwachsene (Freizeit)"
                                 type="number"
                                 max="100"
                                 min="0">
-                            <v-tooltip slot="prepend" bottom>
-                                <v-icon slot="activator" color="grey" dark>info</v-icon>
-                                <span>Kurtaxepflichtig sind alle Ortsfremden Personen, die nicht explizit von den Kurtaxen befreit sind</span>
-                            </v-tooltip>
                         </v-text-field>
                     </v-flex>
                     <v-flex sm6 md4 lg3>
                         <v-text-field
-                                v-model="amountVisitorstaxLiable"
-                                label="Anzahl Kurtaxebefreiter"
+                                v-model="amountAdultBusiness"
+                                label="Anzahl Erwachsene (Geschäftlich)"
                                 type="number"
                                 max="100"
                                 min="0">
-                            <v-tooltip slot="prepend" bottom>
-                                <v-icon slot="activator" color="grey" dark>info</v-icon>
-                                <span>Von den Kurtaxenbefreit sind: <br>
-                                    - Kinder unter 16 Jahren<br>
-                                    - Schwerbehinderte mit einem Ausweis mit dem Merkmal "RF"<br>
-                                    - Personen die eine Geschäftliche Tätigkeit in Konstanz ausführen
-                                </span>
-                            </v-tooltip>
                         </v-text-field>
                     </v-flex>
                 </v-layout>
-
+                <v-layout row justify-center>
+                    <v-flex sm6 md4 lg3>
+                        <v-text-field
+                                v-model="amountChildren"
+                                label="Anzahl Kinder (unter 16)"
+                                type="number"
+                                max="100"
+                                min="0">
+                        </v-text-field>
+                    </v-flex>
+                    <v-flex sm6 md4 lg3>
+                        <v-text-field
+                                v-model="amountDisabled"
+                                label="Anzahl Schwerbehinderte (RF)"
+                                type="number"
+                                max="100"
+                                min="0">
+                        </v-text-field>
+                    </v-flex>
+                </v-layout>
+                -->
             </row-with-description>
             <row-with-description name="Geschäftlichte Tätigkeit"
                                   :closable="business"
@@ -140,7 +247,7 @@
                                     label="Anzahl geschäftl. tätiger Personen"
                                     type="number"
                                     min="0"
-                                    :max="amountPersons"
+                                    :max="amountLiable"
                             >
                             </v-text-field>
                         </v-flex>
@@ -156,7 +263,7 @@
                                     label="Anzahl Tagungsbesucher"
                                     type="number"
                                     min="0"
-                                    :max="amountPersons"
+                                    :max="amountLiable"
                             >
                             </v-text-field>
                         </v-flex>
@@ -199,19 +306,11 @@
             save(date) {
                 this.$refs.menu.save(date)
             },
-            toggleSpouseBoolean() {
-                this.hasSpouse = !this.hasSpouse;
-            },
             toggleBusinessBoolean() {
                 this.business = !this.business;
             },
             registrationFormTypeChanged(type) {
                 if (type === 'Regulär') this.$router.push({path: '/meldeschein/anlegen'});
-            }
-        },
-        computed: {
-            amountPersons: function () {
-                return this.hasSpouse ? 2 : 1;
             }
         },
         data: () => ({
@@ -223,7 +322,10 @@
             dateOfBirth: "",
             range: {},
             business: false,
-            amountChildren: 0,
+            amountChildren: null,
+            amountAdultBusiness: null,
+            amountAdultFree: null,
+            amountDisabled: null,
             ptBr: {
                 night: 'Nacht',
                 nights: 'Nächte',
