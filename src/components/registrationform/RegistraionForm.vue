@@ -6,8 +6,10 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-select
-                                :items="items"
+                                v-model="type"
+                                :items="types"
                                 label="Art"
+                                v-on:input="registrationFormTypeChanged"
                         ></v-select>
                     </v-flex>
                     <v-flex sm6 md3>
@@ -30,7 +32,7 @@
             </v-container>
             <row-with-description name="Gast">
                 <v-layout row justify-center>
-                    <v-flex sm4 md2>
+                    <v-flex sm6 md3>
                         <v-text-field
                                 label="Vorname (nur Rufname)"
                         >
@@ -46,7 +48,7 @@
                     </v-flex>
                 </v-layout>
                 <v-layout row justify-center>
-                    <v-flex sm4 md2>
+                    <v-flex sm6 md3>
                         <v-text-field
                                 label="Passnummer">
                         </v-text-field>
@@ -77,7 +79,7 @@
                 </v-flex>
                 <template v-else>
                     <v-layout row justify-center>
-                        <v-flex sm4 md2>
+                        <v-flex sm6 md3>
                             <v-text-field
                                     label="Vorname (nur Rufname)">
                             </v-text-field>
@@ -92,7 +94,7 @@
                         </v-flex>
                     </v-layout>
                     <v-layout row justify-center>
-                        <v-flex sm4 md2>
+                        <v-flex sm6 md3>
                             <v-text-field
                                     label="Passnummer">
                             </v-text-field>
@@ -135,7 +137,7 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
-                                v-model="amountChilds"
+                                v-model="amountChildren"
                                 label="Anzahl Kinder"
                                 type="number"
                                 max="5"
@@ -152,7 +154,7 @@
                             v-for="(items, index) in childrenSize"
                             :key="index">
                         <v-text-field
-                                label="Kind"
+                                :label="`Geburtsjahr Kind ${index + 1}`"
                                 type="number"
                                 max="16"
                                 min="0">
@@ -180,7 +182,7 @@
                                     label="Anzahl geschäftl. tätiger Personen"
                                     type="number"
                                     min="0"
-                                    :max="amountPersons"
+                                    :max="amountAdults"
                             >
                             </v-text-field>
                         </v-flex>
@@ -196,7 +198,7 @@
                                     label="Anzahl Tagungsbesucher"
                                     type="number"
                                     min="0"
-                                    :max="amountPersons"
+                                    :max="amountAdults"
                             >
                             </v-text-field>
                         </v-flex>
@@ -244,22 +246,26 @@
             },
             toggleBusinessBoolean() {
                 this.business = !this.business;
+            },
+            registrationFormTypeChanged(type) {
+                if (type === 'Gruppe') this.$router.push({path: '/gruppenMeldeschein/anlegen'});
             }
         },
         computed: {
             childrenSize: function () {
                 let childArray = [];
-                for (let index = 0; index < this.amountChilds; index++) {
+                for (let index = 0; index < this.amountChildren; index++) {
                     childArray.push('');
                 }
                 return childArray;
             },
-            amountPersons: function () {
+            amountAdults: function () {
                 return this.hasSpouse ? 2 : 1;
             }
         },
         data: () => ({
-            items: ['Regulär', 'Gruppe'],
+            types: ['Regulär', 'Gruppe'],
+            type: 'Regulär',
             mietobjekte: ['Alemannstr. 5', 'Hohneckerstr. 10'],
             startDate: "",
             endDate: "",
@@ -267,7 +273,7 @@
             range: {},
             hasSpouse: false,
             business: false,
-            amountChilds: 0,
+            amountChildren: 0,
             children: [],
             ptBr: {
                 night: 'Nacht',
