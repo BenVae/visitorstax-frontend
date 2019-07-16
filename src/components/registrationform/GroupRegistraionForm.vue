@@ -185,48 +185,6 @@
                         </tr>
                     </table>
                 </v-layout>
-                <!--
-                <v-layout row justify-center>
-                    <v-flex sm6 md4 lg3>
-                        <v-text-field
-                                v-model="amountAdultFree"
-                                label="Anzahl Erwachsene (Freizeit)"
-                                type="number"
-                                max="100"
-                                min="0">
-                        </v-text-field>
-                    </v-flex>
-                    <v-flex sm6 md4 lg3>
-                        <v-text-field
-                                v-model="amountAdultBusiness"
-                                label="Anzahl Erwachsene (Geschäftlich)"
-                                type="number"
-                                max="100"
-                                min="0">
-                        </v-text-field>
-                    </v-flex>
-                </v-layout>
-                <v-layout row justify-center>
-                    <v-flex sm6 md4 lg3>
-                        <v-text-field
-                                v-model="amountChildren"
-                                label="Anzahl Kinder (unter 16)"
-                                type="number"
-                                max="100"
-                                min="0">
-                        </v-text-field>
-                    </v-flex>
-                    <v-flex sm6 md4 lg3>
-                        <v-text-field
-                                v-model="amountDisabled"
-                                label="Anzahl Schwerbehinderte (RF)"
-                                type="number"
-                                max="100"
-                                min="0">
-                        </v-text-field>
-                    </v-flex>
-                </v-layout>
-                -->
             </row-with-description>
             <row-with-description name="Geschäftlichte Tätigkeit"
                                   :closable="business"
