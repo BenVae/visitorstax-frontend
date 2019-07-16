@@ -1,0 +1,71 @@
+[
+  {
+    "businessId": "1",
+    "user": {
+      "id": "1",
+      "username": "123456",
+      "password": "test",
+      "role": "Betrieb"
+    },
+    "adress": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Rheingutstraße 30",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "adress": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Rheingutstraße 30",
+          "country": "Germany"
+        }
+      },
+      {
+        "id": "2",
+        "adress": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Rheingutstraße 31",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Christoph",
+    "contactPersonSurname": "Hänsel",
+    "contactEmail": "christoph.haensel@htwg-konstanz.de",
+    "contactTel": "0174532682"
+  },
+  {
+    "businessId": "2",
+    "user": {
+      "id": "2",
+      "username": "654321",
+      "password": "test",
+      "role": "Betrieb"
+    },
+    "adress": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Paul-Gretel-Straße 2",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "adress": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Paul-Gretel-Straße 2",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Philippe",
+    "contactPersonSurname": "Renner",
+    "contactEmail": "Philippe.Renner@htwg-konstanz.de",
+    "contactTel": "014258625"
+  }
+]
