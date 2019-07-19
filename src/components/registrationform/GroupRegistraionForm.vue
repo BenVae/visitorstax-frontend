@@ -6,7 +6,7 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-select
-                                v-model="type"
+                                v-model="registrationFormType"
                                 :items="types"
                                 label="Art"
                                 v-on:input="registrationFormTypeChanged"
@@ -245,10 +245,10 @@
         },
         data: () => ({
             types: ['Regulär', 'Gruppe'],
-            type: 'Gruppe',
+            registrationFormType: 'Gruppe',
             mietobjekte: ['Alemannstr. 5', 'Hohneckerstr. 10'],
-            startDate: "",
-            endDate: "",
+            arrivalDate: "",
+            departureDate: "",
             dateOfBirth: "",
             range: {},
             business: false,
@@ -256,7 +256,7 @@
             amountAdultBusiness: null,
             amountAdultHoliday: null,
             amountHandicapped: null,
-            ptBr: {
+            rangerpickerSettings: {
                 night: 'Nacht',
                 nights: 'Nächte',
                 'check-in': 'check-in',

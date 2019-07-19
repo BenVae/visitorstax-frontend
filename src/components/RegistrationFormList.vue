@@ -83,11 +83,11 @@
                 <template v-slot:items="props">
                     <tr @click="displaySingleRegistrationForm(props.item)">
                     <td>{{ props.item.registrationNumber }}</td>
-                    <td>{{ props.item.guest.surname }}</td>
-                    <td>{{ props.item.guest.name }}</td>
-                    <td>{{ $moment(props.item.arrivalDate).format('DD.MM.YYYY') }}</td>
-                    <td>{{ $moment(props.item.departureDate).format('DD.MM.YYYY') }}</td>
-                    <td>{{ props.item.registrationFormType}}</td>
+                    <td>{{ props.item.formData.guest.surname }}</td>
+                    <td>{{ props.item.formData.guest.name }}</td>
+                    <td>{{ $moment(props.formData.item.arrivalDate).format('DD.MM.YYYY') }}</td>
+                    <td>{{ $moment(props.item.formData.departureDate).format('DD.MM.YYYY') }}</td>
+                    <td>{{ props.item.formData.registrationFormType}}</td>
                     <td>{{ props.item.tax }}</td>
                     </tr>
                 </template>
@@ -176,15 +176,15 @@
                     return this.items
                 } else if(this.arrivalDate != null && this.departureDate == null) {
                     return this.items.filter(item =>
-                        Date.parse(item.arrivalDate) >= Date.parse(this.arrivalDate)
+                        Date.parse(item.formData.arrivalDate) >= Date.parse(this.arrivalDate)
                     )
                 } else if(this.arrivalDate == null && this.departureDate != null) {
                     return this.items.filter(item =>
-                        Date.parse(item.departureDate) <= Date.parse(this.departureDate)
+                        Date.parse(item.formData.departureDate) <= Date.parse(this.departureDate)
                     )
                 } else{
                     return this.items.filter(item =>
-                        Date.parse(item.arrivalDate) >= Date.parse(this.arrivalDate) && Date.parse(item.departureDate) <= Date.parse(this.departureDate)
+                        Date.parse(item.formData.arrivalDate) >= Date.parse(this.arrivalDate) && Date.parse(item.formData.departureDate) <= Date.parse(this.departureDate)
                     )
                 }
             },

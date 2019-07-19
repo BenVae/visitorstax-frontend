@@ -26,6 +26,7 @@
                 min="1920-01-01"
                 color="red lighten-1"
                 @change="save"
+                v-on:input="$emit('input', date)"
         ></v-date-picker>
     </v-menu>
 </template>

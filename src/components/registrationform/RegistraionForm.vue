@@ -6,7 +6,7 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-select
-                                v-model="type"
+                                v-model="formData.registrationFormType"
                                 :items="types"
                                 label="Art"
                                 v-on:input="registrationFormTypeChanged"
@@ -23,7 +23,7 @@
                     <v-flex md6>
                         <HotelDatePicker
                                 format="DD.MM.YYYY"
-                                :i18n="ptBr"
+                                :i18n="rangerpickerSettings"
                                 @check-in-changed="setCheckinDate"
                                 @check-out-changed="setCheckoutDate">
                         </HotelDatePicker>
@@ -34,35 +34,38 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
-                                v-model="surname"
+                                v-model="formData.guest.surname"
                                 label="Vorname (nur Rufname)"
                         >
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
-                                v-model="name"
+                                v-model="formData.guest.name"
                                 label="Familienname">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
-                        <BirthdayPicker/>
+                        <BirthdayPicker
+                                v-model="formData.guest.dateOfBirth"/>
                     </v-flex>
                 </v-layout>
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
-                                v-model=""
+                                v-model="formData.guest.passportSerialNumber"
                                 label="Passnummer">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                v-model="formData.guest.nationality"
                                 label="Nationalität">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                v-model="formData.guest.placeOfBirth"
                                 label="Geburtsort">
                         </v-text-field>
                     </v-flex>
@@ -84,31 +87,38 @@
                     <v-layout row justify-center>
                         <v-flex sm6 md3>
                             <v-text-field
-                                    label="Vorname (nur Rufname)">
+                                    v-model="formData.spouse.surname"
+                                    label="Vorname (nur Rufname)"
+                            >
                             </v-text-field>
                         </v-flex>
                         <v-flex sm4 md2>
                             <v-text-field
+                                    v-model="formData.spouse.name"
                                     label="Familienname">
                             </v-text-field>
                         </v-flex>
                         <v-flex sm4 md2>
-                            <BirthdayPicker/>
+                            <BirthdayPicker
+                                    v-model="formData.spouse.dateOfBirth"/>
                         </v-flex>
                     </v-layout>
                     <v-layout row justify-center>
                         <v-flex sm6 md3>
                             <v-text-field
+                                    v-model="formData.spouse.passportSerialNumber"
                                     label="Passnummer">
                             </v-text-field>
                         </v-flex>
                         <v-flex sm4 md2>
                             <v-text-field
+                                    v-model="formData.spouse.nationality"
                                     label="Nationalität">
                             </v-text-field>
                         </v-flex>
                         <v-flex sm4 md2>
                             <v-text-field
+                                    v-model="formData.spouse.placeOfBirth"
                                     label="Geburtsort">
                             </v-text-field>
                         </v-flex>
@@ -120,16 +130,19 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
+                                v-model="formData.guest.adress.streetAndNumber"
                                 label="Straße/Hausnummer">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                v-model="formData.guest.adress.zipCode"
                                 label="Postleizahl">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                v-model="formData.guest.adress.city"
                                 label="Wohnort">
                         </v-text-field>
                     </v-flex>
@@ -158,6 +171,7 @@
                             :key="index">
                         <v-text-field
                                 :label="`Geburtsjahr Kind ${index + 1}`"
+                                v-model="formData.childrenYearOfBirth[index]"
                                 type="number"
                                 max="16"
                                 min="0">
@@ -236,10 +250,10 @@
                 return this.$moment(date).format('DD.MM.YYYY');
             },
             setCheckinDate(newDate) {
-                this.startDate = this.customFormatter(newDate);
+                this.arrivalDate = this.customFormatter(newDate);
             },
             setCheckoutDate(newDate) {
-                this.endDate = this.customFormatter(newDate);
+                this.departureDate = this.customFormatter(newDate);
             },
             save(date) {
                 this.$refs.menu.save(date)
@@ -268,17 +282,39 @@
         },
         data: () => ({
             types: ['Regulär', 'Gruppe'],
-            type: 'Regulär',
             mietobjekte: ['Alemannstr. 5', 'Hohneckerstr. 10'],
-            startDate: "",
-            endDate: "",
-            dateOfBirth: "",
-            range: {},
+            formData: {
+                registrationFormType: 'Regulär',
+                arrivalDate: "",
+                departureDate: "",
+                guest: {
+                    name: "",
+                    surname: "",
+                    dateOfBirth: null,
+                    placeOfBirth: "",
+                    nationality: "",
+                    adress: {
+                        streetAndNumber: "",
+                        zipCode: "",
+                        city: "",
+                        country: ""
+                    },
+                    passportSerialNumber: ""
+                },
+                spouse: {
+                    name: "",
+                    surname: "",
+                    dateOfBirth: null,
+                    placeOfBirth: "",
+                    nationality: "",
+                    passportSerialNumber: ""
+                },
+                childrenYearOfBirth: [],
+            },
+            amountChildren: 0,
             hasSpouse: false,
             business: false,
-            amountChildren: 0,
-            children: [],
-            ptBr: {
+            rangerpickerSettings: {
                 night: 'Nacht',
                 nights: 'Nächte',
                 'check-in': 'check-in',
@@ -286,8 +322,6 @@
                 'day-names': ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
                 'month-names': ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
             },
-            date: null,
-            menu: false
         }),
         watch: {
             menu(val) {
