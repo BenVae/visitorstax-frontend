@@ -32,14 +32,16 @@
             </v-container>
             <row-with-description name="Reiseleiter">
                 <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                    <v-flex sm4 md3>
                         <v-text-field
+                                v-model="surname"
                                 label="Vorname (nur Rufname)"
                         >
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                v-model="name"
                                 label="Familienname">
                         </v-text-field>
                     </v-flex>
@@ -48,8 +50,9 @@
                     </v-flex>
                 </v-layout>
                 <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                    <v-flex sm4 md3>
                         <v-text-field
+                                v-model="pass"
                                 label="Passnummer">
                         </v-text-field>
                     </v-flex>
@@ -65,7 +68,7 @@
                     </v-flex>
                 </v-layout>
                 <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                    <v-flex sm4 md3>
                         <v-text-field
                                 label="Straße/Hausnummer">
                         </v-text-field>

@@ -34,12 +34,14 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
+                                v-model="surname"
                                 label="Vorname (nur Rufname)"
                         >
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                v-model="name"
                                 label="Familienname">
                         </v-text-field>
                     </v-flex>
@@ -50,6 +52,7 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
+                                v-model=""
                                 label="Passnummer">
                         </v-text-field>
                     </v-flex>

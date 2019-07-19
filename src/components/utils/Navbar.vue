@@ -14,15 +14,16 @@
 
                 <!-- Right aligned nav types -->
                 <b-navbar-nav class="ml-auto pr-5">
+
+                    <!-- Stadt -->
+                    <b-nav-item><router-link to="/Betriebe">Betriebe</router-link></b-nav-item>
+
                     <!-- Vermieter und Stadt -->
-                    <b-nav-item>Start</b-nav-item>
                     <b-nav-item><router-link to="/meldescheine">Meldescheine</router-link></b-nav-item>
 
                     <!-- Vermieter -->
                     <b-nav-item id="new-form"><router-link to="/meldeschein/anlegen">neuer Meldeschein</router-link></b-nav-item>
 
-                    <!-- Stadt -->
-                    <b-nav-item>Betriebe</b-nav-item>
                     <b-nav-item>
                         <router-link to="/login">Login</router-link>
                     </b-nav-item>
