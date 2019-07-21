@@ -85,7 +85,7 @@
                     <td>{{ props.item.registrationNumber }}</td>
                     <td>{{ props.item.formData.guest.surname }}</td>
                     <td>{{ props.item.formData.guest.name }}</td>
-                    <td>{{ $moment(props.formData.item.arrivalDate).format('DD.MM.YYYY') }}</td>
+                    <td>{{ $moment(props.item.formData.arrivalDate).format('DD.MM.YYYY') }}</td>
                     <td>{{ $moment(props.item.formData.departureDate).format('DD.MM.YYYY') }}</td>
                     <td>{{ props.item.formData.registrationFormType}}</td>
                     <td>{{ props.item.tax }}</td>
