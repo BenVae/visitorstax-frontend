@@ -1,0 +1,24 @@
+[
+  {
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Rheingutstraße 30",
+      "country": "Germany"
+    },
+    "business": {
+      "id": 123456789
+    }
+  },
+  {
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Rheingutstraße 31",
+      "country": "Germany"
+    },
+    "business": {
+      "id": 123456789
+    }
+  }
+]

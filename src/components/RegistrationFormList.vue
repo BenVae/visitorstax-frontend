@@ -82,13 +82,13 @@
             >
                 <template v-slot:items="props">
                     <tr @click="displaySingleRegistrationForm(props.item)">
-                    <td>{{ props.item.registrationNumber }}</td>
+                    <td>{{ props.item.meta.registrationNumber }}</td>
                     <td>{{ props.item.formData.guest.surname }}</td>
                     <td>{{ props.item.formData.guest.name }}</td>
                     <td>{{ $moment(props.item.formData.arrivalDate).format('DD.MM.YYYY') }}</td>
                     <td>{{ $moment(props.item.formData.departureDate).format('DD.MM.YYYY') }}</td>
                     <td>{{ props.item.formData.registrationFormType}}</td>
-                    <td>{{ props.item.tax }}</td>
+                    <td>{{ props.item.meta.tax }}</td>
                     </tr>
                 </template>
                 <template v-slot:no-results>

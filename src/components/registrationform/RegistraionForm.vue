@@ -1,7 +1,8 @@
 <template>
     <Layout>
         <Title name="Meldeschein anlegen"/>
-        <v-form>
+        <v-form
+                ref="form">
             <v-container>
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
@@ -14,7 +15,12 @@
                     </v-flex>
                     <v-flex sm6 md3>
                         <v-select
+                                required
                                 :items="mietobjekte"
+                                @change="selectBusinessObject"
+                                item-text="text"
+                                item-value="value"
+                                :rules="[v => !!v || 'Bitte Mietobjekt auswählen']"
                                 label="Mietobjekt"
                         ></v-select>
                     </v-flex>
@@ -35,6 +41,7 @@
                     <v-flex sm6 md3>
                         <v-text-field
                                 v-model="formData.guest.surname"
+                                :rules="[v => !!v || 'Bitte Vorname eingeben']"
                                 label="Vorname (nur Rufname)"
                         >
                         </v-text-field>
@@ -42,6 +49,7 @@
                     <v-flex sm4 md2>
                         <v-text-field
                                 v-model="formData.guest.name"
+                                :rules="[v => !!v || 'Bitte Familienname eingeben']"
                                 label="Familienname">
                         </v-text-field>
                     </v-flex>
@@ -53,18 +61,21 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
+                                :rules="[v => !!v || 'Bitte Passnummer eingeben']"
                                 v-model="formData.guest.passportSerialNumber"
                                 label="Passnummer">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                :rules="[v => !!v || 'Bitte Nationalität eingeben']"
                                 v-model="formData.guest.nationality"
                                 label="Nationalität">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                :rules="[v => !!v || 'Bitte Geburtsort eingeben']"
                                 v-model="formData.guest.placeOfBirth"
                                 label="Geburtsort">
                         </v-text-field>
@@ -130,19 +141,22 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
-                                v-model="formData.guest.adress.streetAndNumber"
+                                :rules="[v => !!v || 'Bitte Straße/Hausnummer eingeben']"
+                                v-model="formData.guest.address.streetAndNumber"
                                 label="Straße/Hausnummer">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
-                                v-model="formData.guest.adress.zipCode"
+                                :rules="[v => !!v || 'Bitte Postleihzahl eingeben']"
+                                v-model="formData.guest.address.zipCode"
                                 label="Postleizahl">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
-                                v-model="formData.guest.adress.city"
+                                :rules="[v => !!v || 'Bitte Wohnort eingeben']"
+                                v-model="formData.guest.address.city"
                                 label="Wohnort">
                         </v-text-field>
                     </v-flex>
@@ -172,6 +186,7 @@
                         <v-text-field
                                 :label="`Geburtsjahr Kind ${index + 1}`"
                                 v-model="formData.childrenYearOfBirth[index]"
+                                :rules="[v => !!v || 'Bitte Geburtsjahr eingeben']"
                                 type="number"
                                 max="16"
                                 min="0">
@@ -196,6 +211,7 @@
                     <v-layout row justify-center>
                         <v-flex sm6 md3>
                             <v-text-field
+                                    v-model="formData.business.amountBusinessAdults"
                                     label="Anzahl geschäftl. tätiger Personen"
                                     type="number"
                                     min="0"
@@ -205,6 +221,7 @@
                         </v-flex>
                         <v-flex sm6 md3>
                             <v-text-field
+                                    v-model="formData.business.company"
                                     label="Auftragsfirma">
                             </v-text-field>
                         </v-flex>
@@ -212,6 +229,7 @@
                     <v-layout row justify-center>
                         <v-flex sm6 md3>
                             <v-text-field
+                                    v-model="formData.business.amountConferenceVisitors"
                                     label="Anzahl Tagungsbesucher"
                                     type="number"
                                     min="0"
@@ -221,6 +239,7 @@
                         </v-flex>
                         <v-flex sm6 md3>
                             <v-text-field
+                                    v-model="formData.business.fieldOfBusiness"
                                     label="Tätigkeitsfeld">
                             </v-text-field>
                         </v-flex>
@@ -228,7 +247,10 @@
                 </template>
             </row-with-description>
             <v-layout align-end justify-end>
-                <v-btn color="blue-grey" dark>weiter</v-btn>
+                <v-btn
+                        @click="submitForm"
+                        color="blue-grey"
+                        dark>weiter</v-btn>
             </v-layout>
         </v-form>
     </Layout>
@@ -241,6 +263,7 @@
     import HotelDatePicker from 'vue-hotel-datepicker'
     import BirthdayPicker from "../utils/BirthdayPicker";
     import PlusIcon from "vue-material-design-icons/Plus";
+    import {createRegistrationForm, getBusinessObjects} from "../../formSubmit";
 
     export default {
         name: "RegistrationForm",
@@ -266,6 +289,15 @@
             },
             registrationFormTypeChanged(type) {
                 if (type === 'Gruppe') this.$router.push({path: '/gruppenMeldeschein/anlegen'});
+            },
+            submitForm(){
+                if(this.$refs.form.validate()){
+                    console.log(this.businessObject);
+                    createRegistrationForm(this.formData, this.businessObject)
+                }
+            },
+            selectBusinessObject(selectedObject){
+                this.businessObject = selectedObject;
             }
         },
         computed: {
@@ -283,6 +315,7 @@
         data: () => ({
             types: ['Regulär', 'Gruppe'],
             mietobjekte: ['Alemannstr. 5', 'Hohneckerstr. 10'],
+            businessObject:"",
             formData: {
                 registrationFormType: 'Regulär',
                 arrivalDate: "",
@@ -293,7 +326,7 @@
                     dateOfBirth: null,
                     placeOfBirth: "",
                     nationality: "",
-                    adress: {
+                    address: {
                         streetAndNumber: "",
                         zipCode: "",
                         city: "",
@@ -309,11 +342,18 @@
                     nationality: "",
                     passportSerialNumber: ""
                 },
+                business: {
+                    amountBusinessAdults:"",
+                    amountConferenceVisitors: "",
+                    fieldOfBusiness: "",
+                    company: ""
+                },
                 childrenYearOfBirth: [],
             },
             amountChildren: 0,
             hasSpouse: false,
             business: false,
+            lazy: false,
             rangerpickerSettings: {
                 night: 'Nacht',
                 nights: 'Nächte',
@@ -328,6 +368,9 @@
                 val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
             }
         },
+        beforeMount() {
+            this.mietobjekte = getBusinessObjects();
+        }
     }
 </script>
 

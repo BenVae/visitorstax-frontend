@@ -4,7 +4,10 @@
       "registrationNumber": 1,
       "businessObject": {
         "address": {
-          "streetAndNumber": "Seestraße 18"
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Rheingutstraße 30",
+          "country": "Germany"
         },
         "business": {
           "id": 123456789
@@ -23,7 +26,7 @@
         "dateOfBirth": "1986-08-13",
         "placeOfBirth": "Kempten",
         "nationality": "deutsch",
-        "adress": {
+        "address": {
           "streetAndNumber": "Rheinstraße 87",
           "zipCode": "47051",
           "city": "Duisburg",
@@ -50,16 +53,21 @@
   },
   {
     "meta": {
-      "registrationNumber": 666666,
+      "registrationNumber": 2,
       "businessObject": {
         "address": {
-          "streetAndNumber": "Seestraße 18"
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Rheingutstraße 31",
+          "country": "Germany"
         },
         "business": {
           "id": 123456789
-        }
+        },
+        "isSubmitted": "false"
       },
-      "amountOfFellowPassengers": "14",
+      "tax": "103,50",
+      "amountOfFellowPassengers": "9",
       "isSubmitted": "false",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
@@ -74,7 +82,7 @@
         "dateOfBirth": "1986-08-13",
         "placeOfBirth": "Kempten",
         "nationality": "deutsch",
-        "adress": {
+        "address": {
           "streetAndNumber": "Rheinstraße 87",
           "zipCode": "47051",
           "city": "Duisburg",
@@ -82,19 +90,15 @@
         },
         "passportSerialNumber": "T22000129"
       },
-      "amountPayTax": "9",
-      "amountTaxFree": "5",
-      "passportSerialNumbers": [
-        "T22000130",
-        "T22000131",
-        "T22000132",
-        "T22000133",
-        "T22000134",
-        "T22000135",
-        "T22000136",
-        "T22000137",
-        "T22000138"
-      ]
+      "business": {
+        "fieldOfBusiness": "IT",
+        "company": "Sybit"
+      },
+      "amountAdultBusiness": 6,
+      "amountAdultHoliday": 3,
+      "amountChildren": "",
+      "amountHandicapped": "",
+      "passportSerialNumbers": "T22000130, T22000131, T22000132, T22000133, T22000134, T22000135, T22000136, T22000137, T22000138"
     }
   }
 ]
