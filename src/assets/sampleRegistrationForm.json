@@ -1,44 +1,104 @@
 [
   {
-    "registrationNumber": "666666",
-    "businessObject": {
-      "address": {
-        "streetAndNumber": "Seestraße 18"
+    "meta": {
+      "registrationNumber": 1,
+      "businessObject": {
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Rheingutstraße 30",
+          "country": "Germany"
+        },
+        "business": {
+          "id": 123456789
+        }
+      },
+      "isSubmitted": "false",
+      "tax": "22,50"
+    },
+    "formData": {
+      "registrationFormType": "Regulär",
+      "arrivalDate": "2019-04-20",
+      "departureDate": "2019-04-29",
+      "guest": {
+        "name": "Thomas",
+        "surname": "Schäfer",
+        "dateOfBirth": "1986-08-13",
+        "placeOfBirth": "Kempten",
+        "nationality": "deutsch",
+        "address": {
+          "streetAndNumber": "Rheinstraße 87",
+          "zipCode": "47051",
+          "city": "Duisburg",
+          "country": "Deutschland"
+        },
+        "passportSerialNumber": "T22000129"
+      },
+      "foreignIdentityChecked": "true",
+      "foreignIdentityIdentical": "true",
+      "spouse": {
+        "name": "Maria",
+        "surname": "Schäfer",
+        "dateOfBirth": "1983-03-23",
+        "placeOfBirth": "Mainz",
+        "nationality": "deutsch",
+        "passportSerialNumber": "B245210129"
+      },
+      "childrenYearOfBirth" : [
+        2007,
+        2002,
+        2010
+      ]
+    }
+  },
+  {
+    "meta": {
+      "registrationNumber": 2,
+      "businessObject": {
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Rheingutstraße 31",
+          "country": "Germany"
+        },
+        "business": {
+          "id": 123456789
+        },
+        "isSubmitted": "false"
+      },
+      "tax": "103,50",
+      "amountOfFellowPassengers": "9",
+      "isSubmitted": "false",
+      "foreignIdentityChecked": "true",
+      "foreignIdentityIdentical": "true"
+    },
+    "formData": {
+      "registrationFormType": "Gruppe",
+      "arrivalDate": "2019-04-20",
+      "departureDate": "2019-04-29",
+      "guest": {
+        "name": "Thomas",
+        "surname": "Schäfer",
+        "dateOfBirth": "1986-08-13",
+        "placeOfBirth": "Kempten",
+        "nationality": "deutsch",
+        "address": {
+          "streetAndNumber": "Rheinstraße 87",
+          "zipCode": "47051",
+          "city": "Duisburg",
+          "country": "Deutschland"
+        },
+        "passportSerialNumber": "T22000129"
       },
       "business": {
-        "id": "123456789"
-      }
-    },
-    "isSubmitted": "false",
-    "arrivalDate": "2019-04-20",
-    "departureDate": "2019-04-29",
-    "guest": {
-      "name": "Thomas",
-      "surname": "Schäfer",
-      "dateOfBirth": "1986-08-13",
-      "placeOfBirth": "Kempten",
-      "nationality": "deutsch",
-      "adress": {
-        "streetAndNumber": "Rheinstraße 87",
-        "zipCode": "47051",
-        "city": "Duisburg",
-        "country": "Deutschland"
+        "fieldOfBusiness": "IT",
+        "company": "Sybit"
       },
-      "passportSerialNumber": "T22000129"
-    },
-    "foreignIdentityChecked": "true",
-    "foreignIdentityIdentical": "true",
-    "registrationFormType": "F",
-    "partnerName": "Natalie",
-    "partnerSurname": "Schäfer",
-    "partnerDateOfBirth": "1989-10-27",
-    "nationality": "deutsch",
-    "childrenYearOfBirth" : [
-      2007,
-      2002,
-      2010
-    ],
-    "tax": "22,50"
+      "amountAdultBusiness": 6,
+      "amountAdultHoliday": 3,
+      "amountChildren": "",
+      "amountHandicapped": "",
+      "passportSerialNumbers": "T22000130, T22000131, T22000132, T22000133, T22000134, T22000135, T22000136, T22000137, T22000138"
+    }
   }
 ]
-
