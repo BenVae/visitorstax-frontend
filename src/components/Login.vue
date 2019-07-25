@@ -36,6 +36,7 @@
         methods:{
             saveRole: function () {
                 this.$store.commit('change', 'landlord')
+                this.$router.push({path: '/'});
             }
         }
     }
