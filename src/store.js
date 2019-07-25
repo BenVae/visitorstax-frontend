@@ -3,14 +3,16 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+export const store = new Vuex.Store({
   state: {
-
+    role: ''
+  },
+  getters: {
+    role: state => state.role
   },
   mutations: {
-
-  },
-  actions: {
-
+    change(state, role) {
+      state.role = role
+    }
   }
 })

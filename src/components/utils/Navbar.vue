@@ -12,18 +12,30 @@
 
             <b-collapse id="nav-collapse" is-nav>
 
-                <!-- Right aligned nav types -->
                 <b-navbar-nav class="ml-auto pr-5">
                     <!-- Vermieter und Stadt -->
-                    <b-nav-item>Start</b-nav-item>
-                    <b-nav-item><router-link to="/meldescheine">Meldescheine</router-link></b-nav-item>
+                    <b-nav-item v-if="$store.getters.role === 'landlord' || $store.getters.role === 'city'">
+                        <router-link to="/meldescheine">Meldescheine</router-link>
+                    </b-nav-item>
 
                     <!-- Vermieter -->
-                    <b-nav-item id="new-form"><router-link to="/meldeschein/anlegen">neuer Meldeschein</router-link></b-nav-item>
+                    <b-nav-item id="new-form" v-if="$store.getters.role === 'landlord'">
+                        <router-link to="/meldeschein/anlegen">neuer Meldeschein</router-link>
+                    </b-nav-item>
 
                     <!-- Stadt -->
-                    <b-nav-item>Betriebe</b-nav-item>
-                    <b-nav-item>
+                    <b-nav-item v-if="$store.getters.role === 'city'">
+                        <router-link to="/Betriebsuebersicht">Betriebe</router-link>
+                    </b-nav-item>
+
+                    <b-nav-item v-if="$store.getters.role === 'landlord' || $store.getters.role === 'city'">
+                        <span @click="deleteRoleInState">
+                            <router-link to="/">
+                                Abmelden
+                                </router-link>
+                        </span>
+                    </b-nav-item>
+                    <b-nav-item v-else>
                         <router-link to="/login">Login</router-link>
                     </b-nav-item>
                 </b-navbar-nav>
@@ -35,7 +47,13 @@
 
 <script>
     export default {
-        name: "Navbar"
+        name: "Navbar",
+
+        methods:{
+            deleteRoleInState: function(){
+                this.$store.commit('change', '')
+            }
+        }
     }
 </script>
 
