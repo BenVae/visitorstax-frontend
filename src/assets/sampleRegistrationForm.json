@@ -44,7 +44,13 @@
         "nationality": "deutsch",
         "passportSerialNumber": "B245210129"
       },
-      "childrenYearOfBirth" : [
+      "business": {
+        "amountBusinessAdults": 0,
+        "amountConferenceVisitors": 0,
+        "fieldOfBusiness": "",
+        "company": ""
+      },
+      "childrenYearOfBirth": [
         2007,
         2002,
         2010
@@ -96,8 +102,8 @@
       },
       "amountAdultBusiness": 6,
       "amountAdultHoliday": 3,
-      "amountChildren": "",
-      "amountHandicapped": "",
+      "amountChildren": 0,
+      "amountHandicapped": 0,
       "passportSerialNumbers": "T22000130, T22000131, T22000132, T22000133, T22000134, T22000135, T22000136, T22000137, T22000138"
     }
   }

@@ -50,8 +50,8 @@ export default new Router({
             component: IdCheck,
         },
         {
-            path: '/Betriebsuebersicht',
-            name: 'Betriebsuebersicht',
+            path: '/Betriebe',
+            name: 'Betriebe',
             component: BusinessList
         },
         {

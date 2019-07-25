@@ -1,12 +1,12 @@
 <template>
     <Layout>
         <Title name="Gruppen-Meldeschein anlegen"/>
-        <v-form>
+        <v-form ref="form">
             <v-container>
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-select
-                                v-model="type"
+                                v-model="formData.registrationFormType"
                                 :items="types"
                                 label="Art"
                                 v-on:input="registrationFormTypeChanged"
@@ -15,6 +15,7 @@
                     <v-flex sm6 md3>
                         <v-select
                                 :items="mietobjekte"
+                                :rules="[v => !!v || 'Bitte Mietobjekt auswählen']"
                                 label="Mietobjekt"
                         ></v-select>
                     </v-flex>
@@ -23,7 +24,7 @@
                     <v-flex md6>
                         <HotelDatePicker
                                 format="DD.MM.YYYY"
-                                :i18n="ptBr"
+                                :i18n="rangerpickerSettings"
                                 @check-in-changed="setCheckinDate"
                                 @check-out-changed="setCheckoutDate">
                         </HotelDatePicker>
@@ -32,51 +33,68 @@
             </v-container>
             <row-with-description name="Reiseleiter">
                 <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                    <v-flex sm4 md3>
                         <v-text-field
+                                v-model="formData.guest.surname"
+                                :rules="[v => !!v || 'Bitte Vorname eingeben']"
                                 label="Vorname (nur Rufname)"
                         >
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                v-model="formData.guest.name"
+                                :rules="[v => !!v || 'Bitte Familienname eingeben']"
                                 label="Familienname">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
-                        <BirthdayPicker/>
+                        <BirthdayPicker
+                                v-model="formData.guest.dateOfBirth"/>
                     </v-flex>
                 </v-layout>
                 <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                    <v-flex sm4 md3>
                         <v-text-field
+                                v-model="formData.guest.passportSerialNumber"
+                                :rules="[v => !!v || 'Bitte Passnummer eingeben']"
                                 label="Passnummer">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                :rules="[v => !!v || 'Bitte Nationalität eingeben']"
+                                v-model="formData.guest.nationality"
                                 label="Nationalität">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                :rules="[v => !!v || 'Bitte Geburtsort eingeben']"
+                                v-model="formData.guest.placeOfBirth"
                                 label="Geburtsort">
                         </v-text-field>
                     </v-flex>
                 </v-layout>
                 <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                    <v-flex sm4 md3>
                         <v-text-field
+                                v-model="formData.guest.address.streetAndNumber"
+                                :rules="[v => !!v || 'Bitte Straße/Hausnummer eingeben']"
                                 label="Straße/Hausnummer">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                v-model="formData.guest.address.zipCode"
+                                :rules="[v => !!v || 'Bitte Postleihzahl eingeben']"
                                 label="Postleizahl">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm4 md2>
                         <v-text-field
+                                v-model="formData.guest.address.city"
+                                :rules="[v => !!v || 'Bitte Wohnort eingeben']"
                                 label="Wohnort">
                         </v-text-field>
                     </v-flex>
@@ -114,8 +132,7 @@
                                 <v-text-field
                                         style="width: 100px"
                                         placeholder="0"
-                                        clearable
-                                        v-model="amountAdultHoliday"
+                                        v-model="formData.amountAdultHoliday"
                                         type="number"
                                         max="100"
                                         min="0">
@@ -125,6 +142,7 @@
                                 <v-textarea
                                         solo
                                         auto-grow
+                                        v-model="formData.passportSerialNumbers"
                                         placeholder="Beispiel: Passnummer1, Passnummer2, ..."
                                 ></v-textarea>
                             </td>
@@ -137,8 +155,7 @@
                                 <v-text-field
                                         style="width: 100px"
                                         placeholder="0"
-                                        clearable
-                                        v-model="amountAdultBusiness"
+                                        v-model="formData.amountAdultBusiness"
                                         type="number"
                                         max="100"
                                         min="0">
@@ -147,14 +164,13 @@
                         </tr>
                         <tr>
                             <td>
-                                Anzahl Kinder (unter 16)
+                                Kinder (unter 16)
                             </td>
                             <td>
                                 <v-text-field
                                         style="width: 100px"
                                         placeholder="0"
-                                        clearable
-                                        v-model="amountChildren"
+                                        v-model="formData.amountChildren"
                                         type="number"
                                         max="100"
                                         min="0">
@@ -163,14 +179,13 @@
                         </tr>
                         <tr>
                             <td>
-                                Anzahl Schwerbehinderte (RF)
+                                Schwerbehinderte (RF)
                             </td>
                             <td>
                                 <v-text-field
                                         style="width: 100px"
                                         placeholder="0"
-                                        clearable
-                                        v-model="amountHandicapped"
+                                        v-model="formData.amountHandicapped"
                                         type="number"
                                         max="100"
                                         min="0">
@@ -185,6 +200,7 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
+                                v-model="formData.business.amountConferenceVisitors"
                                 label="Anzahl Tagungsbesucher"
                                 type="number"
                                 min="0"
@@ -193,18 +209,23 @@
                     </v-flex>
                     <v-flex sm6 md3>
                         <v-text-field
+                                v-model="formData.business.fieldOfBusiness"
                                 label="Tätigkeitsfeld">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm6 md3>
                         <v-text-field
+                                v-model="formData.business.company"
                                 label="Auftragsfirma">
                         </v-text-field>
                     </v-flex>
                 </v-layout>
             </row-with-description>
             <v-layout align-end justify-end>
-                <v-btn color="blue-grey" dark>weiter</v-btn>
+                <v-btn
+                @click="submitForm"
+                color="blue-grey"
+                dark>weiter</v-btn>
             </v-layout>
         </v-form>
     </Layout>
@@ -216,6 +237,7 @@
     import RowWithDescription from "../utils/RowWithDescription";
     import HotelDatePicker from 'vue-hotel-datepicker'
     import BirthdayPicker from "../utils/BirthdayPicker";
+    import {createRegistrationForm} from "../../formSubmit";
 
     export default {
         name: "GroupRegistrationForm",
@@ -225,10 +247,10 @@
                 return this.$moment(date).format('DD.MM.YYYY');
             },
             setCheckinDate(newDate) {
-                this.startDate = this.customFormatter(newDate);
+                this.formData.arrivalDate = newDate;
             },
             setCheckoutDate(newDate) {
-                this.endDate = this.customFormatter(newDate);
+                this.formData.departureDate = newDate;
             },
             save(date) {
                 this.$refs.menu.save(date)
@@ -238,22 +260,48 @@
             },
             registrationFormTypeChanged(type) {
                 if (type === 'Regulär') this.$router.push({path: '/meldeschein/anlegen'});
-            }
+            },
+            submitForm(){
+                if(this.$refs.form.validate()){
+                    console.log(this.businessObject);
+                    createRegistrationForm(this.formData, this.businessObject)
+                }
+            },
         },
         data: () => ({
             types: ['Regulär', 'Gruppe'],
-            type: 'Gruppe',
             mietobjekte: ['Alemannstr. 5', 'Hohneckerstr. 10'],
-            startDate: "",
-            endDate: "",
-            dateOfBirth: "",
-            range: {},
+            formData: {
+                registrationFormType: 'Gruppe',
+                arrivalDate: "",
+                departureDate: "",
+                guest: {
+                    name: "",
+                    surname: "",
+                    dateOfBirth: null,
+                    placeOfBirth: "",
+                    nationality: "",
+                    address: {
+                        streetAndNumber: "",
+                        zipCode: "",
+                        city: "",
+                        country: ""
+                    },
+                    passportSerialNumber: ""
+                },
+                amountChildren: 0,
+                amountAdultBusiness: 0,
+                amountAdultHoliday: 0,
+                amountHandicapped: 0,
+                passportSerialNumbers: "",
+                business: {
+                    amountConferenceVisitors: "",
+                    fieldOfBusiness: "",
+                    company: ""
+                }
+            },
             business: false,
-            amountChildren: null,
-            amountAdultBusiness: null,
-            amountAdultHoliday: null,
-            amountHandicapped: null,
-            ptBr: {
+            rangerpickerSettings: {
                 night: 'Nacht',
                 nights: 'Nächte',
                 'check-in': 'check-in',
@@ -261,15 +309,14 @@
                 'day-names': ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
                 'month-names': ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
             },
-            date: null,
             menu: false
         }),
         computed: {
             maxConferenceVisitor: function () {
-                return this.amountAdultBusiness;
+                return this.formData.amountAdultBusiness;
             },
             hasBusinessVisitors: function () {
-                return this.amountAdultBusiness > 0;
+                return this.formData.amountAdultBusiness > 0;
             }
         },
         watch: {

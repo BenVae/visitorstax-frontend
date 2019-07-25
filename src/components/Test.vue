@@ -1,6 +1,6 @@
 <template>
    <Layout>
-       <Title name="Test"/>
+       <Title name="Startseite"/>
    </Layout>
 </template>
 
