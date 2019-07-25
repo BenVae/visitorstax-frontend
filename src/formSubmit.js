@@ -28,7 +28,7 @@ export function createRegistrationForm(formData, businessObject) {
 }
 
 function calculateTaxes(formData) {
-    if (formData.registrationFormType == "Regulär"){
+    if (formData.registrationFormType === "Regulär"){
         return calculateRegularTaxes(formData)
     }else{
         return calculateGroupTaxes(formData)
