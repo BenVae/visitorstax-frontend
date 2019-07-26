@@ -1,5 +1,5 @@
 <template>
-    <Layout>
+    <Layout v-if="propsbusiness!=null">
         <Title :name="title"/>
         <v-container grid-list-lg>
             <v-layout row>
@@ -11,10 +11,10 @@
                         <v-container pt-0>
                             <v-layout row text-center>
                                 <v-flex xs12>
-                                    Mail: {{business.contactEmail}}
+                                    Mail: {{propsbusiness.contactEmail}}
                                 </v-flex>
                                 <v-flex xs12>
-                                    Telefon: {{business.contactTel}}
+                                    Telefon: {{propsbusiness.contactTel}}
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -28,10 +28,10 @@
                         <v-container pt-0>
                             <v-layout row text-center>
                                 <v-flex xs12>
-                                    {{business.address.streetAndNumber}}
+                                    {{propsbusiness.address.streetAndNumber}}
                                 </v-flex>
                                 <v-flex xs12>
-                                    {{business.address.zipCode}} {{business.address.city}}
+                                    {{propsbusiness.address.zipCode}} {{propsbusiness.address.city}}
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -47,7 +47,7 @@
                         <v-container>
                             <v-layout row text-center>
                                 <v-flex xs12 md3
-                                        v-for="object in business.businessObjects">
+                                        v-for="object in propsbusiness.businessObjects">
                                     <v-card elevation="7" height="100px">
                                         <v-container fill-height>
                                             <v-layout row align-center>
@@ -106,17 +106,22 @@
             </v-layout>
         </v-container>
     </Layout>
+    <Layout v-else>
+        <span class="title">Fehler beim Laden des Betriebes</span>
+    </Layout>
 </template>
 
 <script>
     import Title from "./utils/Title"
     import Layout from "./utils/StandardLayout"
     import BusinessData from "../assets/businessData"
-    import FormData from "../assets/sampleRegistrationForm";
 
     export default {
         name: "DisplayBusiness",
         components: {Title, Layout},
+        props: {
+            propsbusiness: Object
+        },
 
         data() {
             return {
@@ -159,7 +164,7 @@
 
         beforeMount() {
             this.business = BusinessData[0]
-            this.title = "Betrieb von " + this.business.contactPersonName + " " + this.business.contactPersonSurname
+            this.title = "Betrieb von " + this.propsbusiness.contactPersonName + " " + this.propsbusiness.contactPersonSurname
             this.forms = this.getForms()
 
         },
@@ -174,7 +179,7 @@
                 }
 
                 items = items.filter(form =>
-                    form.meta.businessObject.business.id == BusinessData[0].businessId
+                    form.meta.businessObject.business.id == this.propsbusiness.businessId
                 )
                 return items
             },

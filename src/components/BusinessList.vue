@@ -23,7 +23,7 @@
                         :search="search"
                 >
                     <template v-slot:items="props">
-                        <tr @click="displaySingleRegistrationForm(props.item)">
+                        <tr @click="displaySingleBusiness(props.item)">
                             <td>{{ props.item.user.username}}</td>
                             <td>{{ props.item.contactPersonSurname}}</td>
                             <td>{{ props.item.contactPersonName}}</td>
@@ -46,15 +46,16 @@
     import businessData from '../assets/businessData';
     import StandardLayout from "./utils/StandardLayout";
     import Title from "./utils/Title";
+
     export default {
         name: "BusinessList",
         components: {Title, StandardLayout},
-        data(){
-            return{
-                pagination:{rowsPerPage:8},
+        data() {
+            return {
+                pagination: {rowsPerPage: 8},
                 search: '',
                 items: null,
-                headers:[
+                headers: [
                     {
                         text: 'Betr.-Nr.',
                         value: 'user.username'
@@ -81,6 +82,12 @@
         beforeMount() {
             this.items = businessData
         },
+
+        methods: {
+            displaySingleBusiness(itemProp) {
+                this.$router.push({name: 'Betrieb', params: {propsbusiness: itemProp}})
+            }
+        }
     }
 </script>
 

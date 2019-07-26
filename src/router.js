@@ -58,7 +58,8 @@ export default new Router({
         {
             path: '/Betrieb',
             name: 'Betrieb',
-            component: DisplayBusiness
+            component: DisplayBusiness,
+            props: true
         },
         {
             path: '/stadtlogin',
