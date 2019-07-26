@@ -318,7 +318,7 @@
         },
         data: () => ({
             types: ['Regulär', 'Gruppe'],
-            mietobjekte: ['Alemannstr. 5', 'Hohneckerstr. 10'],
+            mietobjekte: [],
             businessObject: "",
             formData: {
                 registrationFormType: 'Regulär',

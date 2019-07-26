@@ -51,7 +51,7 @@
 
         methods:{
             deleteRoleInState: function(){
-                this.$store.commit('change', '')
+                this.$store.commit('changeRole', '')
             }
         }
     }

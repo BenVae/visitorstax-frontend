@@ -15,6 +15,9 @@
                     <v-flex sm6 md3>
                         <v-select
                                 :items="mietobjekte"
+                                @change="selectBusinessObject"
+                                item-text="text"
+                                item-value="value"
                                 :rules="[v => !!v || 'Bitte Mietobjekt auswählen']"
                                 label="Mietobjekt"
                         ></v-select>
@@ -223,9 +226,10 @@
             </row-with-description>
             <v-layout align-end justify-end>
                 <v-btn
-                @click="submitForm"
-                color="blue-grey"
-                dark>weiter</v-btn>
+                        @click="submitForm"
+                        color="blue-grey"
+                        dark>weiter
+                </v-btn>
             </v-layout>
         </v-form>
     </Layout>
@@ -237,7 +241,7 @@
     import RowWithDescription from "../utils/RowWithDescription";
     import HotelDatePicker from 'vue-hotel-datepicker'
     import BirthdayPicker from "../utils/BirthdayPicker";
-    import {createRegistrationForm} from "../../formSubmit";
+    import {createRegistrationForm, getBusinessObjects} from "../../formSubmit";
 
     export default {
         name: "GroupRegistrationForm",
@@ -261,16 +265,20 @@
             registrationFormTypeChanged(type) {
                 if (type === 'Regulär') this.$router.push({path: '/meldeschein/anlegen'});
             },
-            submitForm(){
-                if(this.$refs.form.validate()){
+            submitForm() {
+                if (this.$refs.form.validate()) {
                     console.log(this.businessObject);
                     createRegistrationForm(this.formData, this.businessObject)
                 }
             },
+            selectBusinessObject(selectedObject) {
+                this.businessObject = selectedObject;
+            }
         },
         data: () => ({
             types: ['Regulär', 'Gruppe'],
-            mietobjekte: ['Alemannstr. 5', 'Hohneckerstr. 10'],
+            mietobjekte: [],
+            businessObject: "",
             formData: {
                 registrationFormType: 'Gruppe',
                 arrivalDate: "",
@@ -324,6 +332,9 @@
                 val && setTimeout(() => (this.$refs.picker.activePicker = 'YEAR'))
             }
         },
+        beforeMount() {
+            this.mietobjekte = getBusinessObjects();
+        }
     }
 </script>
 

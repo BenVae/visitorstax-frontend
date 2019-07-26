@@ -152,7 +152,7 @@
             }
         },
         beforeMount() {
-            this.items = FormData;
+            this.items = this.$store.getters.registrationForms;
             if(this.$store.getters.role === 'city'){
                 this.items = this.items.filter(item => item.meta.isSubmitted === "true")
             }else if(this.$store.getters.role === 'landlord'){

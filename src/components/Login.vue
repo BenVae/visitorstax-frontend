@@ -35,7 +35,7 @@
         name: "Login",
         methods:{
             saveRole: function () {
-                this.$store.commit('change', 'landlord');
+                this.$store.commit('changeRole', 'landlord');
                 this.$router.push({path: '/'});
             }
         }

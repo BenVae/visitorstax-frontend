@@ -1,6 +1,7 @@
-import businessObjects from './assets/businessObjects';
-import sampleRegistrationForm from './assets/sampleRegistrationForm';
-import moment from "moment";
+import businessObjects from './assets/businessObjects'
+import sampleRegistrationForm from './assets/sampleRegistrationForm'
+import moment from 'moment'
+import {store} from './store'
 
 export function getBusinessObjects() {
     let objects = [];
@@ -26,15 +27,20 @@ export function createRegistrationForm(formData, businessObject) {
         formData: formData
     };
 
-    alert("Meldeschein angelegt mit Kurtaxen: " + regForm.meta.tax + "€")
-    //TODO: regForm an sampleRegistrationForm appenden
+    alert("Meldeschein angelegt mit Kurtaxen: " + regForm.meta.tax + "€");
+
+    let registrationForms = store.getters.registrationForms;
+
+    registrationForms[registrationForms.length + 1] = regForm;
+
+    store.commit('changeRegForm', registrationForms)
 }
 
 function calculateTaxes(formData) {
     if (formData.registrationFormType === "Regulär") {
-        return calculateRegularTaxes(formData)
+        return String(calculateRegularTaxes(formData)).replace(".", ",");
     } else {
-        return calculateGroupTaxes(formData)
+        return String(calculateGroupTaxes(formData)).replace(".", ",");
     }
 }
 
@@ -52,15 +58,15 @@ function calculateRegularTaxes(formData) {
 
 function calculateGroupTaxes(formData) {
     const amountTaxPersons = 1 + formData.amountAdultHoliday;
-    return calculateDays(formData)+ amountTaxPersons * 2.5;
+    return calculateDays(formData) + amountTaxPersons * 2.5;
 }
 
 function calculateDays(formData) {
     const arrivalDate = moment(formData.arrivalDate);
     const departureDate = moment(formData.departureDate);
 
-    console.log("Tage: " + (departureDate.diff(arrivalDate, 'days') + 1));
-    return (departureDate.diff(arrivalDate, 'days') + 1);
+    console.log("Tage: " + (departureDate.diff(arrivalDate, 'days')));
+    return (departureDate.diff(arrivalDate, 'days'));
 }
 
 function getNextRegistrationFormNumber() {
