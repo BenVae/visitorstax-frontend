@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Test from "./components/Test";
+import Start from "./components/Start";
 import Login from "./components/Login";
 import RegistraionForm from "./components/registrationform/RegistraionForm";
 import ShowRegFormHost from "./components/host/DisplaySingularFormHost";
@@ -9,7 +9,6 @@ import IdCheck from "./components/registrationform/IdCheck";
 import BusinessList from "./components/BusinessList";
 import GroupRegistraionForm from "./components/registrationform/GroupRegistraionForm";
 import LoginCity from "./components/LoginCity";
-import CityDash from "./components/cityDashboard"
 
 Vue.use(Router);
 
@@ -19,8 +18,8 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'test',
-            component: Test
+            name: 'start',
+            component: Start
         },
         {
             path: '/login',
@@ -59,11 +58,7 @@ export default new Router({
             path: '/stadtlogin',
             name: 'Stadtlogin',
             component: LoginCity
-        },
-        {
-            path: '/cityDash',
-            name: 'cityDash',
-            component: CityDash
         }
+
     ]
 })
