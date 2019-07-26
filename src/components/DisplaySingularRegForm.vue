@@ -16,7 +16,7 @@
                         <v-spacer/>
                     </template>
                     <template v-else>
-                        <space class="title">Fehler bei Meldescheinverarbeitung</space>
+                        <span class="title">Fehler bei Meldescheinverarbeitung</span>
                         <v-spacer/>
                     </template>
                     {{propform.meta.businessObject.address.streetAndNumber}}
@@ -140,6 +140,16 @@
                         Oh no
                     </v-layout>
                 </v-container>
+                <v-card-actions>
+                    <v-btn block color="white"
+                           v-if="this.$store.getters.role === 'landlord'">Bearbeiten
+                    </v-btn>
+                    <template v-else-if="this.$store.getters.role === 'city'">
+                        <v-spacer></v-spacer>
+                        <v-btn color="white">Zur Bearbeitung freigeben
+                        </v-btn>
+                    </template>
+                </v-card-actions>
             </v-card>
         </v-container>
         <v-container v-else>
@@ -155,7 +165,7 @@
 
     export default {
         name: "singularRegForm",
-        components: {Layout,Title},
+        components: {Layout, Title},
         props: {
             propform: Object
         },

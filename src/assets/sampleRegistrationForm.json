@@ -74,7 +74,7 @@
       },
       "tax": "103,50",
       "amountOfFellowPassengers": "9",
-      "isSubmitted": "false",
+      "isSubmitted": "true",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
     },
