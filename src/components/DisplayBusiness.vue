@@ -66,8 +66,16 @@
             <v-layout row>
                 <v-flex>
                     <v-card elevation="5">
-                        <v-card-title>
+                        <v-card-title pb-0>
                             <span class="title">Letzte Meldescheine</span>
+                        </v-card-title>
+                        <v-card-title>
+                            <v-text-field px-2
+                                          v-model="search"
+                                          prepend-inner-icon="search"
+                                          label="Suche"
+                                          hide-details
+                            ></v-text-field>
                         </v-card-title>
                         <v-data-table
                                 :headers="headers"
@@ -158,11 +166,19 @@
 
         methods: {
             getForms() {
-                var forms = FormData.filter(form => form.meta.businessObject.business.id == BusinessData[0].businessId
+                var items = this.$store.getters.registrationForms;
+                if (this.$store.getters.role === 'city') {
+                    items = this.items.filter(item => item.meta.isSubmitted === "true")
+                } else if (this.$store.getters.role === 'landlord') {
+                    items = this.items.filter(item => item.meta.isSubmitted === "false")
+                }
+
+                items = items.filter(form =>
+                    form.meta.businessObject.business.id == BusinessData[0].businessId
                 )
-                return forms
+                return items
             },
-            displaySingleRegistrationForm(itemProp){
+            displaySingleRegistrationForm(itemProp) {
                 this.$router.push({name: 'Meldeschein', params: {form: itemProp}})
             }
         }
