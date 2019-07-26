@@ -202,7 +202,7 @@
                 this.arrivalDate = null
             },
             displaySingleRegistrationForm(itemProp){
-                this.$router.push({name: 'Meldeschein', params: {form: itemProp}})
+                this.$router.push({name: 'Meldeschein', params: {propform: itemProp}})
             }
         }
     }

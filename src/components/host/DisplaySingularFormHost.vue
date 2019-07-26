@@ -33,11 +33,3 @@
 
 
 </script>
-
-<style lang="scss" scoped>
-
-    .top-buffer {
-        margin-top: 10px;
-    }
-
-</style>
