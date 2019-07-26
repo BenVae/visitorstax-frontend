@@ -4,7 +4,7 @@
         <v-container grid-list-lg>
             <v-layout row>
                 <v-flex xs12 md6>
-                    <v-card>
+                    <v-card elevation="5">
                         <v-card-title>
                             <span class="title">Kontakt</span>
                         </v-card-title>
@@ -21,17 +21,17 @@
                     </v-card>
                 </v-flex>
                 <v-flex xs12 md6>
-                    <v-card>
+                    <v-card elevation="5">
                         <v-card-title>
                             <span class="title">Anschrift</span>
                         </v-card-title>
                         <v-container pt-0>
                             <v-layout row text-center>
                                 <v-flex xs12>
-                                    {{business.adress.streetAndNumber}}
+                                    {{business.address.streetAndNumber}}
                                 </v-flex>
                                 <v-flex xs12>
-                                    {{business.adress.zipCode}} {{business.adress.city}}
+                                    {{business.address.zipCode}} {{business.address.city}}
                                 </v-flex>
                             </v-layout>
                         </v-container>
@@ -40,7 +40,7 @@
             </v-layout>
             <v-layout row>
                 <v-flex>
-                    <v-card>
+                    <v-card elevation="5">
                         <v-card-title>
                             <span class="title">Objekte</span>
                         </v-card-title>
@@ -48,11 +48,11 @@
                             <v-layout row text-center>
                                 <v-flex xs12 md3
                                         v-for="object in business.businessObjects">
-                                    <v-card elevation="3" height="100px">
+                                    <v-card elevation="7" height="100px">
                                         <v-container fill-height>
                                             <v-layout row align-center>
                                                 <v-flex>
-                                                    Objekt: {{object.adress.streetAndNumber}}
+                                                    Objekt: {{object.address.streetAndNumber}}
                                                 </v-flex>
                                             </v-layout>
                                         </v-container>
@@ -65,11 +65,34 @@
             </v-layout>
             <v-layout row>
                 <v-flex>
-                    <v-card>
+                    <v-card elevation="5">
                         <v-card-title>
                             <span class="title">Letzte Meldescheine</span>
                         </v-card-title>
-
+                        <v-data-table
+                                :headers="headers"
+                                :items="forms"
+                                :pagination.sync="pagination"
+                                :rows-per-page-items="['']"
+                        >
+                            <template v-slot:items="items">
+                                <tr @click="displaySingleRegistrationForm(items.item)">
+                                    <td>{{ items.item.meta.registrationNumber }}</td>
+                                    <td>{{ items.item.formData.guest.surname }}</td>
+                                    <td>{{ items.item.formData.guest.name }}</td>
+                                    <td>{{ $moment(items.item.formData.arrivalDate).format('DD.MM.YYYY') }}</td>
+                                    <td>{{ $moment(items.item.formData.departureDate).format('DD.MM.YYYY') }}
+                                    </td>
+                                    <td>{{ items.item.formData.registrationFormType}}</td>
+                                    <td>{{ items.item.meta.tax }}</td>
+                                </tr>
+                            </template>
+                            <template v-slot:no-results>
+                                <v-alert :value="true" color="error" icon="warning">
+                                    Die Suche "{{ search }}" war leider Ergebnislos.
+                                </v-alert>
+                            </template>
+                        </v-data-table>
                     </v-card>
                 </v-flex>
             </v-layout>
@@ -80,7 +103,7 @@
 <script>
     import Title from "./utils/Title"
     import Layout from "./utils/StandardLayout"
-    import Business from "../assets/businessData"
+    import BusinessData from "../assets/businessData"
     import FormData from "../assets/sampleRegistrationForm";
 
     export default {
@@ -91,21 +114,56 @@
             return {
                 business: null,
                 title: null,
-                forms: null
+                forms: null,
+                pagination: {rowsPerPage: 8},
+                headers: [
+                    {
+                        text: 'Ms-Nr.',
+                        value: 'meta.registrationNumber'
+                    },
+                    {
+                        text: 'Name',
+                        value: 'formData.guest.surname'
+                    },
+                    {
+                        text: 'Vorname',
+                        value: 'formData.guest.name'
+                    },
+                    {
+                        text: 'Ankunft',
+                        value: 'formData.arrivalDate'
+                    },
+                    {
+                        text: 'Abfahrt',
+                        value: 'formData.departureDate'
+                    },
+                    {
+                        text: 'Typ',
+                        value: 'formData.registrationFormType'
+                    },
+                    {
+                        text: 'Kurtaxe in €',
+                        value: 'meta.tax'
+                    }
+                ]
             }
         },
 
         beforeMount() {
-            this.business = Business[0]
+            this.business = BusinessData[0]
             this.title = "Betrieb von " + this.business.contactPersonName + " " + this.business.contactPersonSurname
             this.forms = this.getForms()
+
         },
 
-        methods:{
-            getForms(){
-                return FormData.filter(function (el) {
-                    return el.business.id = "1";
-                })
+        methods: {
+            getForms() {
+                var forms = FormData.filter(form => form.meta.businessObject.business.id == BusinessData[0].businessId
+                )
+                return forms
+            },
+            displaySingleRegistrationForm(itemProp){
+                this.$router.push({name: 'Meldeschein', params: {form: itemProp}})
             }
         }
     }

@@ -82,13 +82,13 @@
             >
                 <template v-slot:items="props">
                     <tr @click="displaySingleRegistrationForm(props.item)">
-                    <td>{{ props.item.registrationNumber }}</td>
-                    <td>{{ props.item.guest.surname }}</td>
-                    <td>{{ props.item.guest.name }}</td>
-                    <td>{{ $moment(props.item.arrivalDate).format('DD.MM.YYYY') }}</td>
-                    <td>{{ $moment(props.item.departureDate).format('DD.MM.YYYY') }}</td>
-                    <td>{{ props.item.registrationFormType}}</td>
-                    <td>{{ props.item.tax }}</td>
+                    <td>{{ props.item.meta.registrationNumber }}</td>
+                    <td>{{ props.item.formData.guest.surname }}</td>
+                    <td>{{ props.item.formData.guest.name }}</td>
+                    <td>{{ $moment(props.item.formData.arrivalDate).format('DD.MM.YYYY') }}</td>
+                    <td>{{ $moment(props.item.formData.departureDate).format('DD.MM.YYYY') }}</td>
+                    <td>{{ props.item.formData.registrationFormType}}</td>
+                    <td>{{ props.item.meta.tax }}</td>
                     </tr>
                 </template>
                 <template v-slot:no-results>
@@ -122,37 +122,42 @@
                 headers:[
                     {
                         text: 'Ms-Nr.',
-                        value: 'registrationNumber'
+                        value: 'meta.registrationNumber'
                     },
                     {
                         text: 'Name',
-                        value: 'guest.surname'
+                        value: 'formData.guest.surname'
                     },
                     {
                         text: 'Vorname',
-                        value: 'guest.name'
+                        value: 'formData.guest.name'
                     },
                     {
                         text: 'Ankunft',
-                        value: 'arrivalDate'
+                        value: 'formData.arrivalDate'
                     },
                     {
                         text: 'Abfahrt',
-                        value: 'departureDate'
+                        value: 'formData.departureDate'
                     },
                     {
                         text: 'Typ',
-                        value: 'registrationFormType'
+                        value: 'formData.registrationFormType'
                     },
                     {
                         text: 'Kurtaxe in €',
-                        value: 'tax'
+                        value: 'meta.tax'
                     }
                 ]
             }
         },
         beforeMount() {
-            this.items = FormData
+            this.items = this.$store.getters.registrationForms;
+            if(this.$store.getters.role === 'city'){
+                this.items = this.items.filter(item => item.meta.isSubmitted === "true")
+            }else if(this.$store.getters.role === 'landlord'){
+                this.items = this.items.filter(item => item.meta.isSubmitted === "false")
+            }
         },
         computed:{
             computeArrivalDateFormat: {
@@ -176,15 +181,15 @@
                     return this.items
                 } else if(this.arrivalDate != null && this.departureDate == null) {
                     return this.items.filter(item =>
-                        Date.parse(item.arrivalDate) >= Date.parse(this.arrivalDate)
+                        Date.parse(item.formData.arrivalDate) >= Date.parse(this.arrivalDate)
                     )
                 } else if(this.arrivalDate == null && this.departureDate != null) {
                     return this.items.filter(item =>
-                        Date.parse(item.departureDate) <= Date.parse(this.departureDate)
+                        Date.parse(item.formData.departureDate) <= Date.parse(this.departureDate)
                     )
                 } else{
                     return this.items.filter(item =>
-                        Date.parse(item.arrivalDate) >= Date.parse(this.arrivalDate) && Date.parse(item.departureDate) <= Date.parse(this.departureDate)
+                        Date.parse(item.formData.arrivalDate) >= Date.parse(this.arrivalDate) && Date.parse(item.formData.departureDate) <= Date.parse(this.departureDate)
                     )
                 }
             },

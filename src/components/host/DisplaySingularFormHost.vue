@@ -10,7 +10,6 @@
     import Title from "../utils/Title";
     import SingularRegForm from "../DisplaySingularRegForm";
 
-
     export default {
         name: "singularRegFormHost",
         components: {SingularRegForm, Title, Layout},
@@ -25,7 +24,7 @@
         },
         beforeMount() {
             if(typeof this.form != "undefined") {
-                this.title = "Meldeschein #" + this.form.registrationNumber
+                this.title = "Meldeschein #" + this.form.meta.registrationNumber
             }else {
                 this.title = "Fehler"
             }

@@ -9,6 +9,7 @@ import IdCheck from "./components/registrationform/IdCheck";
 import BusinessList from "./components/BusinessList";
 import GroupRegistraionForm from "./components/registrationform/GroupRegistraionForm";
 import DisplayBusiness from "./components/DisplayBusiness";
+import LoginCity from "./components/LoginCity";
 
 Vue.use(Router);
 
@@ -50,14 +51,19 @@ export default new Router({
             component: IdCheck,
         },
         {
-            path: '/Betriebsuebersicht',
-            name: 'Betriebsuebersicht',
+            path: '/Betriebe',
+            name: 'Betriebe',
             component: BusinessList
         },
         {
             path: '/Betrieb',
             name: 'Betrieb',
             component: DisplayBusiness
+        },
+        {
+            path: '/stadtlogin',
+            name: 'Stadtlogin',
+            component: LoginCity
         }
     ]
 })

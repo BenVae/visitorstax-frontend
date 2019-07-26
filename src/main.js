@@ -1,8 +1,9 @@
 import Vue from 'vue'
+import Vuex from 'vuex';
 import App from './App.vue'
 import './plugins/vuetify'
 import router from './router'
-import store from './store'
+import {store} from './store'
 import BootstrapVue from 'bootstrap-vue'
 import VueGoodTablePlugin from 'vue-good-table'
 import HotelDatePicker from 'vue-hotel-datepicker'
@@ -14,6 +15,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuetify from 'vuetify'
 
+Vue.use(Vuex);
 Vue.use(Vuetify);
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);

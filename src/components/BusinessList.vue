@@ -27,7 +27,7 @@
                             <td>{{ props.item.user.username}}</td>
                             <td>{{ props.item.contactPersonSurname}}</td>
                             <td>{{ props.item.contactPersonName}}</td>
-                            <td>{{ props.item.adress.streetAndNumber}}</td>
+                            <td>{{ props.item.address.streetAndNumber}}</td>
                             <td>{{ props.item.businessObjects.length}}</td>
                         </tr>
                     </template>
@@ -69,7 +69,7 @@
                     },
                     {
                         text: 'Adresse',
-                        value: 'adress'
+                        value: 'address'
                     },
                     {
                         text: 'Anzahl Mietobjekte',

@@ -5,13 +5,13 @@
                 <v-card rounded-lg>
                     <v-card-text>
                         <h3 class="card-title-custom-login text-xs-center">
-                            Vermieter Login
+                            Stadt Login
                         </h3>
                         <v-form>
                             <v-text-field
                                     autofocus
                                     prepend-icon="person"
-                                    label="Betriebsnummer"
+                                    label="Benutzername"
                                     type="text"
                             ></v-text-field>
                             <v-text-field
@@ -32,10 +32,10 @@
 
 <script>
     export default {
-        name: "Login",
+        name: "LoginCity",
         methods:{
             saveRole: function () {
-                this.$store.commit('changeRole', 'landlord');
+                this.$store.commit('changeRole', 'city');
                 this.$router.push({path: '/'});
             }
         }

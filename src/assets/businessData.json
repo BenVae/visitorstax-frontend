@@ -1,13 +1,13 @@
 [
   {
-    "businessId": "1",
+    "businessId": "123456789",
     "user": {
       "id": "1",
       "username": "123456",
       "password": "test",
       "role": "Betrieb"
     },
-    "adress": {
+    "address": {
       "city": "Konstanz",
       "zipCode": "78462",
       "streetAndNumber": "Rheingutstraße 30",
@@ -16,7 +16,7 @@
     "businessObjects": [
       {
         "id": "1",
-        "adress": {
+        "address": {
           "city": "Konstanz",
           "zipCode": "78462",
           "streetAndNumber": "Rheingutstraße 30",
@@ -25,7 +25,7 @@
       },
       {
         "id": "2",
-        "adress": {
+        "address": {
           "city": "Konstanz",
           "zipCode": "78462",
           "streetAndNumber": "Rheingutstraße 31",
@@ -46,7 +46,7 @@
       "password": "test",
       "role": "Betrieb"
     },
-    "adress": {
+    "address": {
       "city": "Konstanz",
       "zipCode": "78462",
       "streetAndNumber": "Paul-Gretel-Straße 2",
@@ -55,7 +55,7 @@
     "businessObjects": [
       {
         "id": "1",
-        "adress": {
+        "address": {
           "city": "Konstanz",
           "zipCode": "78462",
           "streetAndNumber": "Paul-Gretel-Straße 2",
