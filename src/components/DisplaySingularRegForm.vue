@@ -141,12 +141,18 @@
                     </v-layout>
                 </v-container>
                 <v-card-actions>
-                    <v-btn block color="white"
-                           v-if="this.$store.getters.role === 'landlord'">Bearbeiten
-                    </v-btn>
+                    <template v-if="this.$store.getters.role === 'landlord' && propform.meta.isSubmitted === 'false'">
+                        <v-btn block color="blue-grey"
+                               dark>Abschicken
+                        </v-btn>
+                        <v-btn block color="blue-grey"
+                               dark>Bearbeiten
+                        </v-btn>
+                    </template>
                     <template v-else-if="this.$store.getters.role === 'city'">
                         <v-spacer></v-spacer>
-                        <v-btn color="white">Zur Bearbeitung freigeben
+                        <v-btn color="blue-grey"
+                               dark>Zur Bearbeitung freigeben
                         </v-btn>
                     </template>
                 </v-card-actions>

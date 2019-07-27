@@ -69,8 +69,7 @@
         },
         "business": {
           "id": 123456789
-        },
-        "isSubmitted": "false"
+        }
       },
       "tax": "103,50",
       "amountOfFellowPassengers": "9",
