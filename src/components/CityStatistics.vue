@@ -20,7 +20,7 @@
                                     v-on="on"
                                     clearable
                                     v-model="date"
-                                    @click:clear="deleteDate"
+                                    @click:clear="computeItems"
                                     :rules="[rules.datum]"
                             ></v-text-field>
                         </template>
@@ -63,7 +63,6 @@
                         text:'Anzahl Nächte'
                     }
                 ],
-                input: null,
                 rules:{
                     datum: value => {
                         if(value === this.$moment(value, 'YYYY').format('YYYY') || value === null){
@@ -80,9 +79,25 @@
                 this.date = null;
             },
             computeItems(){
-                this.items = this.$store.getters.registrationForms;
+                var scheine = this.$store.getters.registrationForms;
+                scheine.forEach(function(element){
+                   if(this.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')
+                       && this.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')){
 
-                this.items = this.items.filter(item => Date.parse(item.formData.arrivalDate) )
+                   }else if(this.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')
+                       && this.$moment(Date.parse(element.formData.departureDate)).format('YYYY') > this.$moment(this.date, 'YYYY').format('YYYY')){
+
+                   }else if(this.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') < this.$moment(this.date, 'YYYY').format('YYYY')
+                       && this.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')){
+
+                   }
+                });
+
+               // this.items = this.items.filter(item => this.$moment(Date.parse(item.formData.arrivalDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')
+                //    && this.$moment(Date.parse(item.formData.departureDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY'));
+
+                //this.items = this.items.filter(item => this.$moment(Date.parse(item.formData.arrivalDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')
+                //    && this.$moment(Date.parse(item.formData.departureDate)).format('YYYY') > this.$moment(this.date, 'YYYY').format('YYYY'));
             }
         },
     }
