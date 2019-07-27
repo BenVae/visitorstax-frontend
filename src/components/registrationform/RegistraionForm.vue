@@ -237,7 +237,7 @@
                                     label="Anzahl Tagungsbesucher"
                                     type="number"
                                     min="0"
-                                    :max="amountAdults"
+                                    :max="this.formData.business.amountBusinessAdults"
                             >
                             </v-text-field>
                         </v-flex>
@@ -297,7 +297,8 @@
             },
             submitForm() {
                 if (this.$refs.form.validate()) {
-                    createRegistrationForm(this.formData, this.businessObject)
+                    createRegistrationForm(this.formData, this.businessObject);
+                    this.$refs.form.reset();
                 }
             },
             selectBusinessObject(selectedObject) {

@@ -104,9 +104,9 @@
 
 
 <script>
-    import FormData from '../assets/sampleRegistrationForm';
     import StandardLayout from "./utils/StandardLayout";
     import Title from "./utils/Title";
+
     export default {
         name: "RegistrationFormList",
         components: {Title, StandardLayout},

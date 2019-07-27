@@ -213,12 +213,14 @@
                     <v-flex sm6 md3>
                         <v-text-field
                                 v-model="formData.business.fieldOfBusiness"
+                                :rules="[v => !!v || 'Bitte Tätigkeitsfeld eingeben']"
                                 label="Tätigkeitsfeld">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm6 md3>
                         <v-text-field
                                 v-model="formData.business.company"
+                                :rules="[v => !!v || 'Bitte Auftragsfirma eingeben']"
                                 label="Auftragsfirma">
                         </v-text-field>
                     </v-flex>
@@ -267,8 +269,8 @@
             },
             submitForm() {
                 if (this.$refs.form.validate()) {
-                    console.log(this.businessObject);
                     createRegistrationForm(this.formData, this.businessObject)
+                    this.$refs.form.reset();
                 }
             },
             selectBusinessObject(selectedObject) {
