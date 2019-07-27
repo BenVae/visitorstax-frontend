@@ -1,20 +1,9 @@
 <template>
     <Layout>
         <Title name="Startseite"/>
-        <v-container grid-list-lg
-                     v-if="this.$store.getters.role == 'city'">
-            <v-layout>
-                <v-flex xs12 md6>
-                    <v-card>1</v-card>
-                </v-flex>
-                <v-flex xs12 md6>
-                    <v-card>2</v-card>
-                </v-flex>
-            </v-layout>
-            <div id="asd"></div>
-        </v-container>
-        <v-container v-else-if="this.$store.getters.role == 'landlord'">
-            tis a vermieter
+        <v-container>
+            <v-btn @click="getGuests('04-2019')">KLICK</v-btn>
+            <span>{{this.guests}}</span>
         </v-container>
     </Layout>
 </template>
@@ -22,17 +11,22 @@
 <script>
     import Layout from "./utils/StandardLayout";
     import Title from "./utils/Title";
-    import planetData from '../assets/chart-data'
+    import * as statistics from "./utils/statistics"
 
     export default {
         name: "Start",
         components: {Title, Layout},
 
         data() {
-          planetData: planetData
+            return {
+                guests: 0
+            }
         },
 
         methods: {
+            getGuests(month) {
+                this.guests = statistics.getGuestsByDistrictByMonth(month, '78463')
+            }
         }
     }
 </script>
