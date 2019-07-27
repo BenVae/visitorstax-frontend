@@ -4,6 +4,7 @@ import Test from "./components/Test";
 import Login from "./components/Login";
 import RegistraionForm from "./components/registrationform/RegistraionForm";
 import ShowRegFormHost from "./components/host/DisplaySingularFormHost";
+import ShowRegForm from "./components/DisplaySingularRegForm";
 import RegistrationFormList from "./components/RegistrationFormList";
 import IdCheck from "./components/registrationform/IdCheck";
 import BusinessList from "./components/BusinessList";
@@ -38,7 +39,7 @@ export default new Router({
         {
             path: '/Meldeschein',
             name: 'Meldeschein',
-            component: ShowRegFormHost,
+            component: ShowRegForm,
             props: true
         },
         {
