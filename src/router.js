@@ -9,6 +9,7 @@ import IdCheck from "./components/registrationform/IdCheck";
 import BusinessList from "./components/BusinessList";
 import GroupRegistraionForm from "./components/registrationform/GroupRegistraionForm";
 import LoginCity from "./components/LoginCity";
+import CityStatistics from "./components/CityStatistics";
 
 Vue.use(Router);
 
@@ -58,6 +59,11 @@ export default new Router({
             path: '/stadtlogin',
             name: 'Stadtlogin',
             component: LoginCity
+        },
+        {
+            path: '/statistiken',
+            name: 'Statistiken',
+            component: CityStatistics
         }
     ]
 })

@@ -27,6 +27,9 @@
                     <b-nav-item v-if="$store.getters.role === 'city'">
                         <router-link to="/Betriebe">Betriebe</router-link>
                     </b-nav-item>
+                    <b-nav-item v-if="$store.getters.role === 'city'">
+                        <router-link to="/statistiken">Statistiken</router-link>
+                    </b-nav-item>
 
                     <b-nav-item v-if="$store.getters.role === 'landlord' || $store.getters.role === 'city'">
                         <span @click="deleteRoleInState">

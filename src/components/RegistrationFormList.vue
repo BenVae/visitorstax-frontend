@@ -104,7 +104,6 @@
 
 
 <script>
-    import FormData from '../assets/sampleRegistrationForm';
     import StandardLayout from "./utils/StandardLayout";
     import Title from "./utils/Title";
     export default {
@@ -162,7 +161,7 @@
         computed:{
             computeArrivalDateFormat: {
                 get: function () {
-                    if(this.arrivalDate == null) return null
+                    if(this.arrivalDate == null) return null;
                     return this.$moment(this.arrivalDate).format('DD.MM.YYYY')
                 },
                 set: function () {
@@ -170,7 +169,7 @@
             },
             computeDepartureDateFormat: {
                 get: function () {
-                    if(this.departureDate == null) return null
+                    if(this.departureDate == null) return null;
                     return this.$moment(this.departureDate).format('DD.MM.YYYY')
                 },
                 set: function () {
