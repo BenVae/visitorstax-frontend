@@ -11,6 +11,7 @@
                     <v-card>2</v-card>
                 </v-flex>
             </v-layout>
+            <div id="asd"></div>
         </v-container>
         <v-container v-else-if="this.$store.getters.role == 'landlord'">
             tis a vermieter
@@ -21,12 +22,17 @@
 <script>
     import Layout from "./utils/StandardLayout";
     import Title from "./utils/Title";
+    import planetData from '../assets/chart-data'
 
     export default {
         name: "Start",
-        components: {Title, Layout}
+        components: {Title, Layout},
+
+        data() {
+          planetData: planetData
+        },
+
+        methods: {
+        }
     }
 </script>
-
-<style scoped>
-</style>
