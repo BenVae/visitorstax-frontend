@@ -16,6 +16,38 @@ export function getBusinessObjects() {
     return objects;
 }
 
+export function setSubmittedFlag(registrationNumber) {
+    let registrationForms = store.getters.registrationForms;
+
+    for (let i = 0; i < registrationForms.length; i++) {
+        if (registrationForms[i].meta.registrationNumber === registrationNumber) {
+            registrationForms[i].meta.isSubmitted = true;
+        }
+    }
+}
+
+export function updateRegistrationForm(formData, businessObject, registrationNumber) {
+    let regForm = {
+        meta: {
+            "registrationNumber": registrationNumber,
+            "businessObject": businessObject,
+            "isSubmitted": "false",
+            "tax": calculateTaxes(formData)
+        },
+        formData: formData
+    };
+
+    let registrationForms = store.getters.registrationForms;
+
+    for (let i = 0; i < registrationForms.length; i++) {
+        if (registrationForms[i].meta.registrationNumber === registrationNumber) {
+            registrationForms[i] = regForm;
+        }
+    }
+
+    store.commit('changeRegForm', registrationForms);
+}
+
 export function createRegistrationForm(formData, businessObject) {
     let regForm = {
         meta: {
@@ -27,13 +59,15 @@ export function createRegistrationForm(formData, businessObject) {
         formData: formData
     };
 
-    alert("Meldeschein angelegt mit Kurtaxen: " + regForm.meta.tax + "€");
+    alert("Meldeschein erfolgreich angelegt");
 
     let registrationForms = store.getters.registrationForms;
 
-    registrationForms[registrationForms.length + 1] = regForm;
+    registrationForms[registrationForms.length] = regForm;
 
     store.commit('changeRegForm', registrationForms)
+    console.log("created registration form with number: " + regForm.meta.registrationNumber);
+
 }
 
 function calculateTaxes(formData) {
@@ -46,12 +80,10 @@ function calculateTaxes(formData) {
 
 function calculateRegularTaxes(formData) {
     let amountPerson = formData.spouse.name === "" ? 1 : 2;
-    console.log('perosn: ' + amountPerson);
 
     //hier vielleicht noch ein ternärer operator für empty string check
     let amountBusiness = parseInt(formData.business.amountBusinessAdults, 10) + parseInt(formData.business.amountConferenceVisitors, 10);
 
-    console.log('business: ' + amountBusiness);
 
     return calculateDays(formData) * 2.5 * (amountPerson - amountBusiness);
 }
@@ -65,7 +97,6 @@ function calculateDays(formData) {
     const arrivalDate = moment(formData.arrivalDate);
     const departureDate = moment(formData.departureDate);
 
-    console.log("Tage: " + (departureDate.diff(arrivalDate, 'days')));
     return (departureDate.diff(arrivalDate, 'days'));
 }
 

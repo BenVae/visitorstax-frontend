@@ -27,6 +27,7 @@ npm run lint
 
 ### Used Packages
 *  vuejs-datepicker: [doku](https://github.com/charliekassel/vuejs-datepicker#readme)
+* vue notification [doku](https://www.npmjs.com/package/vue-notification)
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

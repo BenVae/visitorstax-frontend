@@ -9,12 +9,13 @@
                                 v-model="formData.registrationFormType"
                                 :items="types"
                                 label="Art"
-                                v-on:input="registrationFormTypeChanged"
+                                readonly
                         ></v-select>
                     </v-flex>
                     <v-flex sm6 md3>
                         <v-select
                                 :items="mietobjekte"
+                                v-model="businessObject"
                                 @change="selectBusinessObject"
                                 item-text="text"
                                 item-value="value"
@@ -24,13 +25,17 @@
                     </v-flex>
                 </v-layout>
                 <v-layout row justify-center>
-                    <v-flex md6>
-                        <HotelDatePicker
-                                format="DD.MM.YYYY"
-                                :i18n="rangepickerSettings"
-                                @check-in-changed="setCheckinDate"
-                                @check-out-changed="setCheckoutDate">
-                        </HotelDatePicker>
+                    <v-flex md3>
+                        <RegularDatePicker name="Anreisedatum"
+                                           :datum="formData.arrivalDate"
+                                           v-model="formData.arrivalDate">
+                        </RegularDatePicker>
+                    </v-flex>
+                    <v-flex md3>
+                        <RegularDatePicker name="Abreisedatum"
+                                           :datum="formData.departureDate"
+                                           v-model="formData.departureDate">
+                        </RegularDatePicker>
                     </v-flex>
                 </v-layout>
             </v-container>
@@ -243,15 +248,13 @@
     import RowWithDescription from "../utils/RowWithDescription";
     import HotelDatePicker from 'vue-hotel-datepicker'
     import BirthdayPicker from "../utils/BirthdayPicker";
-    import {createRegistrationForm, getBusinessObjects} from "../../formSubmit";
+    import {getBusinessObjects, updateRegistrationForm} from "../../formSubmit";
+    import RegularDatePicker from "../utils/RegularDatePicker";
 
     export default {
         name: "GroupRegistrationForm",
-        components: {BirthdayPicker, RowWithDescription, Title, Layout, HotelDatePicker},
+        components: {RegularDatePicker, BirthdayPicker, RowWithDescription, Title, Layout, HotelDatePicker},
         methods: {
-            customFormatter(date) {
-                return this.$moment(date).format('DD.MM.YYYY');
-            },
             setCheckinDate(newDate) {
                 this.formData.arrivalDate = newDate;
             },
@@ -264,12 +267,9 @@
             toggleBusinessBoolean() {
                 this.business = !this.business;
             },
-            registrationFormTypeChanged(type) {
-                if (type === 'Regulär') this.$router.push({path: '/meldeschein/anlegen'});
-            },
             submitForm() {
                 if (this.$refs.form.validate()) {
-                    createRegistrationForm(this.formData, this.businessObject);
+                    updateRegistrationForm(this.formData, this.businessObject.value, this.form.meta.registrationNumber);
                     this.$router.push({name: 'Meldescheine'})
                 }
             },
@@ -277,40 +277,15 @@
                 this.businessObject = selectedObject;
             }
         },
+        props: {
+            form: Object
+        },
         data() {
             return {
                 types: ['Regulär', 'Gruppe'],
                 mietobjekte: [],
                 businessObject: "",
-                formData: {
-                    registrationFormType: 'Gruppe',
-                    arrivalDate: "",
-                    departureDate: "",
-                    guest: {
-                        name: "",
-                        surname: "",
-                        dateOfBirth: null,
-                        placeOfBirth: "",
-                        nationality: "",
-                        address: {
-                            streetAndNumber: "",
-                            zipCode: "",
-                            city: "",
-                            country: ""
-                        },
-                        passportSerialNumber: ""
-                    },
-                    amountChildren: 0,
-                    amountAdultBusiness: 0,
-                    amountAdultHoliday: 0,
-                    amountHandicapped: 0,
-                    passportSerialNumbers: "",
-                    business: {
-                        amountConferenceVisitors: "",
-                        fieldOfBusiness: "",
-                        company: ""
-                    }
-                },
+                formData: {},
                 business: false,
                 rangepickerSettings: {
                     night: 'Nacht',
@@ -333,6 +308,17 @@
         },
         beforeMount() {
             this.mietobjekte = getBusinessObjects();
+
+            this.formData = this.form.formData;
+
+            if (this.form.formData.business.fieldOfBusiness !== "") {
+                this.business = true;
+            }
+
+            this.businessObject = {
+                text: this.form.meta.businessObject.address.streetAndNumber,
+                value: this.form.meta.businessObject
+            };
         }
     }
 </script>
