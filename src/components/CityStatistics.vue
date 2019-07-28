@@ -2,7 +2,7 @@
     <standard-layout>
         <Title name="Statistiken erstellen"/>
         <v-container>
-            <v-layout row justify-center>
+            <v-layout row justify-center id="textRow">
                 <v-flex xs4>
                     <v-menu
                             v-model="menu1"
@@ -26,7 +26,7 @@
                     </v-menu>
                 </v-flex>
             </v-layout>
-            <v-layout row>
+            <v-layout row mt-3>
                 <v-flex>
                     <v-data-table
                             :headers="headers"
@@ -35,7 +35,13 @@
                             hide-actions
                     >
                         <template v-slot:items="props">
-                            <tr>
+                            <tr v-if="props.item.type === 'Gesamt'">
+                                <td class="font-weight-bold">{{props.item.type}}</td>
+                                <td class="font-weight-bold">{{props.item.persons}}</td>
+                                <td class="font-weight-bold">{{props.item.freeOfCharge}}</td>
+                                <td class="font-weight-bold">{{props.item.nights}}</td>
+                            </tr>
+                            <tr v-else>
                                 <td>{{props.item.type}}</td>
                                 <td>{{props.item.persons}}</td>
                                 <td>{{props.item.freeOfCharge}}</td>
@@ -106,7 +112,7 @@
                         if(value === this.$moment(value, 'YYYY').format('YYYY') || value === null){
                             return true
                         }else{
-                            return 'Das Datum ist leider inkorrekt'
+                            return 'Bitte geben Sie das Jahr im korrekten Format z.B. 2019 an.'
                         }
                     }
                 }
@@ -185,5 +191,7 @@
 </script>
 
 <style scoped>
-
+    #textRow{
+        min-height: 70px;
+    }
 </style>
