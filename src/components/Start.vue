@@ -13,19 +13,25 @@
     import Title from "./utils/Title";
     import * as statistics from "./utils/statistics"
 
+    import Forms from '../assets/sampleRegistrationForm'
+
     export default {
         name: "Start",
         components: {Title, Layout},
 
         data() {
             return {
-                guests: 0
+                guests: 0,
             }
+        },
+
+        beforeMount() {
+            this.guests = this.$moment('04-2019', 'MM-YYYY').daysInMonth()
         },
 
         methods: {
             getGuests(month) {
-                this.guests = statistics.getGuestsByDistrictByMonth(month, '78463')
+                this.guests = statistics.getTaxByMonth(month)
             }
         }
     }
