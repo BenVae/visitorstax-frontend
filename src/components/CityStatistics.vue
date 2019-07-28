@@ -20,7 +20,7 @@
                                     v-on="on"
                                     clearable
                                     v-model="date"
-                                    @click:clear="computeItems"
+                                    @click:clear="deleteDate"
                                     :rules="[rules.datum]"
                             ></v-text-field>
                         </template>
@@ -31,8 +31,19 @@
                 <v-flex>
                     <v-data-table
                             :headers="headers"
+                            :items="items"
+                            :items-per-page="5"
+                            class="elevation-1"
                     >
+                        <template v-slot:items="props">
+                            <tr>
+                                <td>{{ props.item.persons}}</td>
+                                <td>{{ props.item.freeOfCharge}}</td>
+                                <td>{{ props.item.nights}}</td>
+                            </tr>
+                        </template>
                     </v-data-table>
+                    <v-btn @click="computeItems"></v-btn>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -42,6 +53,7 @@
 <script>
     import StandardLayout from "./utils/StandardLayout";
     import Title from "./utils/Title";
+    import {computeStatistics} from "../computeStatistics"
     export default {
         name: "CityStatistics",
         components: {Title, StandardLayout},
@@ -49,18 +61,25 @@
             return {
                 date: null,
                 menu1: false,
-                headers:[
+                headers: [
                     {
-                        text:'Personen'
+                        text: 'Personen',
+                        value: 'persons',
                     },
                     {
-                        text:'Befreite'
+                        text: 'Befreit',
+                        value: 'freeOfCharge'
                     },
                     {
-                        text:'Sonstige'
-                    },
+                        text: 'Nächte',
+                        value: 'nights'
+                    }
+                ],
+                items:[
                     {
-                        text:'Anzahl Nächte'
+                        persons:0,
+                        freeOfCharge:0,
+                        nights:0
                     }
                 ],
                 rules:{
@@ -80,25 +99,44 @@
             },
             computeItems(){
                 var scheine = this.$store.getters.registrationForms;
+                var self = this;
+
                 scheine.forEach(function(element){
-                   if(this.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')
-                       && this.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')){
+                   if(self.$moment(element.formData.arrivalDate).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')
+                       && self.$moment(element.formData.departureDate).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')){
 
-                   }else if(this.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')
-                       && this.$moment(Date.parse(element.formData.departureDate)).format('YYYY') > this.$moment(this.date, 'YYYY').format('YYYY')){
+                       var computedItem = (computeStatistics(element));
 
-                   }else if(this.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') < this.$moment(this.date, 'YYYY').format('YYYY')
-                       && this.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')){
+                       self.items[0].persons += computedItem.persons;
+                       self.items[0].freeOfCharge += computedItem.freeOfCharge;
+                       self.items[0].nights += computedItem.nights;
+
+                   }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')
+                       && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') > self.$moment(self.date, 'YYYY').format('YYYY')){
+
+                       element.formData.departureDate = parseInt(self.$moment(Date.parse(element.formData.departureDate)).format('YYYY'))-1 + '-12-31';
+
+                       var computedItemComplexDeparture = (computeStatistics(element));
+
+                       self.items[0].persons += computedItemComplexDeparture.persons;
+                       self.items[0].freeOfCharge += computedItemComplexDeparture.freeOfCharge;
+                       self.items[0].nights += computedItemComplexDeparture.nights;
+
+                   }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') < self.$moment(self.date, 'YYYY').format('YYYY')
+                       && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')){
+
+                       element.formData.arrivalDate = parseInt(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY'))+1 + '-01-01';
+
+                       var computedItemComplexArrival = (computeStatistics(element));
+
+                       self.items[0].persons += computedItemComplexArrival.persons;
+                       self.items[0].freeOfCharge += computedItemComplexArrival.freeOfCharge;
+                       self.items[0].nights += computedItemComplexArrival.nights;
 
                    }
                 });
 
-               // this.items = this.items.filter(item => this.$moment(Date.parse(item.formData.arrivalDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')
-                //    && this.$moment(Date.parse(item.formData.departureDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY'));
-
-                //this.items = this.items.filter(item => this.$moment(Date.parse(item.formData.arrivalDate)).format('YYYY') === this.$moment(this.date, 'YYYY').format('YYYY')
-                //    && this.$moment(Date.parse(item.formData.departureDate)).format('YYYY') > this.$moment(this.date, 'YYYY').format('YYYY'));
-            }
+            },
         },
     }
 </script>
