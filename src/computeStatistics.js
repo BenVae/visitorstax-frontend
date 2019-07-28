@@ -14,7 +14,6 @@ function calculateStatisticsRegular(data){
 
     var item = {persons: 0, freeOfCharge: 0, nights: 0};
 
-
     if(data.formData.spouse.name !== ""){
         item.persons += 2;
     }else{

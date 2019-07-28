@@ -54,7 +54,8 @@
 <script>
     import StandardLayout from "./utils/StandardLayout";
     import Title from "./utils/Title";
-    import {computeStatistics} from "../computeStatistics"
+    import {computeStatistics} from "../computeStatistics";
+    import businessData from "../assets/businessData";
     export default {
         name: "CityStatistics",
         components: {Title, StandardLayout},
@@ -120,38 +121,41 @@
                    if(self.$moment(element.formData.arrivalDate).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')
                        && self.$moment(element.formData.departureDate).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')){
 
-                       var computedItem = (computeStatistics(element));
-
-                       self.items[0].persons += computedItem.persons;
-                       self.items[0].freeOfCharge += computedItem.freeOfCharge;
-                       self.items[0].nights += computedItem.nights;
+                       self.computePrivateOrHotel(computeStatistics(element), element);
 
                    }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')
                        && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') > self.$moment(self.date, 'YYYY').format('YYYY')){
 
                        element.formData.departureDate = parseInt(self.$moment(Date.parse(element.formData.departureDate)).format('YYYY'))-1 + '-12-31';
 
-                       var computedItemComplexDeparture = (computeStatistics(element));
-
-                       self.items[0].persons += computedItemComplexDeparture.persons;
-                       self.items[0].freeOfCharge += computedItemComplexDeparture.freeOfCharge;
-                       self.items[0].nights += computedItemComplexDeparture.nights;
+                       self.computePrivateOrHotel(computeStatistics(element), element);
 
                    }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') < self.$moment(self.date, 'YYYY').format('YYYY')
                        && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')){
 
                        element.formData.arrivalDate = parseInt(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY'))+1 + '-01-01';
 
-                       var computedItemComplexArrival = (computeStatistics(element));
-
-                       self.items[0].persons += computedItemComplexArrival.persons;
-                       self.items[0].freeOfCharge += computedItemComplexArrival.freeOfCharge;
-                       self.items[0].nights += computedItemComplexArrival.nights;
-
+                       self.computePrivateOrHotel(computeStatistics(element), element);
                    }
                 });
 
             },
+            computePrivateOrHotel(formItem, element){
+                var dict = {};
+                businessData.forEach(function(element){
+                    dict[element.businessId] = element.type;
+                });
+
+                if(dict[element.meta.businessObject.business.id] === "Privat"){
+                    this.items[0].persons += formItem.persons;
+                    this.items[0].freeOfCharge += formItem.freeOfCharge;
+                    this.items[0].nights += formItem.nights;
+                }else{
+                    this.items[1].persons += formItem.persons;
+                    this.items[1].freeOfCharge += formItem.freeOfCharge;
+                    this.items[1].nights += formItem.nights;
+                }
+            }
         },
     }
 </script>
