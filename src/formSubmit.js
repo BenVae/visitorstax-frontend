@@ -16,6 +16,38 @@ export function getBusinessObjects() {
     return objects;
 }
 
+export function setSubmittedFlag(registrationNumber) {
+    let registrationForms = store.getters.registrationForms;
+
+    for (let i = 0; i < registrationForms.length; i++) {
+        if (registrationForms[i].meta.registrationNumber === registrationNumber) {
+            registrationForms[i].meta.isSubmitted = true;
+        }
+    }
+}
+
+export function updateRegistrationForm(formData, businessObject, registrationNumber) {
+    let regForm = {
+        meta: {
+            "registrationNumber": registrationNumber,
+            "businessObject": businessObject,
+            "isSubmitted": "false",
+            "tax": calculateTaxes(formData)
+        },
+        formData: formData
+    };
+
+    let registrationForms = store.getters.registrationForms;
+
+    for (let i = 0; i < registrationForms.length; i++) {
+        if (registrationForms[i].meta.registrationNumber === registrationNumber) {
+            registrationForms[i] = regForm;
+        }
+    }
+
+    store.commit('changeRegForm', registrationForms);
+}
+
 export function createRegistrationForm(formData, businessObject) {
     let regForm = {
         meta: {
@@ -31,9 +63,11 @@ export function createRegistrationForm(formData, businessObject) {
 
     let registrationForms = store.getters.registrationForms;
 
-    registrationForms[registrationForms.length + 1] = regForm;
+    registrationForms[registrationForms.length] = regForm;
 
     store.commit('changeRegForm', registrationForms)
+    console.log("created registration form with number: " + regForm.meta.registrationNumber);
+
 }
 
 function calculateTaxes(formData) {

@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
             state.role = role
         },
         changeRegForm(state, registrationForms) {
-            state.registrationForms = registrationForms
+            state.registrationForms = registrationForms;
         }
     }
 });

@@ -143,9 +143,11 @@
                 <v-card-actions>
                     <template v-if="this.$store.getters.role === 'landlord' && propform.meta.isSubmitted === 'false'">
                         <v-btn block color="blue-grey"
+                               @click="submitRegistrationForm"
                                dark>Abschicken
                         </v-btn>
                         <v-btn block color="blue-grey"
+                               @click="displayRegularFormEditor"
                                dark>Bearbeiten
                         </v-btn>
                     </template>
@@ -168,6 +170,7 @@
 
     import Layout from "./utils/StandardLayout";
     import Title from "./utils/Title"
+    import {setSubmittedFlag} from "../formSubmit";
 
     export default {
         name: "singularRegForm",
@@ -191,6 +194,18 @@
         methods: {
             customFormatter(date) {
                 return this.$moment(date).format('DD.MM.YYYY');
+            },
+            displayRegularFormEditor() {
+                if (this.propform.formData.registrationFormType === 'Regulär') {
+                    this.$router.push({name: 'meldescheinBearbeiten', params: {form: this.propform}})
+                } else {
+                    this.$router.push({name: 'gruppenMeldescheinBearbeiten', params: {form: this.propform}})
+
+                }
+            },
+            submitRegistrationForm(){
+                setSubmittedFlag(this.propform.meta.registrationNumber);
+                this.$router.push({name: 'Meldescheine'});
             }
         }
     }
