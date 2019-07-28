@@ -79,9 +79,10 @@
                         </v-card-title>
                         <v-data-table
                                 :headers="headers"
-                                :items="forms"
+                                :items="items"
                                 :pagination.sync="pagination"
                                 :rows-per-page-items="['']"
+                                :search="search"
                         >
                             <template v-slot:items="items">
                                 <tr @click="displaySingleRegistrationForm(items.item)">
@@ -125,9 +126,9 @@
 
         data() {
             return {
-                business: null,
                 title: null,
-                forms: null,
+                items: null,
+                search: '',
                 pagination: {rowsPerPage: 8},
                 headers: [
                     {
@@ -163,9 +164,8 @@
         },
 
         beforeMount() {
-            this.business = BusinessData[0]
             this.title = "Betrieb von " + this.propsbusiness.contactPersonName + " " + this.propsbusiness.contactPersonSurname
-            this.forms = this.getForms()
+            this.items = this.getForms()
 
         },
 

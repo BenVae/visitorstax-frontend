@@ -2,7 +2,7 @@
   {
     "businessId": "123456789",
     "user": {
-      "id": "1",
+      "id": "123456789",
       "username": "123456",
       "password": "test",
       "role": "Betrieb"
