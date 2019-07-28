@@ -10,7 +10,7 @@
           "country": "Germany"
         },
         "business": {
-          "id": 25
+          "id": 1
         }
       },
       "isSubmitted": "false",
@@ -68,13 +68,12 @@
           "country": "Germany"
         },
         "business": {
-          "id": 1
-        },
-        "isSubmitted": "false"
+          "id": 25
+        }
       },
       "tax": "103,50",
       "amountOfFellowPassengers": "9",
-      "isSubmitted": "false",
+      "isSubmitted": "true",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
     },

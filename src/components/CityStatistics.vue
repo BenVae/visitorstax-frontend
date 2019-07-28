@@ -3,7 +3,7 @@
         <Title name="Statistiken erstellen"/>
         <v-container>
             <v-layout row justify-center>
-                <v-flex xs2>
+                <v-flex xs4>
                     <v-menu
                             v-model="menu1"
                             :close-on-content-click="false"
@@ -19,8 +19,7 @@
                                     prepend-inner-icon="event"
                                     v-on="on"
                                     clearable
-                                    v-model="date"
-                                    @click:clear="deleteDate"
+                                    v-model="computeItems2"
                                     :rules="[rules.datum]"
                             ></v-text-field>
                         </template>
@@ -38,9 +37,9 @@
                         <template v-slot:items="props">
                             <tr>
                                 <td>{{props.item.type}}</td>
-                                <td>{{ props.item.persons}}</td>
-                                <td>{{ props.item.freeOfCharge}}</td>
-                                <td>{{ props.item.nights}}</td>
+                                <td>{{props.item.persons}}</td>
+                                <td>{{props.item.freeOfCharge}}</td>
+                                <td>{{props.item.nights}}</td>
                             </tr>
                         </template>
                     </v-data-table>
@@ -60,7 +59,6 @@
         components: {Title, StandardLayout},
         data() {
             return {
-                date: null,
                 menu1: false,
                 headers: [
                     {
@@ -95,6 +93,12 @@
                         persons:0,
                         freeOfCharge:0,
                         nights:0
+                    },
+                    {
+                        type:"Gesamt",
+                        persons:0,
+                        freeOfCharge:0,
+                        nights:0
                     }
                 ],
                 rules:{
@@ -109,9 +113,6 @@
             }
         },
         methods:{
-            deleteDate(){
-                this.date = null;
-            },
             clearItems(){
                 this.items[0].persons = 0;
                 this.items[0].freeOfCharge = 0;
@@ -119,6 +120,9 @@
                 this.items[1].persons = 0;
                 this.items[1].freeOfCharge = 0;
                 this.items[1].nights = 0;
+                this.items[2].persons = 0;
+                this.items[2].freeOfCharge = 0;
+                this.items[2].nights = 0;
             },
             computePrivateOrHotel(formItem, element){
                 var dict = {};
@@ -135,36 +139,49 @@
                     this.items[1].freeOfCharge += formItem.freeOfCharge;
                     this.items[1].nights += formItem.nights;
                 }
+
+                this.items[2].persons += formItem.persons;
+                this.items[2].freeOfCharge += formItem.freeOfCharge;
+                this.items[2].nights += formItem.nights;
             }
         },
         computed:{
+            computeItems2:{
+                set: function (date) {
+
+                    var scheine = this.$store.getters.registrationForms;
+                    var self = this;
+
+                    this.clearItems();
+
+                    scheine.forEach(function(element){
+                        if(self.$moment(element.formData.arrivalDate).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')
+                            && self.$moment(element.formData.departureDate).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')){
+
+                            self.computePrivateOrHotel(computeStatistics(element), element);
+
+                        }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')
+                            && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') > self.$moment(date, 'YYYY').format('YYYY')){
+
+                            element.formData.departureDate = parseInt(self.$moment(Date.parse(element.formData.departureDate)).format('YYYY'))-1 + '-12-31';
+
+                            self.computePrivateOrHotel(computeStatistics(element), element);
+
+                        }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') < self.$moment(date, 'YYYY').format('YYYY')
+                            && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')){
+
+                            element.formData.arrivalDate = parseInt(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY'))+1 + '-01-01';
+
+                            self.computePrivateOrHotel(computeStatistics(element), element);
+                        }
+                    });
+                },
+                get:function () {
+                    return '';
+                }
+            },
             computeItems(){
-                var scheine = this.$store.getters.registrationForms;
-                var self = this;
 
-                this.clearItems();
-
-                scheine.forEach(function(element){
-                    if(self.$moment(element.formData.arrivalDate).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')
-                        && self.$moment(element.formData.departureDate).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')){
-
-                        self.computePrivateOrHotel(computeStatistics(element), element);
-
-                    }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')
-                        && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') > self.$moment(self.date, 'YYYY').format('YYYY')){
-
-                        element.formData.departureDate = parseInt(self.$moment(Date.parse(element.formData.departureDate)).format('YYYY'))-1 + '-12-31';
-
-                        self.computePrivateOrHotel(computeStatistics(element), element);
-
-                    }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') < self.$moment(self.date, 'YYYY').format('YYYY')
-                        && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')){
-
-                        element.formData.arrivalDate = parseInt(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY'))+1 + '-01-01';
-
-                        self.computePrivateOrHotel(computeStatistics(element), element);
-                    }
-                });
                 return '';
             },
         }
