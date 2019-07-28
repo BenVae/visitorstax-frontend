@@ -20,11 +20,13 @@ function calculateStatisticsRegular(data){
         item.persons += 1;
     }
 
+    item.persons += data.formData.childrenYearOfBirth.length;
+
     item.freeOfCharge += data.formData.childrenYearOfBirth.length;
 
     item.freeOfCharge += data.formData.business.amountBusinessAdults;
 
-    item.nights += calculateNights(data);
+    item.nights += item.persons * calculateNights(data);
 
     return item
 }
@@ -37,7 +39,7 @@ function calculateStatisticsGroup(data){
 
     item.freeOfCharge += data.formData.amountChildren + data.formData.amountHandicapped +data.formData.amountAdultBusiness;
 
-    item.nights += calculateNights(data);
+    item.nights += item.persons * calculateNights(data);
 
     return item
 }

@@ -51,6 +51,11 @@
                     </v-data-table>
                 </v-flex>
             </v-layout>
+            <v-layout row>
+                <v-flex id="iframeContainer">
+                </v-flex>
+            </v-layout>
+            <v-btn @click="generatePDF"></v-btn>
         </v-container>
     </standard-layout>
 </template>
@@ -149,10 +154,36 @@
                 this.items[2].persons += formItem.persons;
                 this.items[2].freeOfCharge += formItem.freeOfCharge;
                 this.items[2].nights += formItem.nights;
+            },
+            generatePDF(){
+                var pdfMake = require('pdfmake/build/pdfmake.js');
+                var pdfFonts = require('pdfmake/build/vfs_fonts.js');
+                pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+                var docDefinition = {
+                    content: [
+                        'First paragraph',
+                        'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines'
+                    ]
+
+                };
+
+                const pdfDocGenerator = pdfMake.createPdf(docDefinition);
+                pdfDocGenerator.getDataUrl((dataUrl) => {
+                    const targetElement = document.querySelector('#iframeContainer');
+                    const iframe = document.createElement('iframe');
+                    iframe.setAttribute("type", "application/pdf");
+                    iframe.src = dataUrl;
+                    targetElement.appendChild(iframe);
+                });
+
+
+                //pdfMake.createPdf(docDefinition).download('pdf.pdf')
             }
         },
         computed:{
             computeItems2:{
+
                 set: function (date) {
 
                     var scheine = this.$store.getters.registrationForms;
@@ -193,5 +224,8 @@
 <style scoped>
     #textRow{
         min-height: 70px;
+    }
+    iframe{
+        width: 100%;
     }
 </style>
