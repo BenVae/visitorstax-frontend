@@ -44,7 +44,6 @@
                             </tr>
                         </template>
                     </v-data-table>
-                    <v-btn @click="computeItems"></v-btn>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -113,32 +112,13 @@
             deleteDate(){
                 this.date = null;
             },
-            computeItems(){
-                var scheine = this.$store.getters.registrationForms;
-                var self = this;
-
-                scheine.forEach(function(element){
-                   if(self.$moment(element.formData.arrivalDate).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')
-                       && self.$moment(element.formData.departureDate).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')){
-
-                       self.computePrivateOrHotel(computeStatistics(element), element);
-
-                   }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')
-                       && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') > self.$moment(self.date, 'YYYY').format('YYYY')){
-
-                       element.formData.departureDate = parseInt(self.$moment(Date.parse(element.formData.departureDate)).format('YYYY'))-1 + '-12-31';
-
-                       self.computePrivateOrHotel(computeStatistics(element), element);
-
-                   }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') < self.$moment(self.date, 'YYYY').format('YYYY')
-                       && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')){
-
-                       element.formData.arrivalDate = parseInt(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY'))+1 + '-01-01';
-
-                       self.computePrivateOrHotel(computeStatistics(element), element);
-                   }
-                });
-
+            clearItems(){
+                this.items[0].persons = 0;
+                this.items[0].freeOfCharge = 0;
+                this.items[0].nights = 0;
+                this.items[1].persons = 0;
+                this.items[1].freeOfCharge = 0;
+                this.items[1].nights = 0;
             },
             computePrivateOrHotel(formItem, element){
                 var dict = {};
@@ -157,6 +137,37 @@
                 }
             }
         },
+        computed:{
+            computeItems(){
+                var scheine = this.$store.getters.registrationForms;
+                var self = this;
+
+                this.clearItems();
+
+                scheine.forEach(function(element){
+                    if(self.$moment(element.formData.arrivalDate).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')
+                        && self.$moment(element.formData.departureDate).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')){
+
+                        self.computePrivateOrHotel(computeStatistics(element), element);
+
+                    }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')
+                        && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') > self.$moment(self.date, 'YYYY').format('YYYY')){
+
+                        element.formData.departureDate = parseInt(self.$moment(Date.parse(element.formData.departureDate)).format('YYYY'))-1 + '-12-31';
+
+                        self.computePrivateOrHotel(computeStatistics(element), element);
+
+                    }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') < self.$moment(self.date, 'YYYY').format('YYYY')
+                        && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === self.$moment(self.date, 'YYYY').format('YYYY')){
+
+                        element.formData.arrivalDate = parseInt(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY'))+1 + '-01-01';
+
+                        self.computePrivateOrHotel(computeStatistics(element), element);
+                    }
+                });
+                return '';
+            },
+        }
     }
 </script>
 
