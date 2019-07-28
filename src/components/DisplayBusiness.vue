@@ -164,8 +164,10 @@
         },
 
         beforeMount() {
-            this.title = "Betrieb von " + this.propsbusiness.contactPersonName + " " + this.propsbusiness.contactPersonSurname
-            this.items = this.getForms()
+            if(typeof this.propsbusiness != "undefined") {
+                this.title = "Betrieb von " + this.propsbusiness.contactPersonName + " " + this.propsbusiness.contactPersonSurname
+                this.items = this.getForms()
+            }
 
         },
 
