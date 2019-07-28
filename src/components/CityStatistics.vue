@@ -32,11 +32,12 @@
                     <v-data-table
                             :headers="headers"
                             :items="items"
-                            :items-per-page="5"
                             class="elevation-1"
+                            hide-actions
                     >
                         <template v-slot:items="props">
                             <tr>
+                                <td>{{props.item.type}}</td>
                                 <td>{{ props.item.persons}}</td>
                                 <td>{{ props.item.freeOfCharge}}</td>
                                 <td>{{ props.item.nights}}</td>
@@ -63,20 +64,34 @@
                 menu1: false,
                 headers: [
                     {
+                      text: '',
+                      sortable: false
+                    },
+                    {
                         text: 'Personen',
                         value: 'persons',
+                        sortable: false
                     },
                     {
                         text: 'Befreit',
-                        value: 'freeOfCharge'
+                        value: 'freeOfCharge',
+                        sortable: false
                     },
                     {
                         text: 'Nächte',
-                        value: 'nights'
+                        value: 'nights',
+                        sortable: false
                     }
                 ],
                 items:[
                     {
+                        type:"Konstanz (privat)",
+                        persons:0,
+                        freeOfCharge:0,
+                        nights:0
+                    },
+                    {
+                        type:"Konstanz (Hotel)",
                         persons:0,
                         freeOfCharge:0,
                         nights:0
