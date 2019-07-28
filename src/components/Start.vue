@@ -2,8 +2,6 @@
     <Layout>
         <Title name="Startseite"/>
         <v-container>
-            <v-btn @click="getGuests('04-2019')">KLICK</v-btn>
-            <span>{{this.guests}}</span>
         </v-container>
     </Layout>
 </template>
@@ -12,26 +10,28 @@
     import Layout from "./utils/StandardLayout";
     import Title from "./utils/Title";
     import * as statistics from "./utils/statistics"
-
-    import Forms from '../assets/sampleRegistrationForm'
+    import apexchart from 'vue-apexcharts'
 
     export default {
         name: "Start",
-        components: {Title, Layout},
+        components: {Title, Layout, apexchart},
 
         data() {
             return {
-                guests: 0,
+                districtAnalysis: {}
             }
         },
 
         beforeMount() {
-            this.guests = this.$moment('04-2019', 'MM-YYYY').daysInMonth()
+            this.makeDistrictAnalysis('01-04-2019', '30-04-2019')
         },
 
         methods: {
-            getGuests(month) {
-                this.guests = statistics.getTaxByMonth(month)
+            makeDistrictAnalysis(start, end) {
+                let data = statistics.getGuestInPeriodSortedByDistrict(start, end)
+                this.districtAnalysis["chartOptions"] = {}
+                this.districtAnalysis["chartOptions"]["labels"] = Object.keys(data)
+                this.districtAnalysis["series"] = Object.values(data)
             }
         }
     }
