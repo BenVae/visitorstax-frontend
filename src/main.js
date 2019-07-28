@@ -14,9 +14,7 @@ import 'vue-good-table/dist/vue-good-table.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Vuetify from 'vuetify'
-import Notifications from 'vue-notification'
 
-Vue.use(Notifications);
 Vue.use(Vuex);
 Vue.use(Vuetify);
 Vue.use(VueAxios, axios);
@@ -24,6 +22,7 @@ Vue.use(BootstrapVue);
 Vue.use(VueGoodTablePlugin);
 Vue.use(HotelDatePicker);
 Vue.use(require('vue-moment'));
+
 
 Vue.config.productionTip = false;
 
