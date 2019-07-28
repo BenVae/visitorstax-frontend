@@ -179,11 +179,7 @@
                 get:function () {
                     return '';
                 }
-            },
-            computeItems(){
-
-                return '';
-            },
+            }
         }
     }
 </script>
