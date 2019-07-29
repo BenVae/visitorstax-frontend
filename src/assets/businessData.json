@@ -1,6 +1,7 @@
 [
   {
     "businessId": "1",
+    "type": "Privat",
     "user": {
       "id": "1",
       "username": "123456",
@@ -40,6 +41,7 @@
   },
   {
     "businessId": "2",
+    "type": "Hotel",
     "user": {
       "id": "2",
       "username": "654321",
@@ -67,5 +69,781 @@
     "contactPersonSurname": "Renner",
     "contactEmail": "Philippe.Renner@htwg-konstanz.de",
     "contactTel": "014258625"
+  },
+  {
+    "businessId": "3",
+    "type": "Privat",
+    "user": {
+      "id": "3",
+      "username": "00003",
+      "password": "test3",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Hauptstraße 28",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Hauptstraße 28",
+          "country": "Germany"
+        }
+      },
+      {
+        "id": "2",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Lange Straße 77",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Jan",
+    "contactPersonSurname": "Müller",
+    "contactEmail": "jm@gmx.de",
+    "contactTel": "0815/123"
+  },
+  {
+    "businessId": "4",
+    "type": "Privat",
+    "user": {
+      "id": "4",
+      "username": "00004",
+      "password": "test4",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Turmstraße 1",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Seestraße 5",
+          "country": "Germany"
+        }
+      },
+      {
+        "id": "2",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Chauseestraße 7",
+          "country": "Germany"
+        }
+      },
+      {
+        "id": "3",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Schlossallee 1",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Lionel",
+    "contactPersonSurname": "Messi",
+    "contactEmail": "MessiBarcelona@gmx.de",
+    "contactTel": "0815/0004"
+  },
+  {
+    "businessId": "5",
+    "type": "Privat",
+    "user": {
+      "id": "5",
+      "username": "00005",
+      "password": "test5",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Siegesstraße 10",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Siegesstraße 2",
+          "country": "Germany"
+        }
+      },
+      {
+        "id": "2",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Hochschulstraße 9",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Peter",
+    "contactPersonSurname": "Kurz",
+    "contactEmail": "Kurz@web.de",
+    "contactTel": "0152999000"
+  },
+  {
+    "businessId": "6",
+    "type": "Privat",
+    "user": {
+      "id": "6",
+      "username": "00006",
+      "password": "test6",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Große Straße 18",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Lange Straße 2",
+          "country": "Germany"
+        }
+      },
+      {
+        "id": "2",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Kurze Straße 10",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Peter",
+    "contactPersonSurname": "Zwegat",
+    "contactEmail": "zwegat@gmail.com",
+    "contactTel": "0815/1234561"
+  },
+  {
+    "businessId": "7",
+    "type": "Hotel",
+    "user": {
+      "id": "7",
+      "username": "00007",
+      "password": "test7",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Freiheitsstraße 90",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Freiheitsstraße 90",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Rudolf",
+    "contactPersonSurname": "Rentier",
+    "contactEmail": "RRentier@gmail.com",
+    "contactTel": "77777"
+  },
+  {
+    "businessId": "8",
+    "type": "Privat",
+    "user": {
+      "id": "8",
+      "username": "00008",
+      "password": "test8",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Mühlenstraße 11",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Mühlenstraße 10",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Cristiano",
+    "contactPersonSurname": "Ronaldo",
+    "contactEmail": "Ronaldo@web.de",
+    "contactTel": "01777777777"
+  },
+  {
+    "businessId": "9",
+    "type": "Hotel",
+    "user": {
+      "id": "9",
+      "username": "00009",
+      "password": "test9",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Am Dom 99",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Am Dom 99",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Helga",
+    "contactPersonSurname": "Gauß",
+    "contactEmail": "HelgaG@web.de",
+    "contactTel": "0166666666"
+  },
+  {
+    "businessId": "10",
+    "type": "Hotel",
+    "user": {
+      "id": "10",
+      "username": "00010",
+      "password": "test10",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Klingenallee 1",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Klingenallee 1",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Kurt",
+    "contactPersonSurname": "Bendt",
+    "contactEmail": "kurt123@web.de",
+    "contactTel": "01763337899"
+  },
+  {
+    "businessId": "11",
+    "type": "Privat",
+    "user": {
+      "id": "8",
+      "username": "00011",
+      "password": "test11",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Echte Straße 1",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Mühlenstraße 17",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Francesco",
+    "contactPersonSurname": "Totti",
+    "contactEmail": "TottiF@web.de",
+    "contactTel": "0172229999"
+  },
+  {
+    "businessId": "12",
+    "type": "Privat",
+    "user": {
+      "id": "12",
+      "username": "00012",
+      "password": "test12",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Hinterstraße 1",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Hinterstraße 2",
+          "country": "Germany"
+        }
+      },
+      {
+        "id": "2",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Hinterstraße 3",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Lisa",
+    "contactPersonSurname": "Renz",
+    "contactEmail": "lrenz@web.de",
+    "contactTel": "01777775555"
+  },
+  {
+    "businessId": "13",
+    "type": "Hotel",
+    "user": {
+      "id": "13",
+      "username": "00013",
+      "password": "test13",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Rathausplatz 33",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Rathausplatz 33",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Gudrun",
+    "contactPersonSurname": "Keller",
+    "contactEmail": "gudrun123@web.de",
+    "contactTel": "077732331"
+  },
+  {
+    "businessId": "14",
+    "type": "Privat",
+    "user": {
+      "id": "14",
+      "username": "00014",
+      "password": "test14",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Hauptstraße 90",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Hauptstraße 91",
+          "country": "Germany"
+        }
+      },
+      {
+        "id": "2",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Hauptstraße 92",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Olaf",
+    "contactPersonSurname": "Schubert",
+    "contactEmail": "schubert@web.de",
+    "contactTel": "0161112233"
+  },
+  {
+    "businessId": "15",
+    "type": "Hotel",
+    "user": {
+      "id": "15",
+      "username": "00015",
+      "password": "test15",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Marktallee 20",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Marktallee 20",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Martin",
+    "contactPersonSurname": "Müller",
+    "contactEmail": "MMüller@gmail.com",
+    "contactTel": "64321"
+  },
+  {
+    "businessId": "16",
+    "type": "Privat",
+    "user": {
+      "id": "16",
+      "username": "00016",
+      "password": "test16",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Am Gleis 9",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Bismarckstraße 7",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Emilia",
+    "contactPersonSurname": "Bauer",
+    "contactEmail": "E-Bauer@gmail.com",
+    "contactTel": "1234567"
+  },
+  {
+    "businessId": "17",
+    "type": "Hotel",
+    "user": {
+      "id": "17",
+      "username": "00017",
+      "password": "test17",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Klingenstraße 123",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Klingenstraße 123",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Max",
+    "contactPersonSurname": "Kunz",
+    "contactEmail": "KunzMax@gmail.com",
+    "contactTel": "55555"
+  },
+  {
+    "businessId": "18",
+    "type": "Hotel",
+    "user": {
+      "id": "18",
+      "username": "00018",
+      "password": "test18",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Am Gleis 44",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Am Gleis 44",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Peter",
+    "contactPersonSurname": "Pan",
+    "contactEmail": "PanX@gmail.com",
+    "contactTel": "154400999"
+  },
+  {
+    "businessId": "19",
+    "type": "Privat",
+    "user": {
+      "id": "19",
+      "username": "00019",
+      "password": "test19",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Krausestraße 190",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Krausestraße 190",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Georg",
+    "contactPersonSurname": "Hoeneß",
+    "contactEmail": "HoeneßG@gmail.com",
+    "contactTel": "8911110"
+  },
+  {
+    "businessId": "20",
+    "type": "Hotel",
+    "user": {
+      "id": "20",
+      "username": "00020",
+      "password": "test20",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Turmstraße 50",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Turmstraße 50",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Chiara",
+    "contactPersonSurname": "Rose",
+    "contactEmail": "chrose@gmail.com",
+    "contactTel": "12341234"
+  },
+  {
+    "businessId": "21",
+    "type": "Privat",
+    "user": {
+      "id": "21",
+      "username": "00021",
+      "password": "test21",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Freiheitsstraße 88",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Freiheitsstraße 88",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Frederik",
+    "contactPersonSurname": "Fips",
+    "contactEmail": "Fips2000@web.de",
+    "contactTel": "7788999000"
+  },
+  {
+    "businessId": "22",
+    "type": "Privat",
+    "user": {
+      "id": "22",
+      "username": "00022",
+      "password": "test22",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Klausstraße 34",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Klausstraße 34",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Michael",
+    "contactPersonSurname": "Messer",
+    "contactEmail": "Messer.Michael@gmail.com",
+    "contactTel": "098765"
+  },
+  {
+    "businessId": "23",
+    "type": "Hotel",
+    "user": {
+      "id": "23",
+      "username": "00023",
+      "password": "test23",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Badstraße 90",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Badstraße 90",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Marvin",
+    "contactPersonSurname": "Meister",
+    "contactEmail": "MarvMeister@gmail.com",
+    "contactTel": "123445"
+  },
+  {
+    "businessId": "24",
+    "type": "Privat",
+    "user": {
+      "id": "24",
+      "username": "00024",
+      "password": "test24",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Am Steg 1",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Am Steg 1",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Hermann",
+    "contactPersonSurname": "Richter",
+    "contactEmail": "H.Richter@gmail.com",
+    "contactTel": "666555"
+  },
+  {
+    "businessId": "25",
+    "type": "Hotel",
+    "user": {
+      "id": "25",
+      "username": "00025",
+      "password": "test25",
+      "role": "Betrieb"
+    },
+    "address": {
+      "city": "Konstanz",
+      "zipCode": "78462",
+      "streetAndNumber": "Paul-Gretel-Straße 22",
+      "country": "Germany"
+    },
+    "businessObjects": [
+      {
+        "id": "1",
+        "address": {
+          "city": "Konstanz",
+          "zipCode": "78462",
+          "streetAndNumber": "Paul-Gretel-Straße 22",
+          "country": "Germany"
+        }
+      }
+    ],
+    "contactPersonName": "Carlos",
+    "contactPersonSurname": "Santos",
+    "contactEmail": "Carlos.Santos@web.de",
+    "contactTel": "099111122"
   }
 ]
