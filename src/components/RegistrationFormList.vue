@@ -82,13 +82,13 @@
             >
                 <template v-slot:items="props">
                     <tr @click="displaySingleRegistrationForm(props.item)">
-                    <td>{{ props.item.meta.registrationNumber }}</td>
-                    <td>{{ props.item.formData.guest.surname }}</td>
-                    <td>{{ props.item.formData.guest.name }}</td>
-                    <td>{{ $moment(props.item.formData.arrivalDate).format('DD.MM.YYYY') }}</td>
-                    <td>{{ $moment(props.item.formData.departureDate).format('DD.MM.YYYY') }}</td>
-                    <td>{{ props.item.formData.registrationFormType}}</td>
-                    <td>{{ props.item.meta.tax }}</td>
+                    <td><v-layout justify-center>{{ props.item.meta.registrationNumber }}</v-layout></td>
+                    <td><v-layout justify-center>{{ props.item.formData.guest.surname }}</v-layout></td>
+                    <td><v-layout justify-center>{{ props.item.formData.guest.name }}</v-layout></td>
+                    <td><v-layout justify-center>{{ $moment(props.item.formData.arrivalDate).format('DD.MM.YYYY') }}</v-layout></td>
+                    <td><v-layout justify-center>{{ $moment(props.item.formData.departureDate).format('DD.MM.YYYY') }}</v-layout></td>
+                    <td><v-layout justify-center>{{ props.item.formData.registrationFormType}}</v-layout></td>
+                    <td><v-layout justify-center>{{ props.item.meta.tax }}</v-layout></td>
                     </tr>
                 </template>
                 <template v-slot:no-results>
@@ -121,31 +121,38 @@
                 headers:[
                     {
                         text: 'Ms-Nr.',
-                        value: 'meta.registrationNumber'
+                        value: 'meta.registrationNumber',
+                        align:'center'
                     },
                     {
                         text: 'Name',
-                        value: 'formData.guest.surname'
+                        value: 'formData.guest.surname',
+                        align:'center'
                     },
                     {
                         text: 'Vorname',
-                        value: 'formData.guest.name'
+                        value: 'formData.guest.name',
+                        align:'center'
                     },
                     {
                         text: 'Ankunft',
-                        value: 'formData.arrivalDate'
+                        value: 'formData.arrivalDate',
+                        align:'center'
                     },
                     {
                         text: 'Abfahrt',
-                        value: 'formData.departureDate'
+                        value: 'formData.departureDate',
+                        align:'center'
                     },
                     {
                         text: 'Typ',
-                        value: 'formData.registrationFormType'
+                        value: 'formData.registrationFormType',
+                        align:'center'
                     },
                     {
                         text: 'Kurtaxe in €',
-                        value: 'meta.tax'
+                        value: 'meta.tax',
+                        align:'center'
                     }
                 ]
             }
@@ -153,9 +160,9 @@
         beforeMount() {
             this.items = this.$store.getters.registrationForms;
             if(this.$store.getters.role === 'city'){
-                this.items = this.items.filter(item => item.meta.isSubmitted === "true")
+                this.items = this.items.filter(item => item.meta.state === "submitted")
             }else if(this.$store.getters.role === 'landlord'){
-                this.items = this.items.filter(item => item.meta.isSubmitted === "false")
+                this.items = this.items.filter(item => item.meta.state === "unsubmitted")
             }
         },
         computed:{

@@ -20,6 +20,7 @@
                                     v-on="on"
                                     clearable
                                     v-model="computeItems2"
+                                    @click:clear="deleteDate"
                                     :rules="[rules.datum]"
                             ></v-text-field>
                         </template>
@@ -52,10 +53,11 @@
                 </v-flex>
             </v-layout>
             <v-layout row>
-                <v-flex id="iframeContainer">
+                <v-flex mt-3>
+                    <iframe id='pdfV' style="width:100%; height: 700px" frameborder="0" scrolling="no"></iframe>
+                    <img id='imgToExport' src='../assets/Constance_logo.png' style='display:none'/>
                 </v-flex>
             </v-layout>
-            <v-btn @click="generatePDF"></v-btn>
         </v-container>
     </standard-layout>
 </template>
@@ -71,6 +73,7 @@
         data() {
             return {
                 menu1: false,
+                date: null,
                 headers: [
                     {
                       text: '',
@@ -124,6 +127,9 @@
             }
         },
         methods:{
+            deleteDate(){
+                this.date=null
+            },
             clearItems(){
                 this.items[0].persons = 0;
                 this.items[0].freeOfCharge = 0;
@@ -160,58 +166,93 @@
                 var pdfFonts = require('pdfmake/build/vfs_fonts.js');
                 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-                var docDefinition = {
-                    content: [
-                        'First paragraph',
-                        'Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines'
-                    ]
+                const pdfDocGenerator = pdfMake.createPdf(this.getDocumentDefinition());
+                pdfDocGenerator.getDataUrl((dataUrl) => {
+                    document.getElementById('pdfV').src = dataUrl;
+                });
+            },
+            getDocumentDefinition(){
 
+               var docDefinition = {
+                    content: [
+                        {text: 'Übernachtungen '+this.date, fontSize: 25, bold:true,
+                            margin: [ 0, 0, 0, 20],
+                            alignment: 'center'
+                        },
+                        {   layout: 'lightHorizontalLines',
+                            table: {
+                                heights: [10, 20, 20, 20],
+                                widths: ['*','*','*','*'],
+                                body: [
+                                    [{text:''},
+                                        {text:'Personen', style:'tableHeader', alignment:'center'},
+                                        {text:'Befreite', style:'tableHeader', alignment:'center'},
+                                        {text:'Nächte', style:'tableHeader', alignment:'center'}],
+
+                                    [{text:'Konstanz (privat)', alignment:'left'},
+                                        {text: this.items[0].persons, alignment:'center'},
+                                        {text: this.items[0].freeOfCharge, alignment:'center'},
+                                        {text: this.items[0].nights, alignment:'center'}],
+
+                                    [{text:'Konstanz (Hotel)', alignment:'left'},
+                                        {text: this.items[1].persons, alignment:'center'},
+                                        {text: this.items[1].freeOfCharge, alignment:'center'},
+                                        {text: this.items[1].nights, alignment:'center'}],
+
+                                    [{text:'Gesamt', alignment:'left', bold:true},
+                                        {text: this.items[2].persons, alignment:'center', bold:true},
+                                        {text: this.items[2].freeOfCharge, alignment:'center', bold:true},
+                                        {text: this.items[2].nights, alignment:'center', bold:true}],
+
+                                ]
+                            }
+                        },
+                    ],
+                    styles:{
+                        bottomRow:{
+                            alignment:'center',
+                            bold:true
+                        }
+                    }
                 };
 
-                const pdfDocGenerator = pdfMake.createPdf(docDefinition);
-                pdfDocGenerator.getDataUrl((dataUrl) => {
-                    const targetElement = document.querySelector('#iframeContainer');
-                    const iframe = document.createElement('iframe');
-                    iframe.setAttribute("type", "application/pdf");
-                    iframe.src = dataUrl;
-                    targetElement.appendChild(iframe);
-                });
-
-
-                //pdfMake.createPdf(docDefinition).download('pdf.pdf')
+               return docDefinition;
             }
         },
         computed:{
             computeItems2:{
-
                 set: function (date) {
+                    if (this.$moment(date, 'YYYY', true).isValid()) {
 
-                    var scheine = this.$store.getters.registrationForms;
-                    var self = this;
+                        this.date = date;
+                        var scheine = this.$store.getters.registrationForms;
+                        var self = this;
 
-                    this.clearItems();
+                        this.clearItems();
 
-                    scheine.forEach(function(element){
-                        if(self.$moment(element.formData.arrivalDate).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')
-                            && self.$moment(element.formData.departureDate).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')){
+                        scheine.forEach(function (element) {
+                            if (self.$moment(element.formData.arrivalDate).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')
+                                && self.$moment(element.formData.departureDate).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')) {
 
-                            self.computePrivateOrHotel(computeStatistics(element), element);
+                                self.computePrivateOrHotel(computeStatistics(element), element);
 
-                        }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')
-                            && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') > self.$moment(date, 'YYYY').format('YYYY')){
+                            } else if (self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')
+                                && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') > self.$moment(date, 'YYYY').format('YYYY')) {
 
-                            element.formData.departureDate = parseInt(self.$moment(Date.parse(element.formData.departureDate)).format('YYYY'))-1 + '-12-31';
+                                element.formData.departureDate = parseInt(self.$moment(Date.parse(element.formData.departureDate)).format('YYYY')) - 1 + '-12-31';
 
-                            self.computePrivateOrHotel(computeStatistics(element), element);
+                                self.computePrivateOrHotel(computeStatistics(element), element);
 
-                        }else if(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') < self.$moment(date, 'YYYY').format('YYYY')
-                            && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')){
+                            } else if (self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') < self.$moment(date, 'YYYY').format('YYYY')
+                                && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')) {
 
-                            element.formData.arrivalDate = parseInt(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY'))+1 + '-01-01';
+                                element.formData.arrivalDate = parseInt(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY')) + 1 + '-01-01';
 
-                            self.computePrivateOrHotel(computeStatistics(element), element);
-                        }
-                    });
+                                self.computePrivateOrHotel(computeStatistics(element), element);
+                            }
+                        });
+                        this.generatePDF();
+                    }
                 },
                 get:function () {
                     return '';

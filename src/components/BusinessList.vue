@@ -24,11 +24,11 @@
                 >
                     <template v-slot:items="props">
                         <tr @click="displaySingleRegistrationForm(props.item)">
-                            <td>{{ props.item.user.username}}</td>
-                            <td>{{ props.item.contactPersonSurname}}</td>
-                            <td>{{ props.item.contactPersonName}}</td>
-                            <td>{{ props.item.address.streetAndNumber}}</td>
-                            <td>{{ props.item.businessObjects.length}}</td>
+                            <td><v-layout justify-center>{{ props.item.businessId}}</v-layout></td>
+                            <td><v-layout justify-center>{{ props.item.contactPersonSurname}}</v-layout></td>
+                            <td><v-layout justify-center>{{ props.item.contactPersonName}}</v-layout></td>
+                            <td><v-layout justify-center>{{ props.item.address.streetAndNumber}}</v-layout></td>
+                            <td><v-layout justify-center>{{ props.item.businessObjects.length}}</v-layout></td>
                         </tr>
                     </template>
                     <template v-slot:no-results>
@@ -57,23 +57,28 @@
                 headers:[
                     {
                         text: 'Betr.-Nr.',
-                        value: 'user.username'
+                        value: 'businessId',
+                        align:'center'
                     },
                     {
                         text: 'Name',
-                        value: 'contactPersonSurname'
+                        value: 'contactPersonSurname',
+                        align:'center'
                     },
                     {
                         text: 'Vorname',
-                        value: 'contactPersonName'
+                        value: 'contactPersonName',
+                        align:'center'
                     },
                     {
                         text: 'Adresse',
-                        value: 'address'
+                        value: 'address',
+                        align:'center'
                     },
                     {
                         text: 'Anzahl Mietobjekte',
-                        value: 'businessObjects'
+                        value: 'businessObjects',
+                        align:'center'
                     }
                 ]
             }
