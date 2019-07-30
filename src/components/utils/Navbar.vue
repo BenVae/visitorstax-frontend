@@ -43,9 +43,14 @@
                                 </router-link>
                         </span>
                     </b-nav-item>
-                    <b-nav-item v-else>
-                        <router-link to="/login">Login</router-link>
-                    </b-nav-item>
+                    <template v-else>
+                        <b-nav-item>
+                            <router-link to="/login">Vermieter-Login</router-link>
+                        </b-nav-item>
+                        <b-nav-item>
+                            <router-link to="/stadtlogin">Stadt-Login</router-link>
+                        </b-nav-item>
+                    </template>
                 </b-navbar-nav>
 
             </b-collapse>
@@ -57,8 +62,8 @@
     export default {
         name: "Navbar",
 
-        methods:{
-            deleteRoleInState: function(){
+        methods: {
+            deleteRoleInState: function () {
                 this.$store.commit('changeRole', '')
             }
         }
