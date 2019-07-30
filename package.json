@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "start": "node server.js"
   },
   "dependencies": {
     "apexcharts": "^3.8.3",
@@ -13,6 +14,7 @@
     "bootstrap-vue": "^2.0.0-rc.22",
     "chart.js": "^2.8.0",
     "core-js": "^2.6.5",
+    "express": "^4.17.1",
     "moment": "^2.24.0",
     "pdfmake": "^0.1.58",
     "vue": "^2.6.10",
