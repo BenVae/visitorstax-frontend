@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Test from "./components/Test";
+import Start from "./components/Start";
 import Login from "./components/Login";
 import RegistraionForm from "./components/registrationform/RegistraionForm";
 import ShowRegForm from "./components/DisplaySingularRegForm";
@@ -23,8 +23,8 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'test',
-            component: Test
+            name: 'start',
+            component: Start
         },
         {
             path: '/login',
@@ -94,5 +94,6 @@ export default new Router({
             name: 'Statistiken',
             component: CityStatistics
         }
+
     ]
 })

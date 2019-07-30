@@ -16,13 +16,13 @@ import VueAxios from 'vue-axios'
 import Vuetify from 'vuetify'
 
 Vue.use(Vuex);
-Vue.use(require('pdfmake'));
 Vue.use(Vuetify);
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
 Vue.use(VueGoodTablePlugin);
 Vue.use(HotelDatePicker);
 Vue.use(require('vue-moment'));
+Vue.use(require('vue-apexcharts'))
 Vue.use(require('pdfmake'));
 
 
