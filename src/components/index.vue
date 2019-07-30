@@ -15,7 +15,7 @@
                                 Konstanz</span> in Zusammenarbeit mit der Stadtverwaltung realisiert.
                             </div>
                             <div class="py-3 px-2">
-                                Alle Funktionalitäten, die diese Webapplikation bereitstellt, dienen ausschließlich zur
+                                Alle Funktionalitäten, die diese Webapplikation bereitstellt, dienen ausschließlich der
                                 Präsentation des Proof of Concept und sollten in ihrer Form nicht für andere
                                 Zwecke verwandt werden.
                             </div>
