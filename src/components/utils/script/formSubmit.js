@@ -1,7 +1,7 @@
-import businessObjects from './assets/businessObjects'
-import sampleRegistrationForm from './assets/sampleRegistrationForm'
+import businessObjects from '../../../assets/businessObjects'
+import sampleRegistrationForm from '../../../assets/sampleRegistrationForm'
 import moment from 'moment'
-import {store} from './store'
+import {store} from '../../../store'
 
 export function getBusinessObjects() {
     let objects = [];
@@ -21,7 +21,7 @@ export function setSubmittedFlag(registrationNumber) {
 
     for (let i = 0; i < registrationForms.length; i++) {
         if (registrationForms[i].meta.registrationNumber === registrationNumber) {
-            registrationForms[i].meta.isSubmitted = true;
+            registrationForms[i].meta.state = 'submitted';
         }
     }
 }
@@ -31,7 +31,7 @@ export function updateRegistrationForm(formData, businessObject, registrationNum
         meta: {
             "registrationNumber": registrationNumber,
             "businessObject": businessObject,
-            "isSubmitted": "false",
+            "state": "unsubmitted",
             "tax": calculateTaxes(formData)
         },
         formData: formData
@@ -53,7 +53,7 @@ export function createRegistrationForm(formData, businessObject) {
         meta: {
             "registrationNumber": getNextRegistrationFormNumber(),
             "businessObject": businessObject,
-            "isSubmitted": "false",
+            "state": "unsubmitted",
             "tax": calculateTaxes(formData)
         },
         formData: formData

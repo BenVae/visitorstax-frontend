@@ -141,7 +141,7 @@
                     </v-layout>
                 </v-container>
                 <v-card-actions>
-                    <template v-if="this.$store.getters.role === 'landlord' && propform.meta.isSubmitted === 'false'">
+                    <template v-if="this.$store.getters.role === 'landlord' && propform.meta.state === 'unsubmitted'">
                         <v-btn block color="blue-grey"
                                @click="submitRegistrationForm"
                                dark>Abschicken
@@ -170,7 +170,7 @@
 
     import Layout from "./utils/StandardLayout";
     import Title from "./utils/Title"
-    import {setSubmittedFlag} from "../formSubmit";
+    import {setSubmittedFlag} from "./utils/script/formSubmit";
 
     export default {
         name: "singularRegForm",

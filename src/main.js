@@ -16,6 +16,7 @@ import VueAxios from 'vue-axios'
 import Vuetify from 'vuetify'
 
 Vue.use(Vuex);
+Vue.use(require('pdfmake'));
 Vue.use(Vuetify);
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);

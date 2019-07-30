@@ -12,6 +12,7 @@ import DisplayBusiness from "./components/DisplayBusiness";
 import LoginCity from "./components/LoginCity";
 import EditRegistraionForm from "./components/registrationform/EditRegistraionForm";
 import EditGroupRegistraionForm from "./components/registrationform/EditGroupRegistraionForm";
+import CreateInvoice from "./components/city/CreateInvoice";
 
 Vue.use(Router);
 
@@ -81,6 +82,11 @@ export default new Router({
             name: 'gruppenMeldescheinBearbeiten',
             component: EditGroupRegistraionForm,
             props: true
+        },
+        {
+            path: '/RechnungErstellen',
+            name: 'rechnungErstellen',
+            component: CreateInvoice,
         }
     ]
 })

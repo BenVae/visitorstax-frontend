@@ -13,7 +13,7 @@
           "id": 123456789
         }
       },
-      "isSubmitted": "false",
+      "state": "unsubmitted",
       "tax": "22,50"
     },
     "formData": {
@@ -73,7 +73,7 @@
       },
       "tax": "103,50",
       "amountOfFellowPassengers": "9",
-      "isSubmitted": "true",
+      "state": "submitted",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
     },

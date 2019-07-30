@@ -31,3 +31,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+Stati von state: {submitted, unsubmitted, invoiceSent, invoicePayed}

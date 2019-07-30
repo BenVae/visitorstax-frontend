@@ -243,7 +243,7 @@
     import RowWithDescription from "../utils/RowWithDescription";
     import HotelDatePicker from 'vue-hotel-datepicker'
     import BirthdayPicker from "../utils/BirthdayPicker";
-    import {createRegistrationForm, getBusinessObjects} from "../../formSubmit";
+    import {createRegistrationForm, getBusinessObjects} from "../utils/script/formSubmit";
 
     export default {
         name: "GroupRegistrationForm",

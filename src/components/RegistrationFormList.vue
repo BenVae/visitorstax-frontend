@@ -89,6 +89,7 @@
                             <td>{{ $moment(props.item.formData.departureDate).format('DD.MM.YYYY') }}</td>
                             <td>{{ props.item.formData.registrationFormType}}</td>
                             <td>{{ props.item.meta.tax }}</td>
+                            <td>{{ props.item.meta.state }}</td>
                         </tr>
                     </template>
                     <template v-slot:no-results>
@@ -147,6 +148,10 @@
                     {
                         text: 'Kurtaxe in €',
                         value: 'meta.tax'
+                    },
+                    {
+                        text: 'Status',
+                        value: 'meta.state'
                     }
                 ]
             }
@@ -154,7 +159,7 @@
         beforeMount() {
             this.items = this.$store.getters.registrationForms;
             if (this.$store.getters.role === 'city') {
-                this.items = this.items.filter(item => item.meta.isSubmitted === "true")
+                this.items = this.items.filter(item => item.meta.state === "unsubmitted")
             }
         },
         computed: {
