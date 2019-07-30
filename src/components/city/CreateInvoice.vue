@@ -19,7 +19,7 @@
                             dark>PDF erstellen
                     </v-btn>
                 </v-layout>
-                <iframe id='pdfV' style="width:100%; height: 500px; display: none"></iframe>
+                <iframe id='pdfV' style="width:100%; height: 700px;" frameborder="0" scrolling="no"></iframe>
             </v-container>
         </v-form>
     </Layout>
@@ -48,7 +48,6 @@
             generatePDF() {
                 if (this.businessId !== "") {
                     createpdf(this.businessId);
-                    document.getElementById('pdfV').style.display = 'block';
                 } else {
                     alert("bitte Betrieb auswählen")
                 }
