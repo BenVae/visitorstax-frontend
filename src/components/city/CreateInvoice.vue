@@ -58,7 +58,9 @@
             this.businesses = getBusinesses();
             let registrationForms = [];
             this.$store.getters.registrationForms.forEach(function(element){
-                registrationForms.push(element.meta.businessObject.business.id);
+                if(element.meta.state === "submitted") {
+                    registrationForms.push(element.meta.businessObject.business.id)
+                };
             });
             this.businesses = this.businesses.filter(function(element){
                 if(registrationForms.includes(parseInt(element.value))){
