@@ -246,14 +246,13 @@
     import Layout from "../utils/StandardLayout";
     import Title from "../utils/Title";
     import RowWithDescription from "../utils/RowWithDescription";
-    import HotelDatePicker from 'vue-hotel-datepicker'
     import BirthdayPicker from "../utils/BirthdayPicker";
-    import {getBusinessObjects, updateRegistrationForm} from "../../formSubmit";
+    import {getBusinessObjects, updateRegistrationForm} from "../utils/script/formSubmit";
     import RegularDatePicker from "../utils/RegularDatePicker";
 
     export default {
         name: "GroupRegistrationForm",
-        components: {RegularDatePicker, BirthdayPicker, RowWithDescription, Title, Layout, HotelDatePicker},
+        components: {RegularDatePicker, BirthdayPicker, RowWithDescription, Title, Layout},
         methods: {
             setCheckinDate(newDate) {
                 this.formData.arrivalDate = newDate;

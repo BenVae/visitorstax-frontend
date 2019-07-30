@@ -24,9 +24,15 @@
                     </b-nav-item>
 
                     <!-- Stadt -->
-                    <b-nav-item v-if="$store.getters.role === 'city'">
-                        <router-link to="/Betriebe">Betriebe</router-link>
-                    </b-nav-item>
+                    <template v-if="$store.getters.role === 'city'">
+                        <b-nav-item>
+                            <router-link to="/Betriebe">Betriebe</router-link>
+                        </b-nav-item>
+
+                        <b-nav-item>
+                            <router-link to="/RechnungErstellen">Rechnung erstellen</router-link>
+                        </b-nav-item>
+                    </template>
 
                     <b-nav-item v-if="$store.getters.role === 'landlord' || $store.getters.role === 'city'">
                         <span @click="deleteRoleInState">
@@ -49,8 +55,8 @@
     export default {
         name: "Navbar",
 
-        methods:{
-            deleteRoleInState: function(){
+        methods: {
+            deleteRoleInState: function () {
                 this.$store.commit('changeRole', '')
             }
         }

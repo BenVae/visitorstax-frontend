@@ -170,7 +170,7 @@
 
     import Layout from "./utils/StandardLayout";
     import Title from "./utils/Title"
-    import {setSubmittedFlag} from "../formSubmit";
+    import {setSubmittedFlag} from "./utils/script/formSubmit";
 
     export default {
         name: "singularRegForm",
