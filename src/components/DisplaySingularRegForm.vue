@@ -68,7 +68,7 @@
                     </v-layout>
                     <v-layout v-if="propform.formData.registrationFormType==='Regulär'" row>
                         <v-flex xs12 sm8>
-                            <v-card v-if="propform.hasOwnProperty('partnerName')" elevation="4">
+                            <v-card v-if="propform.formData.spouse.hasOwnProperty('name')" elevation="4">
                                 <v-icon>loyalty</v-icon>
                                 <v-layout row justify-center text-xs-center>
                                     <v-flex xs12>
