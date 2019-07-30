@@ -8,7 +8,6 @@ let city;
 let zipCode;
 
 export function createpdf(businessId) {
-    console.log(businessId);
     let pdfMake = require('pdfmake/build/pdfmake.js');
     let pdfFonts = require('pdfmake/build/vfs_fonts.js');
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -28,7 +27,6 @@ function createTable() {
             return element;
         }
     });
-    console.log(registrationForms);
 
     let body = [];
     body.push(header);
@@ -43,7 +41,6 @@ function createTable() {
             body.push(row)
         }
     }
-    console.log(body);
     body.push(calculateLastRow(body));
 
     return body;
