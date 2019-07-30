@@ -1,5 +1,3 @@
-// playground requires you to assign document definition to a variable called dd
-
 import moment from 'moment';
 import {store} from "../../../store";
 
@@ -32,9 +30,10 @@ function createTable() {
 
     for (let i = 0; i < registrationForms.length; i++) {
         if (registrationForms[i].meta.state === 'submitted') {
-            let row = [registrationForms[i].meta.registrationNumber, registrationForms[i].formData.arrivalDate, registrationForms[i].formData.departureDate,
-                nachtBerechnung(registrationForms[i]), berechnungNormal(registrationForms[i]), berechnungFrei(registrationForms[i]), "0",
-                übernachtungen(registrationForms[i]), kurtaxeberechnung(registrationForms[i])
+            let row = [registrationForms[i].meta.registrationNumber, moment(registrationForms[i].formData.arrivalDate).format('DD.MM.YYYY'),
+                moment(registrationForms[i].formData.departureDate).format('DD.MM.YYYY'), nachtBerechnung(registrationForms[i]),
+                berechnungNormal(registrationForms[i]), berechnungFrei(registrationForms[i]), "0",
+                uebernachtungen(registrationForms[i]), kurtaxeberechnung(registrationForms[i])
             ];
             body.push(row)
         }
@@ -46,45 +45,72 @@ function createTable() {
 }
 
 function nachtBerechnung(form) {
-    return 10
+    const arrivalDate = moment(form.formData.arrivalDate);
+    const departureDate = moment(form.formData.departureDate);
+
+    return (departureDate.diff(arrivalDate, 'days'));
 }
 
 function berechnungNormal(form) {
-    return 4
+    if(form.formData.registrationFormType === "Regulär"){
+        if(form.formData.business.amountBusinessAdults === 0){
+            if(form.formData.spouse.name !== ""){
+                return 2;
+            }else{
+                return 1;
+            }
+        }else{
+            return 0;
+        }
+    }else{
+        return form.formData.amountAdultHoliday;
+    }
 }
 
 function berechnungFrei(form) {
-    return 2
+    if(form.formData.registrationFormType === "Regulär"){
+        return (form.formData.business.amountBusinessAdults === 0 ? form.formData.childrenYearOfBirth.length : form.formData.business.amountBusinessAdults + form.formData.childrenYearOfBirth.length)
+    }else{
+        return form.formData.amountHandicapped + form.formData.amountAdultBusiness + form.formData.amountChildren;
+    }
 }
 
-function übernachtungen(form) {
-    return 6
+function uebernachtungen(form) {
+    const persons = berechnungNormal(form);
+    const arrivalDate = moment(form.formData.arrivalDate);
+    const departureDate = moment(form.formData.departureDate);
+
+    return (departureDate.diff(arrivalDate, 'days') * persons);
 }
 
 function kurtaxeberechnung(form) {
-    return "20,00"
+    const kurtaxe = 2.50;
+    return (uebernachtungen(form) * kurtaxe + '€').replace(".", ",")
 }
 
 function calculateLastRow() {
     return [
-        '', {colSpan: 3, text: 'Gesamtsummen', bold: 'true'}, '', {text: '99', bold: 'true'}, {
-            text: '99',
-            bold: 'true'
-        },
-        {text: '0', bold: 'true'}, {text: '0', bold: 'true'}, {text: '8', bold: 'true'}, {text: '99', bold: 'true'}
+        '',
+        {colSpan: 2, text: 'Gesamtsumme', bold: 'true'},
+        '',
+        {text: '99', bold: 'true'},
+        {text: '99', bold: 'true'},
+        {text: '0', bold: 'true'},
+        {text: '0', bold: 'true'},
+        {text: '8', bold: 'true'},
+        {text: '99', bold: 'true'}
     ]
 }
 
 const header = [{text: 'Meld-Nr.', style: 'tableHeader'}, {
     text: 'Ankunft',
-    style: 'tableHeader'
-}, {text: 'Abreise', style: 'tableHeader'}, {text: 'Nächte', style: 'tableHeader'}, {
-    text: 'Normal',
-    style: 'tableHeader'
-}, {text: 'frei', style: 'tableHeader'}, {
-    text: 'Sonst.',
-    style: 'tableHeader'
-}, {text: 'Übernachtungen', style: 'tableHeader'},
+    style: 'tableHeader'},
+    {text: 'Abreise', style: 'tableHeader'},
+    {text: 'Nächte', style: 'tableHeader'},
+    {text: 'Normal', style: 'tableHeader'},
+    {text: 'frei', style: 'tableHeader'},
+    {text: 'Sonst.', style: 'tableHeader'},
+    {text: 'Übernachtungen', style: 'tableHeader'},
     {text: 'Kurtaxe in €', style: 'tableHeader'}];
 
 function getDocumentDefinition() {

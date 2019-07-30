@@ -7,7 +7,6 @@ export function computeStatistics(data){
     }else{
         return calculateStatisticsGroup(data);
     }
-
 }
 
 function calculateStatisticsRegular(data){
