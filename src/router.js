@@ -13,6 +13,7 @@ import LoginCity from "./components/LoginCity";
 import EditRegistraionForm from "./components/registrationform/EditRegistraionForm";
 import EditGroupRegistraionForm from "./components/registrationform/EditGroupRegistraionForm";
 import CreateInvoice from "./components/city/CreateInvoice";
+import CityStatistics from "./components/CityStatistics";
 
 Vue.use(Router);
 
@@ -87,6 +88,11 @@ export default new Router({
             path: '/RechnungErstellen',
             name: 'rechnungErstellen',
             component: CreateInvoice,
+        },
+        {
+            path: '/statistiken',
+            name: 'Statistiken',
+            component: CityStatistics
         }
     ]
 })

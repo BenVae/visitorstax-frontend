@@ -23,6 +23,7 @@ Vue.use(BootstrapVue);
 Vue.use(VueGoodTablePlugin);
 Vue.use(HotelDatePicker);
 Vue.use(require('vue-moment'));
+Vue.use(require('pdfmake'));
 
 
 Vue.config.productionTip = false;
