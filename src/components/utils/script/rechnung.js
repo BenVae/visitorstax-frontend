@@ -8,7 +8,7 @@ let city;
 let zipCode;
 
 export function createpdf(businessId) {
-
+    console.log(businessId);
     let pdfMake = require('pdfmake/build/pdfmake.js');
     let pdfFonts = require('pdfmake/build/vfs_fonts.js');
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -23,7 +23,12 @@ export function createpdf(businessId) {
 }
 
 function createTable() {
-    let registrationForms = store.getters.registrationForms;
+    let registrationForms = store.getters.registrationForms.filter(function (element){
+        if(parseInt(element.meta.businessObject.business.id) === parseInt(businessid)){
+            return element;
+        }
+    });
+    console.log(registrationForms);
 
     let body = [];
     body.push(header);
@@ -38,8 +43,8 @@ function createTable() {
             body.push(row)
         }
     }
-
-    body.push(calculateLastRow());
+    console.log(body);
+    body.push(calculateLastRow(body));
 
     return body;
 }
@@ -85,20 +90,35 @@ function uebernachtungen(form) {
 
 function kurtaxeberechnung(form) {
     const kurtaxe = 2.50;
-    return (uebernachtungen(form) * kurtaxe + '€').replace(".", ",")
+    return (uebernachtungen(form) * kurtaxe)
 }
 
-function calculateLastRow() {
+function calculateLastRow(data) {
+
+    let entireNights = 0;
+    let entirePersons = 0;
+    let entireFreeOfCharge = 0;
+    let entireOvernights = 0;
+    let tax = 0;
+
+    for(let i = 1; i < data.length; i++){
+        entireNights += data[i][3];
+        entirePersons += data[i][4];
+        entireFreeOfCharge += data[i][5];
+        entireOvernights += data[i][7];
+        tax += data[i][8];
+    }
+
     return [
         '',
         {colSpan: 2, text: 'Gesamtsumme', bold: 'true'},
         '',
-        {text: '99', bold: 'true'},
-        {text: '99', bold: 'true'},
+        {text: entireNights, bold: 'true'},
+        {text: entirePersons, bold: 'true'},
+        {text: entireFreeOfCharge, bold: 'true'},
         {text: '0', bold: 'true'},
-        {text: '0', bold: 'true'},
-        {text: '8', bold: 'true'},
-        {text: '99', bold: 'true'}
+        {text: entireOvernights, bold: 'true'},
+        {text: tax, bold: 'true'}
     ]
 }
 
