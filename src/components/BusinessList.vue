@@ -23,7 +23,7 @@
                         :search="search"
                 >
                     <template v-slot:items="props">
-                        <tr @click="displaySingleRegistrationForm(props.item)">
+                        <tr @click="displaySingleBusiness(props.item)">
                             <td><v-layout justify-center>{{ props.item.businessId}}</v-layout></td>
                             <td><v-layout justify-center>{{ props.item.contactPersonSurname}}</v-layout></td>
                             <td><v-layout justify-center>{{ props.item.contactPersonName}}</v-layout></td>

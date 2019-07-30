@@ -175,14 +175,14 @@
             getForms() {
                 var items = this.$store.getters.registrationForms;
                 if (this.$store.getters.role === 'city') {
-                    items = this.items.filter(item => item.meta.isSubmitted === "true")
+                   items = items.filter(item => item.meta.state === "submitted")
                 } else if (this.$store.getters.role === 'landlord') {
-                    items = this.items.filter(item => item.meta.isSubmitted === "false")
+                    items = items.filter(item => item.meta.state === "unsubmitted")
                 }
 
                 items = items.filter(form =>
                     form.meta.businessObject.business.id == this.propsbusiness.businessId
-                )
+                );
                 return items
             },
             displaySingleRegistrationForm(itemProp) {
