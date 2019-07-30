@@ -69,11 +69,11 @@
         },
         "business": {
           "id": 1
-        },
-        "state": "submitted"
+        }
       },
       "tax": "103,50",
       "amountOfFellowPassengers": "9",
+      "state": "submitted",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
     },
@@ -118,10 +118,10 @@
         },
         "business": {
           "id": 2
-        },
-        "state": "unsubmitted"
+        }
       },
       "tax": "103,50",
+      "state": "unsubmitted",
       "amountOfFellowPassengers": "9",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
@@ -167,10 +167,10 @@
         },
         "business": {
           "id": 3
-        },
-        "state": "unsubmitted"
+        }
       },
       "tax": "80,50",
+      "state": "unsubmitted",
       "amountOfFellowPassengers": "9",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
@@ -216,10 +216,10 @@
         },
         "business": {
           "id": 4
-        },
-        "state": "submitted"
+        }
       },
       "tax": "99,50",
+      "state": "submitted",
       "amountOfFellowPassengers": "7",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
@@ -265,10 +265,10 @@
         },
         "business": {
           "id": 5
-        },
-        "state": "unsubmitted"
+        }
       },
       "tax": "60,50",
+      "state": "unsubmitted",
       "amountOfFellowPassengers": "4",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
@@ -939,10 +939,10 @@
         },
         "business": {
           "id": 12
-        },
-        "state": "unsubmitted"
+        }
       },
       "tax": "164,50",
+      "state": "unsubmitted",
       "amountOfFellowPassengers": "9",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
@@ -988,10 +988,10 @@
         },
         "business": {
           "id": 12
-        },
-        "state": "unsubmitted"
+        }
       },
       "tax": "164,50",
+      "state": "unsubmitted",
       "amountOfFellowPassengers": "9",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
@@ -1037,10 +1037,10 @@
         },
         "business": {
           "id": 13
-        },
-        "state": "submitted"
+        }
       },
       "tax": "164,50",
+      "state": "submitted",
       "amountOfFellowPassengers": "9",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
@@ -1086,10 +1086,10 @@
         },
         "business": {
           "id": 13
-        },
-        "state": "unsubmitted"
+        }
       },
       "tax": "164,50",
+      "state": "unsubmitted",
       "amountOfFellowPassengers": "7",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
@@ -1135,10 +1135,10 @@
         },
         "business": {
           "id": 13
-        },
-        "state": "unsubmitted"
+        }
       },
       "tax": "144,50",
+      "state": "unsubmitted",
       "amountOfFellowPassengers": "7",
       "foreignIdentityChecked": "true",
       "foreignIdentityIdentical": "true"
