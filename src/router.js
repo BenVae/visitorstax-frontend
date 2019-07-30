@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Index from "./components/index";
 import Start from "./components/Start";
 import Login from "./components/Login";
 import RegistraionForm from "./components/registrationform/RegistraionForm";
@@ -23,6 +24,11 @@ export default new Router({
     routes: [
         {
             path: '/',
+            name: 'index',
+            component: Index
+        },
+        {
+            path: '/start',
             name: 'start',
             component: Start
         },
