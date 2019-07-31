@@ -19,7 +19,7 @@
                             dark>PDF erstellen
                     </v-btn>
                 </v-layout>
-                <iframe id='pdfV' style="width:100%; height: 500px; display: none"></iframe>
+                <iframe id='pdfV' style="width:100%; height: 700px;" frameborder="0" scrolling="no"></iframe>
             </v-container>
         </v-form>
     </Layout>
@@ -29,7 +29,7 @@
     import Layout from "../utils/StandardLayout";
     import Title from "../utils/Title";
     import {getBusinesses} from "../utils/script/invoiceService";
-    import {createpdf} from "../utils/script/rechnung";
+    import {createpdf} from "../utils/script/billService";
 
     export default {
         name: "CreateInvoice",
@@ -48,7 +48,6 @@
             generatePDF() {
                 if (this.businessId !== "") {
                     createpdf(this.businessId);
-                    document.getElementById('pdfV').style.display = 'block';
                 } else {
                     alert("bitte Betrieb auswählen")
                 }

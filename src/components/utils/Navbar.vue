@@ -29,6 +29,9 @@
                             <router-link to="/Betriebe">Betriebe</router-link>
                         </b-nav-item>
                         <b-nav-item>
+                            <router-link to="/Betrieb/anlegen">Betrieb anlegen</router-link>
+                        </b-nav-item>
+                        <b-nav-item>
                             <router-link to="/statistiken">Statistiken</router-link>
                         </b-nav-item>
                         <b-nav-item>

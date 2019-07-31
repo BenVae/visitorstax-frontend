@@ -15,6 +15,7 @@ import EditRegistraionForm from "./components/registrationform/EditRegistraionFo
 import EditGroupRegistraionForm from "./components/registrationform/EditGroupRegistraionForm";
 import CreateInvoice from "./components/city/CreateInvoice";
 import CityStatistics from "./components/CityStatistics";
+import CreateBusiness from "./components/city/CreateBusiness";
 
 Vue.use(Router);
 
@@ -99,6 +100,11 @@ export default new Router({
             path: '/statistiken',
             name: 'Statistiken',
             component: CityStatistics
+        },
+        {
+            path: '/Betrieb/anlegen',
+            name: 'BetriebAnlegen',
+            component: CreateBusiness
         }
 
     ]
