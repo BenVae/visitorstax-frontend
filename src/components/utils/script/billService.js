@@ -1,5 +1,3 @@
-// playground requires you to assign document definition to a variable called dd
-
 import moment from 'moment';
 import {store} from "../../../store";
 
@@ -10,7 +8,6 @@ let city;
 let zipCode;
 
 export function createpdf(businessId) {
-
     let pdfMake = require('pdfmake/build/pdfmake.js');
     let pdfFonts = require('pdfmake/build/vfs_fonts.js');
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -25,66 +22,112 @@ export function createpdf(businessId) {
 }
 
 function createTable() {
-    let registrationForms = store.getters.registrationForms;
+    let registrationForms = store.getters.registrationForms.filter(function (element){
+        if(parseInt(element.meta.businessObject.business.id) === parseInt(businessid)){
+            return element;
+        }
+    });
 
     let body = [];
     body.push(header);
 
     for (let i = 0; i < registrationForms.length; i++) {
         if (registrationForms[i].meta.state === 'submitted') {
-            let row = [registrationForms[i].meta.registrationNumber, registrationForms[i].formData.arrivalDate, registrationForms[i].formData.departureDate,
-                nachtBerechnung(registrationForms[i]), berechnungNormal(registrationForms[i]), berechnungFrei(registrationForms[i]), "0",
-                übernachtungen(registrationForms[i]), kurtaxeberechnung(registrationForms[i])
+            let row = [registrationForms[i].meta.registrationNumber, moment(registrationForms[i].formData.arrivalDate).format('DD.MM.YYYY'),
+                moment(registrationForms[i].formData.departureDate).format('DD.MM.YYYY'), nachtBerechnung(registrationForms[i]),
+                berechnungNormal(registrationForms[i]), berechnungFrei(registrationForms[i]), "0",
+                uebernachtungen(registrationForms[i]), kurtaxeberechnung(registrationForms[i])
             ];
             body.push(row)
         }
     }
-
-    body.push(calculateLastRow());
+    body.push(calculateLastRow(body));
 
     return body;
 }
 
 function nachtBerechnung(form) {
-    return 10
+    const arrivalDate = moment(form.formData.arrivalDate);
+    const departureDate = moment(form.formData.departureDate);
+
+    return (departureDate.diff(arrivalDate, 'days'));
 }
 
 function berechnungNormal(form) {
-    return 4
+    if(form.formData.registrationFormType === "Regulär"){
+        if(form.formData.business.amountBusinessAdults === 0){
+            if(form.formData.spouse.name !== ""){
+                return 2;
+            }else{
+                return 1;
+            }
+        }else{
+            return 0;
+        }
+    }else{
+        return form.formData.amountAdultHoliday;
+    }
 }
 
 function berechnungFrei(form) {
-    return 2
+    if(form.formData.registrationFormType === "Regulär"){
+        return (form.formData.business.amountBusinessAdults === 0 ? form.formData.childrenYearOfBirth.length : form.formData.business.amountBusinessAdults + form.formData.childrenYearOfBirth.length)
+    }else{
+        return form.formData.amountHandicapped + form.formData.amountAdultBusiness + form.formData.amountChildren;
+    }
 }
 
-function übernachtungen(form) {
-    return 6
+function uebernachtungen(form) {
+    const persons = berechnungNormal(form);
+    const arrivalDate = moment(form.formData.arrivalDate);
+    const departureDate = moment(form.formData.departureDate);
+
+    return (departureDate.diff(arrivalDate, 'days') * persons);
 }
 
 function kurtaxeberechnung(form) {
-    return "20,00"
+    const kurtaxe = 2.50;
+    return (uebernachtungen(form) * kurtaxe)
 }
 
-function calculateLastRow() {
+function calculateLastRow(data) {
+
+    let entireNights = 0;
+    let entirePersons = 0;
+    let entireFreeOfCharge = 0;
+    let entireOvernights = 0;
+    let tax = 0;
+
+    for(let i = 1; i < data.length; i++){
+        entireNights += data[i][3];
+        entirePersons += data[i][4];
+        entireFreeOfCharge += data[i][5];
+        entireOvernights += data[i][7];
+        tax += data[i][8];
+    }
+
     return [
-        '', {colSpan: 3, text: 'Gesamtsummen', bold: 'true'}, '', {text: '99', bold: 'true'}, {
-            text: '99',
-            bold: 'true'
-        },
-        {text: '0', bold: 'true'}, {text: '0', bold: 'true'}, {text: '8', bold: 'true'}, {text: '99', bold: 'true'}
+        '',
+        {colSpan: 2, text: 'Gesamtsumme', bold: 'true'},
+        '',
+        {text: entireNights, bold: 'true'},
+        {text: entirePersons, bold: 'true'},
+        {text: entireFreeOfCharge, bold: 'true'},
+        {text: '0', bold: 'true'},
+        {text: entireOvernights, bold: 'true'},
+        {text: tax, bold: 'true'}
     ]
 }
 
 const header = [{text: 'Meld-Nr.', style: 'tableHeader'}, {
     text: 'Ankunft',
-    style: 'tableHeader'
-}, {text: 'Abreise', style: 'tableHeader'}, {text: 'Nächte', style: 'tableHeader'}, {
-    text: 'Normal',
-    style: 'tableHeader'
-}, {text: 'frei', style: 'tableHeader'}, {
-    text: 'Sonst.',
-    style: 'tableHeader'
-}, {text: 'Übernachtungen', style: 'tableHeader'},
+    style: 'tableHeader'},
+    {text: 'Abreise', style: 'tableHeader'},
+    {text: 'Nächte', style: 'tableHeader'},
+    {text: 'Normal', style: 'tableHeader'},
+    {text: 'frei', style: 'tableHeader'},
+    {text: 'Sonst.', style: 'tableHeader'},
+    {text: 'Übernachtungen', style: 'tableHeader'},
     {text: 'Kurtaxe in €', style: 'tableHeader'}];
 
 function getDocumentDefinition() {

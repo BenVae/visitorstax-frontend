@@ -141,14 +141,20 @@
                     </v-layout>
                 </v-container>
                 <v-card-actions>
+                    <template v-if="this.$store.getters.role === 'landlord'">
+                            <v-btn block color="blue-grey"
+                                   @click="createGuestCard"
+                                   dark>Gästekarte drucken
+                            </v-btn>
+                    </template>
                     <template v-if="this.$store.getters.role === 'landlord' && propform.meta.state === 'unsubmitted'">
-                        <v-btn block color="blue-grey"
-                               @click="submitRegistrationForm"
-                               dark>Abschicken
-                        </v-btn>
                         <v-btn block color="blue-grey"
                                @click="displayRegularFormEditor"
                                dark>Bearbeiten
+                        </v-btn>
+                        <v-btn block color="blue-grey"
+                               @click="submitRegistrationForm"
+                               dark>Abschicken
                         </v-btn>
                     </template>
                     <template v-else-if="this.$store.getters.role === 'city'">
@@ -163,6 +169,7 @@
         <v-container v-else>
             <h1>Leider wurde kein Meldeschein ausgewählt.</h1>
         </v-container>
+        <img id='imgToExport' src='../assets/Constance_logo.png' style='display:none'/>
     </Layout>
 </template>
 
@@ -206,6 +213,43 @@
             submitRegistrationForm(){
                 setSubmittedFlag(this.propform.meta.registrationNumber);
                 this.$router.push({name: 'Meldescheine'});
+            },
+            createGuestCard(){
+                var pdfMake = require('pdfmake/build/pdfmake.js');
+                var pdfFonts = require('pdfmake/build/vfs_fonts.js');
+                pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+                var imgToExport = document.getElementById('imgToExport');
+                var canvas = document.createElement('canvas');
+                canvas.width = imgToExport.width;
+                canvas.height = imgToExport.height;
+                canvas.getContext('2d').drawImage(imgToExport, 0, 0);
+                canvas.toDataURL('image/png');
+
+                var docDefinition = {
+                    pageSize:{width:400, height:250},
+                    content: [
+                        {
+                            layout:'noBorders',
+                            table: {
+                                widths:['*','*'],
+                                body: [
+                                    [
+                                        {text:'Gästekarte', fontSize:25, decoration: 'underline'},
+                                        {image: canvas.toDataURL('image/png'), alignment:'right', fit:[150,100]}
+                                    ],
+                                    [
+                                        {text:'\n' + this.propform.formData.guest.surname + ' ' + this.propform.formData.guest.name +
+                                                '\n \n' +  this.$moment(this.propform.formData.arrivalDate).format('DD.MM.YYYY') + ' - ' +
+                                                this.$moment(this.propform.formData.departureDate).format('DD.MM.YYYY'), fontSize:13},
+                                        {qr: this.propform.meta.registrationNumber.toString(), fit:'100', alignment:'center', margin:[0,15]},
+                                    ]
+                                ]
+                            }
+                        },
+                    ]
+                };
+                pdfMake.createPdf(docDefinition).open();
             }
         }
     }
