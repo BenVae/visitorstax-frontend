@@ -13,6 +13,16 @@ export function createBusiness(business) {
     businessData[businessData.length] = tmpBusiness;
 }
 
+export function updateBusiness(editedBusiness) {
+    let businessData = store.getters.businessData;
+
+    for (let i = 0; i < businessData.length; i++) {
+        if (businessData[i].businessId === editedBusiness.businessId) {
+            businessData[i] = editedBusiness;
+        }
+    }
+}
+
 function getNextBusinessId() {
     let businessData = store.getters.businessData;
 

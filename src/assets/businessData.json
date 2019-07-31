@@ -1,6 +1,6 @@
 [
   {
-    "businessId": "1",
+    "businessId": 1,
     "businessName": "B000001",
     "type": "Privat",
     "user": {
@@ -41,7 +41,7 @@
     "contactTel": "0174532682"
   },
   {
-    "businessId": "2",
+    "businessId": 2,
     "businessName": "Harbr Hotel",
     "type": "Hotel",
     "user": {
@@ -73,7 +73,7 @@
     "contactTel": "014258625"
   },
   {
-    "businessId": "3",
+    "businessId": 3,
     "businessName": "B000003",
     "type": "Privat",
     "user": {
@@ -114,7 +114,7 @@
     "contactTel": "0815/123"
   },
   {
-    "businessId": "4",
+    "businessId": 4,
     "businessName": "B000004",
     "type": "Privat",
     "user": {
@@ -164,7 +164,7 @@
     "contactTel": "0815/0004"
   },
   {
-    "businessId": "5",
+    "businessId": 5,
     "businessName": "B000005",
     "type": "Privat",
     "user": {
@@ -205,7 +205,7 @@
     "contactTel": "0152999000"
   },
   {
-    "businessId": "6",
+    "businessId": 6,
     "businessName": "B000006",
     "type": "Privat",
     "user": {
@@ -246,7 +246,7 @@
     "contactTel": "0815/1234561"
   },
   {
-    "businessId": "7",
+    "businessId": 7,
     "businessName": "Aqua Hotel",
     "type": "Hotel",
     "user": {
@@ -278,7 +278,7 @@
     "contactTel": "77777"
   },
   {
-    "businessId": "8",
+    "businessId": 8,
     "businessName": "B000008",
     "type": "Privat",
     "user": {
@@ -310,7 +310,7 @@
     "contactTel": "01777777777"
   },
   {
-    "businessId": "9",
+    "businessId": 9,
     "businessName": "Hotel 47°",
     "type": "Hotel",
     "user": {
@@ -342,7 +342,7 @@
     "contactTel": "0166666666"
   },
   {
-    "businessId": "10",
+    "businessId": 10,
     "businessName": "B2B Hotel",
     "type": "Hotel",
     "user": {
@@ -374,7 +374,7 @@
     "contactTel": "01763337899"
   },
   {
-    "businessId": "11",
+    "businessId": 11,
     "businessName": "B000011",
     "type": "Privat",
     "user": {
@@ -406,7 +406,7 @@
     "contactTel": "0172229999"
   },
   {
-    "businessId": "12",
+    "businessId": 12,
     "businessName": "B000012",
     "type": "Privat",
     "user": {
@@ -447,7 +447,7 @@
     "contactTel": "01777775555"
   },
   {
-    "businessId": "13",
+    "businessId": 13,
     "businessName": "Landgasthof",
     "type": "Hotel",
     "user": {
@@ -479,7 +479,7 @@
     "contactTel": "077732331"
   },
   {
-    "businessId": "14",
+    "businessId": 14,
     "businessName": "B000014",
     "type": "Privat",
     "user": {
@@ -520,7 +520,7 @@
     "contactTel": "0161112233"
   },
   {
-    "businessId": "15",
+    "businessId": 15,
     "businessName": "Hagnauer Hotel",
     "type": "Hotel",
     "user": {
@@ -552,7 +552,7 @@
     "contactTel": "64321"
   },
   {
-    "businessId": "16",
+    "businessId": 16,
     "businessName": "B000016",
     "type": "Privat",
     "user": {
@@ -584,7 +584,7 @@
     "contactTel": "1234567"
   },
   {
-    "businessId": "17",
+    "businessId": 17,
     "businessName": "Arthus Hotel",
     "type": "Hotel",
     "user": {
@@ -616,7 +616,7 @@
     "contactTel": "55555"
   },
   {
-    "businessId": "18",
+    "businessId": 18,
     "businessName": "Vita Wellnesshotel",
     "type": "Hotel",
     "user": {
@@ -648,7 +648,7 @@
     "contactTel": "154400999"
   },
   {
-    "businessId": "19",
+    "businessId": 19,
     "businessName": "B000019",
     "type": "Privat",
     "user": {
@@ -680,7 +680,7 @@
     "contactTel": "8911110"
   },
   {
-    "businessId": "20",
+    "businessId": 20,
     "businessName": "Hotel Graf Zeppelin",
     "type": "Hotel",
     "user": {
@@ -712,7 +712,7 @@
     "contactTel": "12341234"
   },
   {
-    "businessId": "21",
+    "businessId": 21,
     "businessName": "B000021",
     "type": "Privat",
     "user": {
@@ -744,7 +744,7 @@
     "contactTel": "7788999000"
   },
   {
-    "businessId": "22",
+    "businessId": 22,
     "businessName": "B000022",
     "type": "Privat",
     "user": {
@@ -776,7 +776,7 @@
     "contactTel": "098765"
   },
   {
-    "businessId": "23",
+    "businessId": 23,
     "businessName": "City Hotel",
     "type": "Hotel",
     "user": {
@@ -808,7 +808,7 @@
     "contactTel": "123445"
   },
   {
-    "businessId": "24",
+    "businessId": 24,
     "businessName": "B000024",
     "type": "Privat",
     "user": {
@@ -840,7 +840,7 @@
     "contactTel": "666555"
   },
   {
-    "businessId": "25",
+    "businessId": 25,
     "businessName": "Hotel am Yachthafen",
     "type": "Hotel",
     "user": {

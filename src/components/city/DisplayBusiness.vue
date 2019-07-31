@@ -47,7 +47,7 @@
                         <v-container>
                             <v-layout row text-center>
                                 <v-flex xs12 md3
-                                        v-for="object in propsbusiness.businessObjects">
+                                        v-for="(object, index) in propsbusiness.businessObjects" :key="index">
                                     <v-card elevation="7" height="100px">
                                         <v-container fill-height>
                                             <v-layout row align-center>
@@ -63,6 +63,10 @@
                     </v-card>
                 </v-flex>
             </v-layout>
+            <v-btn block color="blue-grey"
+                   @click="displayBusinessEditor"
+                   dark>Betrieb bearbeiten
+            </v-btn>
             <v-layout row>
                 <v-flex>
                     <v-card elevation="5">
@@ -115,7 +119,6 @@
 <script>
     import Title from "../utils/Title"
     import Layout from "../utils/StandardLayout"
-    import BusinessData from "../../assets/businessData"
 
     export default {
         name: "DisplayBusiness",
@@ -168,25 +171,35 @@
                 this.title = "Betrieb von " + this.propsbusiness.contactPersonName + " " + this.propsbusiness.contactPersonSurname
                 this.items = this.getForms()
             }
-
         },
 
         methods: {
             getForms() {
                 var items = this.$store.getters.registrationForms;
+
+                console.log(items)
+
                 if (this.$store.getters.role === 'city') {
                    items = items.filter(item => item.meta.state === "submitted")
-                } else if (this.$store.getters.role === 'landlord') {
-                    items = items.filter(item => item.meta.state === "unsubmitted")
                 }
 
+                console.log(items)
+
+                console.log("businessid: " + this.propsbusiness.businessId);
+
+
                 items = items.filter(form =>
-                    form.meta.businessObject.business.id === this.propsbusiness.businessId
+                    parseInt(form.meta.businessObject.business.id) === parseInt(this.propsbusiness.businessId)
                 );
+                console.log(items)
+
                 return items
             },
             displaySingleRegistrationForm(itemProp) {
                 this.$router.push({name: 'Meldeschein', params: {form: itemProp}})
+            },
+            displayBusinessEditor(){
+                this.$router.push({name: 'EditBusiness', params: {businessProp: this.propsbusiness}})
             }
         }
     }

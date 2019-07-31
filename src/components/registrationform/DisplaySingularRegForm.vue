@@ -170,15 +170,15 @@
         <v-container v-else>
             <h1>Leider wurde kein Meldeschein ausgewählt.</h1>
         </v-container>
-        <img id='imgToExport' src='../assets/Constance_logo.png' style='display:none'/>
+        <img id='imgToExport' src='../../assets/Constance_logo.png' style='display:none'/>
     </Layout>
 </template>
 
 <script>
 
-    import Layout from "./utils/StandardLayout";
-    import Title from "./utils/Title"
-    import {setSubmittedFlag,setUnsubmittedFlag} from "../script/registrationFormService";
+    import Layout from "../utils/StandardLayout";
+    import Title from "../utils/Title"
+    import {setSubmittedFlag,setUnsubmittedFlag} from "../../script/registrationFormService";
 
     export default {
         name: "singularRegForm",

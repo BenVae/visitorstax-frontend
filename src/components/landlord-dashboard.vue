@@ -30,44 +30,52 @@
                     </v-card>
                 </v-flex>
             </v-layout>
-            <v-card>
-                <v-card-title>
-                    <span class="title mx-auto">Im letzten Jahr...</span>
-                </v-card-title>
             <v-layout row>
-                <v-flex xs12 md6>
-                        <apexchart type="line"
-                                   :options="overTimeLineChart.options"
-                                   :series="overTimeLineChart.series"></apexchart>
-                </v-flex>
-                <v-flex xs12 md6>
-                        <v-container fill-height>
-                            <v-layout row text-center class="px-5">
-                                <v-flex>
-                                    <div class="font-weight-thin title grey--text">Gäste: </div>
-                                    <div class="font-weight-light headline mt-2">{{lastYearGuests}}</div>
-                                </v-flex>
-                                <v-flex>
-                                    <div class="font-weight-thin title grey--text">Familien: </div>
-                                    <div class="font-weight-light headline mt-2">{{lastYearFams}}</div>
-                                </v-flex>
-                                <v-flex>
-                                    <div class="font-weight-thin title grey--text">Gruppen: </div>
-                                    <div class="font-weight-light headline mt-2">{{lastYearGroups}}</div>
-                                </v-flex>
-                                <v-flex>
-                                    <div class="font-weight-thin title grey--text">Bester Monat: </div>
-                                    <div class="font-weight-light headline mt-2">{{lastYearBestMonth}} / {{lastYearBestTax}}€</div>
-                                </v-flex>
-                                <v-flex>
-                                    <div class="font-weight-thin title grey--text">Schlechtester Monat: </div>
-                                    <div class="font-weight-light headline mt-2">{{lastYearWorstMonth}} / {{lastYearWorstTax}}€</div>
-                                </v-flex>
-                            </v-layout>
-                        </v-container>
+                <v-flex xs12>
+                    <v-card>
+                        <v-card-title>
+                            <span class="title mx-auto">Im letzten Jahr...</span>
+                        </v-card-title>
+                        <v-layout row>
+                            <v-flex xs12 md6>
+                                <apexchart type="line"
+                                           :options="overTimeLineChart.options"
+                                           :series="overTimeLineChart.series"></apexchart>
+                            </v-flex>
+                            <v-flex xs12 md6>
+                                <v-container fill-height>
+                                    <v-layout row text-center class="px-5">
+                                        <v-flex>
+                                            <div class="font-weight-thin title grey--text">Gäste:</div>
+                                            <div class="font-weight-light headline mt-2">{{lastYearGuests}}</div>
+                                        </v-flex>
+                                        <v-flex>
+                                            <div class="font-weight-thin title grey--text">Familien:</div>
+                                            <div class="font-weight-light headline mt-2">{{lastYearFams}}</div>
+                                        </v-flex>
+                                        <v-flex>
+                                            <div class="font-weight-thin title grey--text">Gruppen:</div>
+                                            <div class="font-weight-light headline mt-2">{{lastYearGroups}}</div>
+                                        </v-flex>
+                                        <v-flex>
+                                            <div class="font-weight-thin title grey--text">Bester Monat:</div>
+                                            <div class="font-weight-light headline mt-2">{{lastYearBestMonth}} /
+                                                {{lastYearBestTax}}€
+                                            </div>
+                                        </v-flex>
+                                        <v-flex>
+                                            <div class="font-weight-thin title grey--text">Schlechtester Monat:</div>
+                                            <div class="font-weight-light headline mt-2">{{lastYearWorstMonth}} /
+                                                {{lastYearWorstTax}}€
+                                            </div>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-flex>
+                        </v-layout>
+                    </v-card>
                 </v-flex>
             </v-layout>
-            </v-card>
         </v-container>
     </Layout>
 </template>
@@ -77,6 +85,7 @@
     import Title from "./utils/Title";
     import * as statistics from "../script/dashboardService";
     import apexchart from 'vue-apexcharts';
+    import {getBusinessIdOfLoggedInUser} from "../script/loginService";
 
     export default {
         name: "landlordStart",
@@ -168,12 +177,18 @@
 
         methods: {
             getUnsubmittedForms() {
-                var items = this.$store.getters.registrationForms.filter(form => form.meta.state === "unsubmitted");
+                let items = this.$store.getters.registrationForms.filter(form => form.meta.state === "unsubmitted");
+
+                let businessid = getBusinessIdOfLoggedInUser();
+                console.log(businessid)
+
+                items = items.filter(element => parseInt(element.meta.businessObject.business.id) === parseInt(businessid));
+
                 return items;
             },
 
             getSubmittedForms() {
-                var items = this.$store.getters.registrationForms.filter(form => form.meta.state === "submitted");
+                let items = this.$store.getters.registrationForms.filter(form => form.meta.state === "submitted");
                 return items;
             },
 

@@ -4,8 +4,8 @@ import Index from "./components/utils/index";
 import Start from "./components/Start";
 import Login from "./components/Login";
 import RegistraionForm from "./components/registrationform/RegistraionForm";
-import ShowRegForm from "./components/DisplaySingularRegForm";
-import RegistrationFormList from "./components/RegistrationFormList";
+import ShowRegForm from "./components/registrationform/DisplaySingularRegForm";
+import RegistrationFormList from "./components/registrationform/RegistrationFormList";
 import IdCheck from "./components/registrationform/IdCheck";
 import BusinessList from "./components/city/BusinessList";
 import GroupRegistraionForm from "./components/registrationform/GroupRegistraionForm";
@@ -16,6 +16,7 @@ import EditGroupRegistraionForm from "./components/registrationform/EditGroupReg
 import CreateInvoice from "./components/city/CreateInvoice";
 import CityStatistics from "./components/city/CityStatistics";
 import CreateBusiness from "./components/city/CreateBusiness";
+import EditBusiness from "./components/city/EditBusiness";
 
 Vue.use(Router);
 
@@ -105,6 +106,12 @@ export default new Router({
             path: '/Betrieb/anlegen',
             name: 'BetriebAnlegen',
             component: CreateBusiness
+        },
+        {
+            path: '/Betrieb/bearbeiten',
+            name: 'EditBusiness',
+            component: EditBusiness,
+            props: true
         }
 
     ]
