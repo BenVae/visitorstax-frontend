@@ -117,7 +117,7 @@
                             <th style="width: 40%">
                                 <v-tooltip slot="prepend" bottom>
                                     <v-icon slot="activator" color="grey" dark>info</v-icon>
-                                    <span>Bitte geben Sie die Passnummern aller Personen kommersepariert ein.<br>
+                                    <span>Bitte geben Sie die Passnummern aller Personen kommasepariert ein.<br>
                                         Beispiel: Passnummer1, Passnummer2, ...<br>
                                     </span>
                                 </v-tooltip>

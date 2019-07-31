@@ -25,6 +25,7 @@
                     <template v-slot:items="props">
                         <tr @click="displaySingleBusiness(props.item)">
                             <td><v-layout justify-center>{{ props.item.user.username}}</v-layout></td>
+                            <td><v-layout justify-center>{{ props.item.type}}</v-layout></td>
                             <td><v-layout justify-center>{{ props.item.contactPersonSurname}}</v-layout></td>
                             <td><v-layout justify-center>{{ props.item.contactPersonName}}</v-layout></td>
                             <td><v-layout justify-center>{{ props.item.address.streetAndNumber}}</v-layout></td>
@@ -58,6 +59,11 @@
                     {
                         text: 'Betr.-Nr.',
                         value: 'businessId',
+                        align:'center'
+                    },
+                    {
+                        text: 'Typ',
+                        value: 'type',
                         align:'center'
                     },
                     {
