@@ -2,10 +2,12 @@
     <div>
         <b-navbar toggleable="lg" type="light" class="navbar">
             <b-navbar-brand href="#">
-                <router-link to="/">
-                    <img class="pl-5" id="navbar-pic" height="50" src="../../assets/Constance_logo.png"
-                         alt="Konstanz Logo">
-                </router-link>
+                <img class="pl-5"
+                     id="navbar-pic"
+                     height="50"
+                     src="../../assets/Constance_logo.png"
+                     alt="Konstanz Logo"
+                     @click="showDisclaimerOrDashboard">
             </b-navbar-brand>
 
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -68,6 +70,14 @@
         methods: {
             deleteRoleInState: function () {
                 this.$store.commit('changeRole', '')
+            },
+            showDisclaimerOrDashboard() {
+                if (this.$store.getters.role === 'landlord' || this.$store.getters.role === 'city') {
+                    this.$router.push({path: '/start'});
+
+                } else {
+                    this.$router.push({path: '/'});
+                }
             }
         }
     }
