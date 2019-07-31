@@ -65,7 +65,7 @@
 <script>
     import StandardLayout from "./utils/StandardLayout";
     import Title from "./utils/Title";
-    import {computeStatistics} from "../computeStatistics";
+    import {statisticsService} from "../script/statisticsService";
     import businessData from "../assets/businessData";
     export default {
         name: "CityStatistics",
@@ -234,21 +234,21 @@
                             if (self.$moment(element.formData.arrivalDate).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')
                                 && self.$moment(element.formData.departureDate).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')) {
 
-                                self.computePrivateOrHotel(computeStatistics(element), element);
+                                self.computePrivateOrHotel(statisticsService(element), element);
 
                             } else if (self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')
                                 && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') > self.$moment(date, 'YYYY').format('YYYY')) {
 
                                 element.formData.departureDate = parseInt(self.$moment(Date.parse(element.formData.departureDate)).format('YYYY')) - 1 + '-12-31';
 
-                                self.computePrivateOrHotel(computeStatistics(element), element);
+                                self.computePrivateOrHotel(statisticsService(element), element);
 
                             } else if (self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY') < self.$moment(date, 'YYYY').format('YYYY')
                                 && self.$moment(Date.parse(element.formData.departureDate)).format('YYYY') === self.$moment(date, 'YYYY').format('YYYY')) {
 
                                 element.formData.arrivalDate = parseInt(self.$moment(Date.parse(element.formData.arrivalDate)).format('YYYY')) + 1 + '-01-01';
 
-                                self.computePrivateOrHotel(computeStatistics(element), element);
+                                self.computePrivateOrHotel(statisticsService(element), element);
                             }
                         });
                         this.generatePDF();

@@ -1,6 +1,6 @@
-import businessObjects from '../../../assets/businessObjects'
+import businessObjects from '../assets/businessObjects'
 import moment from 'moment'
-import {store} from '../../../store'
+import {store} from '../store'
 
 export function getBusinessObjects() {
     let objects = [];

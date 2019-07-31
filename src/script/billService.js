@@ -1,5 +1,5 @@
 import moment from 'moment';
-import {store} from "../../../store";
+import {store} from "../store";
 
 let businessid;
 let businessName;

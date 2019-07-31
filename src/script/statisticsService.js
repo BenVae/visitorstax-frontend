@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-export function computeStatistics(data){
+export function statisticsService(data){
 
     if(data.formData.registrationFormType === "Regulär"){
         return calculateStatisticsRegular(data);

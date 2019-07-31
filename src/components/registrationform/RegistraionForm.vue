@@ -270,7 +270,7 @@
     import HotelDatePicker from 'vue-hotel-datepicker'
     import BirthdayPicker from "../utils/BirthdayPicker";
     import PlusIcon from "vue-material-design-icons/Plus";
-    import {createRegistrationForm, getBusinessObjects} from "../utils/script/registrationFormService";
+    import {createRegistrationForm, getBusinessObjects} from "../../script/registrationFormService";
 
     export default {
         name: "RegistrationForm",

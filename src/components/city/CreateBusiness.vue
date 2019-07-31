@@ -152,7 +152,7 @@
     import Title from "../utils/Title";
     import RowWithDescription from "../utils/RowWithDescription";
     import CloseIcon from "vue-material-design-icons/Close";
-    import {createBusiness} from "../utils/script/businessService";
+    import {createBusiness} from "../../script/businessService";
 
     export default {
         name: "CreateBusiness",

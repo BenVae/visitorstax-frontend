@@ -247,7 +247,7 @@
     import Title from "../utils/Title";
     import RowWithDescription from "../utils/RowWithDescription";
     import BirthdayPicker from "../utils/BirthdayPicker";
-    import {getBusinessObjects, updateRegistrationForm} from "../utils/script/registrationFormService";
+    import {getBusinessObjects, updateRegistrationForm} from "../../script/registrationFormService";
     import RegularDatePicker from "../utils/RegularDatePicker";
 
     export default {

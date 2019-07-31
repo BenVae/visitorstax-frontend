@@ -28,8 +28,8 @@
 <script>
     import Layout from "../utils/StandardLayout";
     import Title from "../utils/Title";
-    import {getBusinesses} from "../utils/script/invoiceService";
-    import {createpdf} from "../utils/script/billService";
+    import {getBusinesses} from "../../script/invoiceService";
+    import {createpdf} from "../../script/billService";
 
     export default {
         name: "CreateInvoice",

@@ -177,7 +177,7 @@
 
     import Layout from "./utils/StandardLayout";
     import Title from "./utils/Title"
-    import {setSubmittedFlag} from "./utils/script/registrationFormService";
+    import {setSubmittedFlag} from "../script/registrationFormService";
 
     export default {
         name: "singularRegForm",
@@ -215,18 +215,18 @@
                 this.$router.push({name: 'Meldescheine'});
             },
             createGuestCard(){
-                var pdfMake = require('pdfmake/build/pdfmake.js');
-                var pdfFonts = require('pdfmake/build/vfs_fonts.js');
+                let pdfMake = require('pdfmake/build/pdfmake.js');
+                let pdfFonts = require('pdfmake/build/vfs_fonts.js');
                 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-                var imgToExport = document.getElementById('imgToExport');
-                var canvas = document.createElement('canvas');
+                let imgToExport = document.getElementById('imgToExport');
+                let canvas = document.createElement('canvas');
                 canvas.width = imgToExport.width;
                 canvas.height = imgToExport.height;
                 canvas.getContext('2d').drawImage(imgToExport, 0, 0);
                 canvas.toDataURL('image/png');
 
-                var docDefinition = {
+                let docDefinition = {
                     pageSize:{width:400, height:250},
                     content: [
                         {
