@@ -46,7 +46,7 @@
     "type": "Hotel",
     "user": {
       "id": "2",
-      "username": "B000003",
+      "username": "B000002",
       "password": "test",
       "role": "Betrieb"
     },

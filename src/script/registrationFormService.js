@@ -82,7 +82,6 @@ export function createRegistrationForm(formData, businessObject) {
     registrationForms[registrationForms.length] = regForm;
 
     store.commit('changeRegForm', registrationForms)
-    console.log("created registration form with number: " + regForm.meta.registrationNumber);
 
 }
 
