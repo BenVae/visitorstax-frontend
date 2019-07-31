@@ -1,5 +1,13 @@
 # visitorstax-frontend
 
+## Projekt Stand
+
+Bei dieser Applikation handelt es sich um einen Prototypen. 
+Aus diesem Grund wurde vorerst auf ein Backend verzichtet. 
+Die Beispieldaten um die Funktionalitäten der Anwendung darstellen zu können, 
+werden beim Start der Anwendung aus den Jsons ``businessData und sampleRegistrationForm`` in den Global-State (Vuex) geladen.
+
+
 ## Project setup
 ```
 npm install
