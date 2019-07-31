@@ -142,10 +142,10 @@
                 </v-container>
                 <v-card-actions>
                     <template v-if="this.$store.getters.role === 'landlord'">
-                            <v-btn block color="blue-grey"
-                                   @click="createGuestCard"
-                                   dark>Gästekarte drucken
-                            </v-btn>
+                        <v-btn block color="blue-grey"
+                               @click="createGuestCard"
+                               dark>Gästekarte drucken
+                        </v-btn>
                     </template>
                     <template v-if="this.$store.getters.role === 'landlord' && propform.meta.state === 'unsubmitted'">
                         <v-btn block color="blue-grey"
@@ -160,6 +160,7 @@
                     <template v-else-if="this.$store.getters.role === 'city'">
                         <v-spacer></v-spacer>
                         <v-btn color="blue-grey"
+                               @click="unsubmitRegistrationForm"
                                dark>Zur Bearbeitung freigeben
                         </v-btn>
                     </template>
@@ -177,7 +178,7 @@
 
     import Layout from "./utils/StandardLayout";
     import Title from "./utils/Title"
-    import {setSubmittedFlag} from "../script/registrationFormService";
+    import {setSubmittedFlag,setUnsubmittedFlag} from "../script/registrationFormService";
 
     export default {
         name: "singularRegForm",
@@ -199,6 +200,10 @@
             }
         },
         methods: {
+            unsubmitRegistrationForm(){
+                setUnsubmittedFlag(this.propform.meta.registrationNumber);
+                this.$router.push({name: 'Meldescheine'});
+            },
             customFormatter(date) {
                 return this.$moment(date).format('DD.MM.YYYY');
             },
@@ -210,11 +215,11 @@
 
                 }
             },
-            submitRegistrationForm(){
+            submitRegistrationForm() {
                 setSubmittedFlag(this.propform.meta.registrationNumber);
                 this.$router.push({name: 'Meldescheine'});
             },
-            createGuestCard(){
+            createGuestCard() {
                 let pdfMake = require('pdfmake/build/pdfmake.js');
                 let pdfFonts = require('pdfmake/build/vfs_fonts.js');
                 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -227,22 +232,25 @@
                 canvas.toDataURL('image/png');
 
                 let docDefinition = {
-                    pageSize:{width:400, height:250},
+                    pageSize: {width: 400, height: 250},
                     content: [
                         {
-                            layout:'noBorders',
+                            layout: 'noBorders',
                             table: {
-                                widths:['*','*'],
+                                widths: ['*', '*'],
                                 body: [
                                     [
-                                        {text:'Gästekarte', fontSize:25, decoration: 'underline'},
-                                        {image: canvas.toDataURL('image/png'), alignment:'right', fit:[150,100]}
+                                        {text: this.getGuestcardTitle(), fontSize: 25, decoration: 'underline'},
+                                        {image: canvas.toDataURL('image/png'), alignment: 'right', fit: [150, 100]}
                                     ],
                                     [
-                                        {text:'\n' + this.propform.formData.guest.surname + ' ' + this.propform.formData.guest.name +
-                                                '\n \n' +  this.$moment(this.propform.formData.arrivalDate).format('DD.MM.YYYY') + ' - ' +
-                                                this.$moment(this.propform.formData.departureDate).format('DD.MM.YYYY'), fontSize:13},
-                                        {qr: this.propform.meta.registrationNumber.toString(), fit:'100', alignment:'center', margin:[0,15]},
+                                        this.getGuestcardContent(),
+                                        {
+                                            qr: this.propform.meta.registrationNumber.toString(),
+                                            fit: '100',
+                                            alignment: 'center',
+                                            margin: [0, 15]
+                                        },
                                     ]
                                 ]
                             }
@@ -250,6 +258,65 @@
                     ]
                 };
                 pdfMake.createPdf(docDefinition).open();
+            },
+            getGuestcardTitle() {
+                if (this.propform.formData.registrationFormType === 'Regulär') {
+                    return "Gästekarte"
+                } else {
+                    return "Gruppen-Gästekarte "
+                }
+            },
+            getGuestcardContent() {
+                if (this.propform.formData.registrationFormType === 'Regulär') {
+                    return this.regularGuestcardBody()
+                } else {
+                    return this.groupGuestcardBody()
+                }
+
+            },
+            regularGuestcardBody() {
+                return {
+                    stack: [
+                        '\n \n',
+                        "Gast: " + this.getGuest(),
+                        this.getSpouse(),
+                        this.getPeriod()
+                    ],
+                    fontSize: 11
+                };
+            },
+            groupGuestcardBody(){
+                return {
+                    stack: [
+                        '\n \n',
+                        "Gruppenleiter: " + this.getGuest(),
+                        this.getAmountTaxpayers(),
+                        this.getPeriod()
+
+                    ],
+                    fontSize: 11
+                };
+            },
+            getAmountTaxpayers(){
+                return "Anzahl Personen: " + this.propform.formData.amountAdultHoliday;
+            },
+            getGuest(){
+                let guest = this.propform.formData.guest;
+
+                return guest.surname + " " + guest.name;
+            },
+            getSpouse(){
+                let spouse = this.propform.formData.spouse;
+
+                if (spouse.name !== "") {
+                    return "Lebenspartner/in: " + spouse.surname + " " + spouse.name;
+                }else{
+                    return "";
+                }
+            },
+            getPeriod(){
+                return this.$moment(this.propform.formData.arrivalDate).format('DD.MM.YYYY') + ' - ' +
+                    this.$moment(this.propform.formData.departureDate).format('DD.MM.YYYY')
             }
         }
     }
