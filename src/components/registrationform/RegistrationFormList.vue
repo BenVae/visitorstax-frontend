@@ -189,12 +189,10 @@
 
             let businessid = getBusinessIdOfLoggedInUser();
 
-            console.log(businessid)
-
-            this.items = this.items.filter(element => parseInt(element.meta.businessObject.business.id) === parseInt(businessid));
-
             if (this.$store.getters.role === 'city') {
                 this.items = this.items.filter(item => item.meta.state === "submitted")
+            }else{
+                this.items = this.items.filter(element => parseInt(element.meta.businessObject.business.id) === parseInt(businessid));
             }
         },
         computed: {
@@ -218,14 +216,17 @@
                 if (this.arrivalDate == null && this.departureDate == null) {
                     return this.items
                 } else if (this.arrivalDate != null && this.departureDate == null) {
+                    console.log(this.items)
                     return this.items.filter(item =>
                         Date.parse(item.formData.arrivalDate) >= Date.parse(this.arrivalDate)
                     )
                 } else if (this.arrivalDate == null && this.departureDate != null) {
+                    console.log(this.items)
                     return this.items.filter(item =>
                         Date.parse(item.formData.departureDate) <= Date.parse(this.departureDate)
                     )
                 } else {
+                    console.log(this.items)
                     return this.items.filter(item =>
                         Date.parse(item.formData.arrivalDate) >= Date.parse(this.arrivalDate) && Date.parse(item.formData.departureDate) <= Date.parse(this.departureDate)
                     )
