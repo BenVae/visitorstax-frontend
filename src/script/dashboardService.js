@@ -51,7 +51,7 @@ export function getGuestsInPeriod(start, end) {
     return guests
 }
 
-export function getGuestsByDistrictInPeriod(start, end, district) {
+export function getGuestsInDistrictInPeriod(start, end, district) {
     let guests = 0
     let forms = store.getters.registrationForms
 
@@ -365,7 +365,7 @@ export function getGuestsInPeriodSortedByType(start, end) {
 
         data.gesamt += elementGuests
 
-        if (businessDict[el.meta.businessObject.business.id] == "Privat") {
+        if (businessDict[el.meta.businessObject.business.id] === "Privat") {
             data.Privat += elementGuests
         } else {
             data.Hotel += elementGuests
@@ -450,4 +450,66 @@ export function getNumberOfFormTypesInPeriod(start, end) {
         }
     })
     return data
+}
+
+//sorry 4 hardcode, besser wäre getNumberOfFormTypesInPeriod() um ein Eingabeparameter, dass den Typ (Privat, Stadt, allgemein) zu erweitern
+export function getNumberOfFormTypesInPeriodPrivate(start, end) {
+    let forms = store.getters.registrationForms
+
+    let data = {"Regulaer": 0, "Gruppe": 0}
+
+    forms.forEach(function (el) {
+
+        if (moment(el.formData.arrivalDate) <= moment(end, 'DD-MM-YYYY')
+            && moment(el.formData.departureDate) >= moment(start, 'DD-MM-YYYY')
+            && businessDict[el.meta.businessObject.business.id] === "Privat") {
+
+            if (el.formData.registrationFormType === "Regulär") {
+                data.Regulaer++
+            } else {
+                data.Gruppe++
+            }
+        }
+    })
+    return data
+}
+
+//sorry 4 hardcode, besser wäre getTaxInPeriod() um ein Eingabeparameter, dass den Typ (Privat, Stadt, allgemein) zu erweitern
+export function getTaxInPeriodPrivate(start, end) {
+
+    let forms = store.getters.registrationForms
+    let tax = 2.5
+
+    let payedNights = 0
+
+    let elementPayingGuests = 0
+    let elementNights = 0
+
+    forms.forEach(function (el) {
+        elementPayingGuests = 0
+        elementNights = 0
+
+        if (moment(el.formData.arrivalDate) <= moment(end, 'DD-MM-YYYY')
+            && moment(el.formData.departureDate) >= moment(start, 'DD-MM-YYYY')
+            && businessDict[el.meta.businessObject.business.id] === "Privat") {
+
+            if (el.formData.registrationFormType === "Regulär") {
+                if (el.formData.spouse.name !== "") {
+                    elementPayingGuests += 2;
+                } else {
+                    elementPayingGuests += 1;
+                }
+                if (el.formData.business.amountBusinessAdults !== 0) {
+                    elementPayingGuests -= el.formData.business.amountBusinessAdults;
+                }
+            } else if (el.formData.registrationFormType === "Gruppe") {
+                elementPayingGuests += el.formData.amountAdultHoliday
+            }
+
+            elementNights = calculateNightsInPeriod(moment(start, 'DD-MM-YYYY'), moment(end, 'DD-MM-YYYY'), el)
+
+            payedNights += elementNights * elementPayingGuests
+        }
+    })
+    return payedNights * tax
 }
