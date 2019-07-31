@@ -160,6 +160,7 @@
                     <template v-else-if="this.$store.getters.role === 'city'">
                         <v-spacer></v-spacer>
                         <v-btn color="blue-grey"
+                               @click="unsubmitRegistrationForm"
                                dark>Zur Bearbeitung freigeben
                         </v-btn>
                     </template>
@@ -177,7 +178,7 @@
 
     import Layout from "./utils/StandardLayout";
     import Title from "./utils/Title"
-    import {setSubmittedFlag} from "./utils/script/registrationFormService";
+    import {setSubmittedFlag, setUnsubmittedFlag} from "./utils/script/registrationFormService";
 
     export default {
         name: "singularRegForm",
@@ -199,6 +200,10 @@
             }
         },
         methods: {
+            unsubmitRegistrationForm(){
+                setUnsubmittedFlag(this.propform.meta.registrationNumber);
+                this.$router.push({name: 'Meldescheine'});
+            },
             customFormatter(date) {
                 return this.$moment(date).format('DD.MM.YYYY');
             },

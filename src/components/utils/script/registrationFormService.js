@@ -25,6 +25,16 @@ export function setSubmittedFlag(registrationNumber) {
     }
 }
 
+export function setUnsubmittedFlag(registrationNumber) {
+    let registrationForms = store.getters.registrationForms;
+
+    for (let i = 0; i < registrationForms.length; i++) {
+        if (registrationForms[i].meta.registrationNumber === registrationNumber) {
+            registrationForms[i].meta.state = 'unsubmitted';
+        }
+    }
+}
+
 export function updateRegistrationForm(formData, businessObject, registrationNumber) {
     let regForm = {
         meta: {
