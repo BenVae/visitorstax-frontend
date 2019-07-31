@@ -12,11 +12,13 @@
                                     autofocus
                                     prepend-icon="person"
                                     label="Betriebsnummer"
+                                    v-model="loginData.username"
                                     type="text"
                             ></v-text-field>
                             <v-text-field
                                     prepend-icon="lock"
                                     label="Password"
+                                    v-model="loginData.password"
                                     type="password"
                             ></v-text-field>
                         </v-form>
@@ -31,12 +33,26 @@
 </template>
 
 <script>
+    import {checkLoginData} from "../script/loginService";
+
     export default {
         name: "Login",
         methods:{
-            saveRole: function () {
-                this.$store.commit('changeRole', 'landlord');
-                this.$router.push({path: '/start'});
+            saveRole(){
+                if(checkLoginData(this.loginData)){
+                    this.$store.commit('changeRole', 'landlord');
+                    this.$router.push({path: '/start'});
+                }else{
+                    alert("Passwort und Username sind nicht bekannt")
+                }
+            }
+        },
+        data(){
+            return{
+                loginData:{
+                    username:null,
+                    password:null
+                }
             }
         }
     }
