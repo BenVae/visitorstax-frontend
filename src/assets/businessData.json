@@ -46,7 +46,7 @@
     "type": "Hotel",
     "user": {
       "id": "2",
-      "username": "654321",
+      "username": "B000003",
       "password": "test",
       "role": "Betrieb"
     },
@@ -79,7 +79,7 @@
     "user": {
       "id": "3",
       "username": "B000003",
-      "password": "test3",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -120,7 +120,7 @@
     "user": {
       "id": "4",
       "username": "B000004",
-      "password": "test4",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -170,7 +170,7 @@
     "user": {
       "id": "5",
       "username": "B000005",
-      "password": "test5",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -211,7 +211,7 @@
     "user": {
       "id": "6",
       "username": "B000006",
-      "password": "test6",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -251,8 +251,8 @@
     "type": "Hotel",
     "user": {
       "id": "7",
-      "username": "00007",
-      "password": "test7",
+      "username": "B000007",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -284,7 +284,7 @@
     "user": {
       "id": "8",
       "username": "B000008",
-      "password": "test8",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -315,8 +315,8 @@
     "type": "Hotel",
     "user": {
       "id": "9",
-      "username": "00009",
-      "password": "test9",
+      "username": "B000009",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -347,8 +347,8 @@
     "type": "Hotel",
     "user": {
       "id": "10",
-      "username": "00010",
-      "password": "test10",
+      "username": "B000010",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -380,7 +380,7 @@
     "user": {
       "id": "8",
       "username": "B000011",
-      "password": "test11",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -412,7 +412,7 @@
     "user": {
       "id": "12",
       "username": "B000012",
-      "password": "test12",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -452,8 +452,8 @@
     "type": "Hotel",
     "user": {
       "id": "13",
-      "username": "00013",
-      "password": "test13",
+      "username": "B000013",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -485,7 +485,7 @@
     "user": {
       "id": "14",
       "username": "B000014",
-      "password": "test14",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -525,8 +525,8 @@
     "type": "Hotel",
     "user": {
       "id": "15",
-      "username": "00015",
-      "password": "test15",
+      "username": "B000015",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -558,7 +558,7 @@
     "user": {
       "id": "16",
       "username": "B000016",
-      "password": "test16",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -589,8 +589,8 @@
     "type": "Hotel",
     "user": {
       "id": "17",
-      "username": "00017",
-      "password": "test17",
+      "username": "B000017",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -617,12 +617,12 @@
   },
   {
     "businessId": "18",
-    "businessName": "Business 18",
-    "type": "Vita Wellnesshotel",
+    "businessName": "Vita Wellnesshotel",
+    "type": "Hotel",
     "user": {
       "id": "18",
-      "username": "00018",
-      "password": "test18",
+      "username": "B000018",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -654,7 +654,7 @@
     "user": {
       "id": "19",
       "username": "B000019",
-      "password": "test19",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -685,8 +685,8 @@
     "type": "Hotel",
     "user": {
       "id": "20",
-      "username": "00020",
-      "password": "test20",
+      "username": "B000020",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -718,7 +718,7 @@
     "user": {
       "id": "21",
       "username": "B000021",
-      "password": "test21",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -750,7 +750,7 @@
     "user": {
       "id": "22",
       "username": "B000022",
-      "password": "test22",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -781,8 +781,8 @@
     "type": "Hotel",
     "user": {
       "id": "23",
-      "username": "00023",
-      "password": "test23",
+      "username": "B000023",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -814,7 +814,7 @@
     "user": {
       "id": "24",
       "username": "B000024",
-      "password": "test24",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -845,8 +845,8 @@
     "type": "Hotel",
     "user": {
       "id": "25",
-      "username": "00025",
-      "password": "test25",
+      "username": "B000025",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {

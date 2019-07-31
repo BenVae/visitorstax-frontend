@@ -161,8 +161,6 @@
             this.items = this.$store.getters.registrationForms;
             if(this.$store.getters.role === 'city'){
                 this.items = this.items.filter(item => item.meta.state === "submitted")
-            }else if(this.$store.getters.role === 'landlord'){
-                this.items = this.items.filter(item => item.meta.state === "unsubmitted")
             }
         },
         computed:{
