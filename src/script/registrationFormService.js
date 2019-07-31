@@ -1,17 +1,28 @@
-import businessObjects from '../assets/businessObjects'
 import moment from 'moment'
 import {store} from '../store'
 
 export function getBusinessObjects() {
+    let businessData = store.getters.businessData;
+    let username = store.getters.username;
     let objects = [];
 
-    businessObjects.forEach(function (businessObject) {
-        let test = {
-            text: businessObject.address.streetAndNumber,
-            value: businessObject
-        };
-        objects.push(test)
+    businessData.forEach(function (business) {
+        if (business.user.username === username) {
+            business.businessObjects.forEach(function (businessObject) {
+                let test = {
+                    text: businessObject.address.streetAndNumber,
+                    value: {
+                        address: businessObject.address,
+                        business: {
+                            id: business.businessId
+                        }
+                    }
+                };
+                objects.push(test)
+            })
+        }
     });
+
     return objects;
 }
 

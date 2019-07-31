@@ -164,7 +164,7 @@
                 this.items[2].freeOfCharge += formItem.freeOfCharge;
                 this.items[2].nights += formItem.nights;
             },
-            generatePDF(){
+            downloadPDF(){
                 let pdfMake = require('pdfmake/build/pdfmake.js');
                 let pdfFonts = require('pdfmake/build/vfs_fonts.js');
                 let pdfName = "Statistiken-" + this.date;

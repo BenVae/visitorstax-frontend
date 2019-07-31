@@ -6,11 +6,11 @@ let businessName;
 let streetAndNumber;
 let city;
 let zipCode;
+let pdfMake = require('pdfmake/build/pdfmake.js');
+let pdfFonts = require('pdfmake/build/vfs_fonts.js');
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export function createpdf(businessId) {
-    let pdfMake = require('pdfmake/build/pdfmake.js');
-    let pdfFonts = require('pdfmake/build/vfs_fonts.js');
-    pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
     businessid = businessId;
     getDataForBusiness(businessId);
@@ -21,9 +21,15 @@ export function createpdf(businessId) {
     });
 }
 
+export function downloadPDF(businessId) {
+    getDataForBusiness(businessId);
+
+    pdfMake.createPdf(getDocumentDefinition()).download(businessId + "_Rechnung_vom_" + moment().format('DD_MM_YYYY'));
+}
+
 function createTable() {
-    let registrationForms = store.getters.registrationForms.filter(function (element){
-        if(parseInt(element.meta.businessObject.business.id) === parseInt(businessid)){
+    let registrationForms = store.getters.registrationForms.filter(function (element) {
+        if (parseInt(element.meta.businessObject.business.id) === parseInt(businessid)) {
             return element;
         }
     });
@@ -54,25 +60,25 @@ function nachtBerechnung(form) {
 }
 
 function berechnungNormal(form) {
-    if(form.formData.registrationFormType === "Regulär"){
-        if(form.formData.business.amountBusinessAdults === 0){
-            if(form.formData.spouse.name !== ""){
+    if (form.formData.registrationFormType === "Regulär") {
+        if (form.formData.business.amountBusinessAdults === 0) {
+            if (form.formData.spouse.name !== "") {
                 return 2;
-            }else{
+            } else {
                 return 1;
             }
-        }else{
+        } else {
             return 0;
         }
-    }else{
+    } else {
         return form.formData.amountAdultHoliday;
     }
 }
 
 function berechnungFrei(form) {
-    if(form.formData.registrationFormType === "Regulär"){
+    if (form.formData.registrationFormType === "Regulär") {
         return (form.formData.business.amountBusinessAdults === 0 ? form.formData.childrenYearOfBirth.length : form.formData.business.amountBusinessAdults + form.formData.childrenYearOfBirth.length)
-    }else{
+    } else {
         return form.formData.amountHandicapped + form.formData.amountAdultBusiness + form.formData.amountChildren;
     }
 }
@@ -98,7 +104,7 @@ function calculateLastRow(data) {
     let entireOvernights = 0;
     let tax = 0;
 
-    for(let i = 1; i < data.length; i++){
+    for (let i = 1; i < data.length; i++) {
         entireNights += data[i][3];
         entirePersons += data[i][4];
         entireFreeOfCharge += data[i][5];
@@ -121,7 +127,8 @@ function calculateLastRow(data) {
 
 const header = [{text: 'Meld-Nr.', style: 'tableHeader'}, {
     text: 'Ankunft',
-    style: 'tableHeader'},
+    style: 'tableHeader'
+},
     {text: 'Abreise', style: 'tableHeader'},
     {text: 'Nächte', style: 'tableHeader'},
     {text: 'Normal', style: 'tableHeader'},
@@ -171,8 +178,7 @@ function getDocumentDefinition() {
             },
             {
                 stack: [
-                    '78459 Konstanz, den ',
-                    moment().format('DD.MM.YYYY'),
+                    '78459 Konstanz, den ' + moment().format('DD.MM.YYYY'),
                 ], style: 'headerStadt3'
             },
 
@@ -191,7 +197,8 @@ function getDocumentDefinition() {
             },
             {
                 stack: [
-                    'Betr .Nr.: ', businessid,
+                    'Betr .Nr.: ' + businessid,
+                    '\n',
                     '\n',
                     '\n',
                     {
@@ -264,8 +271,7 @@ function getDocumentDefinition() {
             {
                 stack: [
                     '\n',
-                    'Fälligkeit: +14 days from',
-                    moment().format('DD.MM.YYYY'),
+                    'Fälligkeit: 14 Tage ab dem ' + moment().format('DD.MM.YYYY'),
                 ], style: 'subheader'
             },
         ],
