@@ -29,7 +29,7 @@
     import Layout from "../utils/StandardLayout";
     import Title from "../utils/Title";
     import {getBusinesses} from "../utils/script/invoiceService";
-    import {createpdf} from "../utils/script/rechnung";
+    import {createpdf} from "../utils/script/billService";
 
     export default {
         name: "CreateInvoice",

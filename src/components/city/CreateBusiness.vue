@@ -1,6 +1,6 @@
 <template>
     <Layout>
-        <Title name="Meldeschein anlegen"/>
+        <Title name="Betrieb anlegen"/>
         <v-form ref="form">
             <v-container>
                 <v-layout row justify-center>
@@ -88,14 +88,13 @@
                 <v-layout row justify-center>
                     <v-flex sm6 md3>
                         <v-text-field
-                                :rules="[v => !!v || 'Bitte Straße/Hausnummer eingeben']"
-                                v-model="address.streetAndNumber"
+                                v-model="businessObject.address.streetAndNumber"
                                 label="Straße/Hausnummer">
                         </v-text-field>
                     </v-flex>
                     <v-flex sm6 md3>
                         <v-select
-                                v-model="address.zipCode"
+                                v-model="businessObject.address.zipCode"
                                 :items="zipCodes"
                                 label="Postleitzahl"
                                 append-outer-icon="add_circle"
@@ -103,7 +102,47 @@
                         ></v-select>
                     </v-flex>
                 </v-layout>
+                <v-container grid-list-lg>
+                    <v-layout row>
+                        <v-flex>
+                            <v-card elevation="5">
+                                <v-card-title>
+                                    <span class="title">Objekte</span>
+                                </v-card-title>
+                                <v-container>
+                                    <v-layout row text-center>
+                                        <v-flex xs12 md3
+                                                v-for="(object,index) in business.businessObjects" :key="index">
+                                            <v-card elevation="7" height="100px">
+                                                <v-container fill-height>
+                                                    <v-layout row align-center>
+                                                        <v-flex>
+                                                            {{object.address.streetAndNumber}}<br>{{object.address.zipCode}}
+                                                        </v-flex>
+                                                    </v-layout>
+                                                    <close-icon
+                                                            class="show-pointer"
+                                                            v-on:click="deleteObject(index)"
+                                                            :size="16"
+                                                            fill-color="#607D8B">
+                                                    </close-icon>
+                                                </v-container>
+                                            </v-card>
+                                        </v-flex>
+                                    </v-layout>
+                                </v-container>
+                            </v-card>
+                        </v-flex>
+                    </v-layout>
+                </v-container>
             </row-with-description>
+            <v-layout align-end justify-end>
+                <v-btn
+                        @click="submitForm"
+                        color="blue-grey"
+                        dark>weiter
+                </v-btn>
+            </v-layout>
         </v-form>
     </Layout>
 </template>
@@ -112,14 +151,36 @@
     import Layout from "../utils/StandardLayout";
     import Title from "../utils/Title";
     import RowWithDescription from "../utils/RowWithDescription";
+    import CloseIcon from "vue-material-design-icons/Close";
+    import {createBusiness} from "../utils/script/businessService";
 
     export default {
         name: "CreateBusiness",
-        components: {Title, Layout, RowWithDescription},
+        components: {CloseIcon, Title, Layout, RowWithDescription},
         methods: {
-            createBusinessObject(){
-                if (this.address.zipCode !== ""){
-                    this.business.businessObjects;
+            createBusinessObject() {
+                if (this.businessObject.address.streetAndNumber !== "") {
+                    this.business.businessObjects.push({
+                        id: this.business.businessObjects.length + 1,
+                        address: {
+                            streetAndNumber: this.businessObject.address.streetAndNumber,
+                            zipCode: this.businessObject.address.zipCode,
+                            city: "Konstanz",
+                            country: "Germany"
+                        }
+                    });
+                    this.businessObject.address.streetAndNumber = "";
+                } else {
+                    alert("Straße/Hausnummer feld darf nicht leer sein")
+                }
+            },
+            deleteObject(index) {
+                this.business.businessObjects.splice(index, 1);
+            },
+            submitForm(){
+                if (this.$refs.form.validate()) {
+                    createBusiness(this.business);
+                    this.$router.push({name: 'Betriebe'})
                 }
             }
         },
@@ -127,16 +188,21 @@
             return {
                 types: ["Privat", "Hotel"],
                 zipCodes: ["78462", "78464", "78465", "78467"],
-                address: {
-                    streetAndNumber: "",
-                    zipCode: "78462",
-                    city: "Konstanz",
-                    country: "Germany"
+                businessObject: {
+                    id: "",
+                    address: {
+                        streetAndNumber: "",
+                        zipCode: "78462",
+                        city: "Konstanz",
+                        country: "Germany"
+                    }
                 },
                 business: {
+                    businessId: "",
                     businessName: "",
                     type: "Privat",
                     user: {
+                        id: "",
                         username: "",
                         password: "123456",
                         role: "landlord"

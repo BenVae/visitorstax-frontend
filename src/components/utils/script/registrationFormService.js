@@ -1,5 +1,4 @@
 import businessObjects from '../../../assets/businessObjects'
-import sampleRegistrationForm from '../../../assets/sampleRegistrationForm'
 import moment from 'moment'
 import {store} from '../../../store'
 
@@ -44,8 +43,6 @@ export function updateRegistrationForm(formData, businessObject, registrationNum
             registrationForms[i] = regForm;
         }
     }
-
-    store.commit('changeRegForm', registrationForms);
 }
 
 export function createRegistrationForm(formData, businessObject) {
@@ -58,8 +55,6 @@ export function createRegistrationForm(formData, businessObject) {
         },
         formData: formData
     };
-
-    alert("Meldeschein erfolgreich angelegt");
 
     let registrationForms = store.getters.registrationForms;
 
@@ -101,7 +96,10 @@ function calculateDays(formData) {
 }
 
 function getNextRegistrationFormNumber() {
-    const registrationFormNumber = sampleRegistrationForm[sampleRegistrationForm.length - 1].meta.registrationNumber;
+
+    let registrationForms = store.getters.registrationForms;
+
+    const registrationFormNumber = registrationForms[registrationForms.length - 1].meta.registrationNumber;
 
     return parseInt(registrationFormNumber, 10) + 1;
 }
