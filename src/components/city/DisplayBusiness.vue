@@ -113,9 +113,9 @@
 </template>
 
 <script>
-    import Title from "./utils/Title"
-    import Layout from "./utils/StandardLayout"
-    import BusinessData from "../assets/businessData"
+    import Title from "../utils/Title"
+    import Layout from "../utils/StandardLayout"
+    import BusinessData from "../../assets/businessData"
 
     export default {
         name: "DisplayBusiness",

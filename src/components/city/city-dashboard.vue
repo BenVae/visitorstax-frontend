@@ -100,9 +100,9 @@
 </template>
 
 <script>
-    import Layout from "./utils/StandardLayout";
-    import Title from "./utils/Title";
-    import * as statistics from "../script/dashboardService"
+    import Layout from "../utils/StandardLayout";
+    import Title from "../utils/Title";
+    import * as statistics from "../../script/dashboardService"
     import apexchart from 'vue-apexcharts'
 
     export default {

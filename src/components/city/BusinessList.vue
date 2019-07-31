@@ -43,9 +43,9 @@
 </template>
 
 <script>
-    import businessData from '../assets/businessData';
-    import StandardLayout from "./utils/StandardLayout";
-    import Title from "./utils/Title";
+    import businessData from '../../assets/businessData';
+    import StandardLayout from "../utils/StandardLayout";
+    import Title from "../utils/Title";
     export default {
         name: "BusinessList",
         components: {Title, StandardLayout},

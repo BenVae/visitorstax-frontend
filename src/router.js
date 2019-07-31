@@ -1,20 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from "./components/index";
+import Index from "./components/utils/index";
 import Start from "./components/Start";
 import Login from "./components/Login";
 import RegistraionForm from "./components/registrationform/RegistraionForm";
 import ShowRegForm from "./components/DisplaySingularRegForm";
 import RegistrationFormList from "./components/RegistrationFormList";
 import IdCheck from "./components/registrationform/IdCheck";
-import BusinessList from "./components/BusinessList";
+import BusinessList from "./components/city/BusinessList";
 import GroupRegistraionForm from "./components/registrationform/GroupRegistraionForm";
-import DisplayBusiness from "./components/DisplayBusiness";
+import DisplayBusiness from "./components/city/DisplayBusiness";
 import LoginCity from "./components/LoginCity";
 import EditRegistraionForm from "./components/registrationform/EditRegistraionForm";
 import EditGroupRegistraionForm from "./components/registrationform/EditGroupRegistraionForm";
 import CreateInvoice from "./components/city/CreateInvoice";
-import CityStatistics from "./components/CityStatistics";
+import CityStatistics from "./components/city/CityStatistics";
 import CreateBusiness from "./components/city/CreateBusiness";
 
 Vue.use(Router);

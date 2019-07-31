@@ -56,7 +56,7 @@
         </v-container>
         <v-layout v-if="this.date != null" align-center justify-center>
             <v-btn
-                    @click="generatePDF"
+                    @click="downloadPDF"
                     color="blue-grey"
                     dark>Statstik herunterladen
             </v-btn>
@@ -65,10 +65,10 @@
 </template>
 
 <script>
-    import StandardLayout from "./utils/StandardLayout";
-    import Title from "./utils/Title";
-    import {statisticsService} from "../script/statisticsService";
-    import businessData from "../assets/businessData";
+    import StandardLayout from "../utils/StandardLayout";
+    import Title from "../utils/Title";
+    import {statisticsService} from "../../script/statisticsService";
+    import businessData from "../../assets/businessData";
     export default {
         name: "CityStatistics",
         components: {Title, StandardLayout},
