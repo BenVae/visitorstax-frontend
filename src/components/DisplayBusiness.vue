@@ -181,7 +181,7 @@
                 }
 
                 items = items.filter(form =>
-                    form.meta.businessObject.business.id == this.propsbusiness.businessId
+                    form.meta.businessObject.business.id === this.propsbusiness.businessId
                 );
                 return items
             },

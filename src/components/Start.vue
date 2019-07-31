@@ -3,7 +3,7 @@
         <Title name="Startseite"/>
         <v-container grid-list-lg>
             <v-layout row>
-                <v-flex xs12 sm6 md5 lg3>
+                <v-flex xs12 sm6 md5 lg4>
                     <v-card min-height="100%">
                         <v-card-title>
                             <span class="title mx-auto">Gäste pro Stadtteil</span>
@@ -13,7 +13,7 @@
                                    :series="districtAnalysis.series"></apexchart>
                     </v-card>
                 </v-flex>
-                <v-flex xs12 sm6 md7 lg9>
+                <v-flex xs12 sm6 md7 lg8>
                     <v-card class="px-5 py-3" min-height="100%">
                         <v-card-title class="mb-4">
                             <span class="title mx-auto">In den letzten {{lastDays}} Tagen...</span>
@@ -86,7 +86,7 @@
                             </v-flex>
                             <v-flex>
                                 <div class="mx-auto font-weight-thin subtitle-1 grey--text">schlechtester Monat</div>
-                                <div class="mx-auto mt-2 font-weight-light headline">{{lasYearWorstMonth}} /
+                                <div class="mx-auto mt-2 font-weight-light headline">{{lastYearWorstMonth}} /
                                     {{lastYearWorstTax}}€
                                 </div>
                             </v-flex>
@@ -113,12 +113,7 @@
             return {
                 districtAnalysis: {
                     chartOptions: {
-                        labels: [],
-                        legend: {
-                            labels: {
-                                colors: ['#FFFFFF']
-                            }
-                        }
+                        labels: []
                     },
                     series: []
                 },
@@ -200,11 +195,10 @@
                 lastYearAvgStay: null,
                 lastYearBestMonth: null,
                 lastYearBestTax: null,
-                lasYearWorstMonth: null,
+                lastYearWorstMonth: null,
                 lastYearWorstTax: null
             }
-        }
-        ,
+        },
 
         beforeMount() {
             statistics.makeDict()
@@ -229,7 +223,6 @@
             },
 
             makeDistributionAnalysisLineChart() {
-
                 let self = this
                 let i = 11
 
@@ -263,9 +256,7 @@
             getLastYearNumbers() {
 
                 let self = this
-                this.$moment.locale('de')
 
-                //get Best/Worst Month + taxes
                 let i = 11
                 let bestTax = 0
                 let worstTax = 10000000000
@@ -290,7 +281,7 @@
                 this.lastYearAvgStay = averageStay.toFixed(2)
                 this.lastYearBestMonth = bestMonth
                 this.lastYearBestTax = bestTax
-                this.lasYearWorstMonth = worstMonth
+                this.lastYearWorstMonth = worstMonth
                 this.lastYearWorstTax = worstTax
             }
         }
