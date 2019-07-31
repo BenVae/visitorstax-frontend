@@ -59,7 +59,7 @@
             this.$store.getters.registrationForms.forEach(function(element){
                 if(element.meta.state === "submitted") {
                     registrationForms.push(element.meta.businessObject.business.id)
-                };
+                }
             });
             this.businesses = this.businesses.filter(function(element){
                 if(registrationForms.includes(parseInt(element.value))){
