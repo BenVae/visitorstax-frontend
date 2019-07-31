@@ -30,16 +30,17 @@
                     </v-card>
                 </v-flex>
             </v-layout>
+            <v-card>
+                <v-card-title>
+                    <span class="title mx-auto">Im letzten Jahr...</span>
+                </v-card-title>
             <v-layout row>
                 <v-flex xs12 md6>
-                    <v-card>
                         <apexchart type="line"
                                    :options="overTimeLineChart.options"
                                    :series="overTimeLineChart.series"></apexchart>
-                    </v-card>
                 </v-flex>
                 <v-flex xs12 md6>
-                    <v-card height="100%">
                         <v-container fill-height>
                             <v-layout row text-center class="px-5">
                                 <v-flex>
@@ -64,9 +65,9 @@
                                 </v-flex>
                             </v-layout>
                         </v-container>
-                    </v-card>
                 </v-flex>
             </v-layout>
+            </v-card>
         </v-container>
     </Layout>
 </template>
