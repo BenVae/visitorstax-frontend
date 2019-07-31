@@ -52,13 +52,15 @@
                     </v-data-table>
                 </v-flex>
             </v-layout>
-            <v-layout row>
-                <v-flex mt-3>
-                    <iframe id='pdfV' style="width:100%; height: 700px" frameborder="0" scrolling="no"></iframe>
-                    <img id='imgToExport' src='../assets/Constance_logo.png' style='display:none'/>
-                </v-flex>
-            </v-layout>
+
         </v-container>
+        <v-layout v-if="this.date != null" align-center justify-center>
+            <v-btn
+                    @click="generatePDF"
+                    color="blue-grey"
+                    dark>Statstik herunterladen
+            </v-btn>
+        </v-layout>
     </standard-layout>
 </template>
 
@@ -128,7 +130,8 @@
         },
         methods:{
             deleteDate(){
-                this.date=null
+                this.date=null;
+                this.clearItems();
             },
             clearItems(){
                 this.items[0].persons = 0;
@@ -162,14 +165,12 @@
                 this.items[2].nights += formItem.nights;
             },
             generatePDF(){
-                var pdfMake = require('pdfmake/build/pdfmake.js');
-                var pdfFonts = require('pdfmake/build/vfs_fonts.js');
+                let pdfMake = require('pdfmake/build/pdfmake.js');
+                let pdfFonts = require('pdfmake/build/vfs_fonts.js');
+                let pdfName = "Statistiken-" + this.date;
                 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-                const pdfDocGenerator = pdfMake.createPdf(this.getDocumentDefinition());
-                pdfDocGenerator.getDataUrl((dataUrl) => {
-                    document.getElementById('pdfV').src = dataUrl;
-                });
+                pdfMake.createPdf(this.getDocumentDefinition()).download(pdfName);
             },
             getDocumentDefinition(){
 
@@ -223,7 +224,6 @@
             computeItems2:{
                 set: function (date) {
                     if (this.$moment(date, 'YYYY', true).isValid()) {
-
                         this.date = date;
                         var scheine = this.$store.getters.registrationForms;
                         var self = this;
@@ -251,7 +251,6 @@
                                 self.computePrivateOrHotel(computeStatistics(element), element);
                             }
                         });
-                        this.generatePDF();
                     }
                 },
                 get:function () {
