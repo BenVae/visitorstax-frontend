@@ -63,7 +63,7 @@
       "businessObject": {
         "address": {
           "city": "Konstanz",
-          "zipCode": "78462",
+          "zipCode": "78464",
           "streetAndNumber": "Rheingutstraße 31",
           "country": "Germany"
         },
@@ -112,7 +112,7 @@
       "businessObject": {
         "address": {
           "city": "Konstanz",
-          "zipCode": "78462",
+          "zipCode": "78467",
           "streetAndNumber": "Paul-Gretel-Straße 2",
           "country": "Germany"
         },
@@ -161,7 +161,7 @@
       "businessObject": {
         "address": {
           "city": "Konstanz",
-          "zipCode": "78462",
+          "zipCode": "78467",
           "streetAndNumber": "Lange Straße 77",
           "country": "Germany"
         },
@@ -594,7 +594,7 @@
       "businessObject": {
         "address": {
           "city": "Konstanz",
-          "zipCode": "78462",
+          "zipCode": "78464",
           "streetAndNumber": "Freiheitsstraße 90",
           "country": "Germany"
         },
@@ -762,7 +762,7 @@
       "businessObject": {
         "address": {
           "city": "Konstanz",
-          "zipCode": "78462",
+          "zipCode": "78464",
           "streetAndNumber": "Am Dom 99",
           "country": "Germany"
         },

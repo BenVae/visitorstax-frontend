@@ -1,5 +1,5 @@
 <template>
-    <v-container class="v-container">
+    <v-container>
         <v-layout row fill-height>
             <v-flex rounded-lg id="menu">
                 <v-container

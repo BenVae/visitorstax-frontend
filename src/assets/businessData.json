@@ -1,17 +1,17 @@
 [
   {
     "businessId": "1",
-    "businessName": "Business 1",
+    "businessName": "B000001",
     "type": "Privat",
     "user": {
       "id": "1",
-      "username": "123456",
+      "username": "B000001",
       "password": "test",
       "role": "Betrieb"
     },
     "address": {
       "city": "Konstanz",
-      "zipCode": "78462",
+      "zipCode": "78464",
       "streetAndNumber": "Rheingutstraße 30",
       "country": "Germany"
     },
@@ -42,7 +42,7 @@
   },
   {
     "businessId": "2",
-    "businessName": "Business 2",
+    "businessName": "Harbr Hotel",
     "type": "Hotel",
     "user": {
       "id": "2",
@@ -74,11 +74,11 @@
   },
   {
     "businessId": "3",
-    "businessName": "Business 3",
+    "businessName": "B000003",
     "type": "Privat",
     "user": {
       "id": "3",
-      "username": "00003",
+      "username": "B000003",
       "password": "test3",
       "role": "Betrieb"
     },
@@ -115,11 +115,11 @@
   },
   {
     "businessId": "4",
-    "businessName": "Business 4",
+    "businessName": "B000004",
     "type": "Privat",
     "user": {
       "id": "4",
-      "username": "00004",
+      "username": "B000004",
       "password": "test4",
       "role": "Betrieb"
     },
@@ -165,11 +165,11 @@
   },
   {
     "businessId": "5",
-    "businessName": "Business 5",
+    "businessName": "B000005",
     "type": "Privat",
     "user": {
       "id": "5",
-      "username": "00005",
+      "username": "B000005",
       "password": "test5",
       "role": "Betrieb"
     },
@@ -206,11 +206,11 @@
   },
   {
     "businessId": "6",
-    "businessName": "Business 6",
+    "businessName": "B000006",
     "type": "Privat",
     "user": {
       "id": "6",
-      "username": "00006",
+      "username": "B000006",
       "password": "test6",
       "role": "Betrieb"
     },
@@ -247,7 +247,7 @@
   },
   {
     "businessId": "7",
-    "businessName": "Business 7",
+    "businessName": "Aqua Hotel",
     "type": "Hotel",
     "user": {
       "id": "7",
@@ -279,11 +279,11 @@
   },
   {
     "businessId": "8",
-    "businessName": "Business 8",
+    "businessName": "B000008",
     "type": "Privat",
     "user": {
       "id": "8",
-      "username": "00008",
+      "username": "B000008",
       "password": "test8",
       "role": "Betrieb"
     },
@@ -311,7 +311,7 @@
   },
   {
     "businessId": "9",
-    "businessName": "Business 9",
+    "businessName": "Hotel 47°",
     "type": "Hotel",
     "user": {
       "id": "9",
@@ -343,7 +343,7 @@
   },
   {
     "businessId": "10",
-    "businessName": "Business 10",
+    "businessName": "B2B Hotel",
     "type": "Hotel",
     "user": {
       "id": "10",
@@ -375,11 +375,11 @@
   },
   {
     "businessId": "11",
-    "businessName": "Business 11",
+    "businessName": "B000011",
     "type": "Privat",
     "user": {
       "id": "8",
-      "username": "00011",
+      "username": "B000011",
       "password": "test11",
       "role": "Betrieb"
     },
@@ -407,11 +407,11 @@
   },
   {
     "businessId": "12",
-    "businessName": "Business 12",
+    "businessName": "B000012",
     "type": "Privat",
     "user": {
       "id": "12",
-      "username": "00012",
+      "username": "B000012",
       "password": "test12",
       "role": "Betrieb"
     },
@@ -448,7 +448,7 @@
   },
   {
     "businessId": "13",
-    "businessName": "Business 13",
+    "businessName": "Landgasthof",
     "type": "Hotel",
     "user": {
       "id": "13",
@@ -480,11 +480,11 @@
   },
   {
     "businessId": "14",
-    "businessName": "Business 14",
+    "businessName": "B000014",
     "type": "Privat",
     "user": {
       "id": "14",
-      "username": "00014",
+      "username": "B000014",
       "password": "test14",
       "role": "Betrieb"
     },
@@ -521,7 +521,7 @@
   },
   {
     "businessId": "15",
-    "businessName": "Business 15",
+    "businessName": "Hagnauer Hotel",
     "type": "Hotel",
     "user": {
       "id": "15",
@@ -553,11 +553,11 @@
   },
   {
     "businessId": "16",
-    "businessName": "Business 16",
+    "businessName": "B000016",
     "type": "Privat",
     "user": {
       "id": "16",
-      "username": "00016",
+      "username": "B000016",
       "password": "test16",
       "role": "Betrieb"
     },
@@ -585,7 +585,7 @@
   },
   {
     "businessId": "17",
-    "businessName": "Business 17",
+    "businessName": "Arthus Hotel",
     "type": "Hotel",
     "user": {
       "id": "17",
@@ -618,7 +618,7 @@
   {
     "businessId": "18",
     "businessName": "Business 18",
-    "type": "Hotel",
+    "type": "Vita Wellnesshotel",
     "user": {
       "id": "18",
       "username": "00018",
@@ -649,11 +649,11 @@
   },
   {
     "businessId": "19",
-    "businessName": "Business 19",
+    "businessName": "B000019",
     "type": "Privat",
     "user": {
       "id": "19",
-      "username": "00019",
+      "username": "B000019",
       "password": "test19",
       "role": "Betrieb"
     },
@@ -681,7 +681,7 @@
   },
   {
     "businessId": "20",
-    "businessName": "Business 20",
+    "businessName": "Hotel Graf Zeppelin",
     "type": "Hotel",
     "user": {
       "id": "20",
@@ -713,11 +713,11 @@
   },
   {
     "businessId": "21",
-    "businessName": "Business 21",
+    "businessName": "B000021",
     "type": "Privat",
     "user": {
       "id": "21",
-      "username": "00021",
+      "username": "B000021",
       "password": "test21",
       "role": "Betrieb"
     },
@@ -745,11 +745,11 @@
   },
   {
     "businessId": "22",
-    "businessName": "Business 22",
+    "businessName": "B000022",
     "type": "Privat",
     "user": {
       "id": "22",
-      "username": "00022",
+      "username": "B000022",
       "password": "test22",
       "role": "Betrieb"
     },
@@ -777,7 +777,7 @@
   },
   {
     "businessId": "23",
-    "businessName": "Business 23",
+    "businessName": "City Hotel",
     "type": "Hotel",
     "user": {
       "id": "23",
@@ -809,11 +809,11 @@
   },
   {
     "businessId": "24",
-    "businessName": "Business 24",
+    "businessName": "B000024",
     "type": "Privat",
     "user": {
       "id": "24",
-      "username": "00024",
+      "username": "B000024",
       "password": "test24",
       "role": "Betrieb"
     },
@@ -841,7 +841,7 @@
   },
   {
     "businessId": "25",
-    "businessName": "Business 25",
+    "businessName": "Hotel am Yachthafen",
     "type": "Hotel",
     "user": {
       "id": "25",

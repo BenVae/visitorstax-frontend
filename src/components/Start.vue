@@ -2,9 +2,9 @@
     <Layout>
         <Title name="Startseite"/>
         <v-container grid-list-lg>
-            <v-layout row class="mb-3">
+            <v-layout row>
                 <v-flex xs12 sm6 md5 lg3>
-                    <v-card dark>
+                    <v-card min-height="100%">
                         <v-card-title>
                             <span class="title mx-auto">Gäste pro Stadtteil</span>
                         </v-card-title>
@@ -14,7 +14,7 @@
                     </v-card>
                 </v-flex>
                 <v-flex xs12 sm6 md7 lg9>
-                    <v-card height="100%" class="px-5">
+                    <v-card class="px-5 py-3" min-height="100%">
                         <v-card-title class="mb-4">
                             <span class="title mx-auto">In den letzten {{lastDays}} Tagen...</span>
                         </v-card-title>
@@ -35,55 +35,66 @@
                     </v-card>
                 </v-flex>
             </v-layout>
-            <v-card class="mb-3">
-                <v-card-title>
-                    <span class="title mx-auto">Gäste in den letzten 12 Monaten</span>
-                </v-card-title>
-                <v-layout row>
-                    <v-flex xs12 lg6>
+            <v-layout row>
+                <v-flex>
+                    <v-card class="pb-3">
+                        <v-card-title>
+                            <span class="title mx-auto">Gäste in den letzten 12 Monaten</span>
+                        </v-card-title>
+                        <v-layout row>
+                            <v-flex xs12 lg6>
+                                <apexchart type="bar"
+                                           :options="distributionAnalysisBarChart.options"
+                                           :series="distributionAnalysisBarChart.series"></apexchart>
 
-                        <apexchart type="bar"
-                                   :options="distributionAnalysisBarChart.options"
-                                   :series="distributionAnalysisBarChart.series"></apexchart>
+                            </v-flex>
+                            <v-flex xs12 lg6>
+                                <apexchart type="line"
+                                           :options="distributionAnalysisLineChart.options"
+                                           :series="distributionAnalysisLineChart.series"></apexchart>
 
-                    </v-flex>
-                    <v-flex xs12 lg6>
+                            </v-flex>
+                        </v-layout>
+                    </v-card>
+                </v-flex>
+            </v-layout>
+            <v-layout row>
+                <v-flex>
+                    <v-card class="pb-3">
+                        <v-card-title>
+                            <span class="mx-auto title">Im letzten Jahr...</span>
+                        </v-card-title>
+                        <v-layout row text-center align-center>
+                            <v-flex>
+                                <div class="mx-auto font-weight-thin subtitle-1 grey--text">Familien / Reguläre Scheine
+                                </div>
+                                <div class="mx-auto mt-2 font-weight-light headline">{{lastYearFams}}</div>
+                            </v-flex>
+                            <v-flex>
+                                <div class="mx-auto font-weight-thin subtitle-1 grey--text">Gruppen</div>
+                                <div class="mx-auto mt-2 font-weight-light headline">{{lastYearGroups}}</div>
+                            </v-flex>
+                            <v-flex>
+                                <div class="mx-auto font-weight-thin subtitle-1 grey--text">⌀ Aufenthaltsdauer</div>
+                                <div class="mx-auto mt-2 font-weight-light headline">{{lastYearAvgStay}} Tage</div>
+                            </v-flex>
+                            <v-flex>
+                                <div class="mx-auto font-weight-thin subtitle-1 grey--text">bester Monat</div>
+                                <div class="mx-auto mt-2 font-weight-light headline">{{lastYearBestMonth}} /
+                                    {{lastYearBestTax}}€
+                                </div>
+                            </v-flex>
+                            <v-flex>
+                                <div class="mx-auto font-weight-thin subtitle-1 grey--text">schlechtester Monat</div>
+                                <div class="mx-auto mt-2 font-weight-light headline">{{lasYearWorstMonth}} /
+                                    {{lastYearWorstTax}}€
+                                </div>
+                            </v-flex>
+                        </v-layout>
+                    </v-card>
 
-                        <apexchart type="line"
-                                   :options="distributionAnalysisLineChart.options"
-                                   :series="distributionAnalysisLineChart.series"></apexchart>
-
-                    </v-flex>
-                </v-layout>
-            </v-card>
-            <v-card class="px-5 pb-3">
-                <v-card-title>
-                    <span class="mx-auto title">Im letzten Jahr...</span>
-                </v-card-title>
-                <v-layout row text-center align-center>
-                    <v-flex>
-                        <div class="mx-auto font-weight-thin subtitle-1 grey--text">Familien / Reguläre Scheine
-                        </div>
-                        <div class="mx-auto mt-2 font-weight-light headline">{{lastYearFams}}</div>
-                    </v-flex>
-                    <v-flex>
-                        <div class="mx-auto font-weight-thin subtitle-1 grey--text">Gruppen</div>
-                        <div class="mx-auto mt-2 font-weight-light headline">{{lastYearGroups}}</div>
-                    </v-flex>
-                    <v-flex>
-                        <div class="mx-auto font-weight-thin subtitle-1 grey--text">⌀ Aufenthaltsdauer</div>
-                        <div class="mx-auto mt-2 font-weight-light headline">{{lastYearAvgStay}} Tage</div>
-                    </v-flex>
-                    <v-flex>
-                        <div class="mx-auto font-weight-thin subtitle-1 grey--text">bester Monat</div>
-                        <div class="mx-auto mt-2 font-weight-light headline">{{lastYearBestMonth}} / {{lastYearBestTax}}€</div>
-                    </v-flex>
-                    <v-flex>
-                        <div class="mx-auto font-weight-thin subtitle-1 grey--text">schlechtester Monat</div>
-                        <div class="mx-auto mt-2 font-weight-light headline">{{lasYearWorstMonth}} / {{lastYearWorstTax}}€</div>
-                    </v-flex>
-                </v-layout>
-            </v-card>
+                </v-flex>
+            </v-layout>
         </v-container>
     </Layout>
 </template>
@@ -91,7 +102,7 @@
 <script>
     import Layout from "./utils/StandardLayout";
     import Title from "./utils/Title";
-    import * as statistics from "./utils/statistics"
+    import * as statistics from "./utils/script/statisticService"
     import apexchart from 'vue-apexcharts'
 
     export default {

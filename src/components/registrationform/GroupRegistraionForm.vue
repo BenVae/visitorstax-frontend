@@ -106,10 +106,7 @@
             <row-with-description
                     name="Gruppe">
                 <v-layout row justify-center>
-                    <v-table-overflow>
-
-                    </v-table-overflow>
-                    <table style="width:100%" class="ma-3">
+                    <table id="groupDataTable" class="ma-3">
                         <tr>
                             <th style="width: 40%">
                                 Kategorie
@@ -337,13 +334,9 @@
     }
 </script>
 
-<style lang="scss" scoped>
-    .white-background {
-        background-color: #FFF !important;
-    }
-
-    .scroll-here {
-        overflow: auto;
-        height: 740px;
+<style lang="scss">
+    #groupDataTable {
+        width: 100%;
+        overflow-x: auto;
     }
 </style>

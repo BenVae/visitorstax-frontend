@@ -321,14 +321,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-    .white-background {
-        background-color: #FFF !important;
-    }
-
-    .scroll-here {
-        overflow: auto;
-        height: 740px;
-    }
-</style>
