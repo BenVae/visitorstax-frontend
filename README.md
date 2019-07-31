@@ -1,5 +1,13 @@
 # visitorstax-frontend
 
+## Projekt Stand
+
+Bei dieser Applikation handelt es sich um einen Prototypen. 
+Aus diesem Grund wurde vorerst auf ein Backend verzichtet. 
+Die Beispieldaten um die Funktionalitäten der Anwendung darstellen zu können, 
+werden beim Start der Anwendung aus den Jsons ``businessData und sampleRegistrationForm`` in den Global-State (Vuex) geladen.
+
+
 ## Project setup
 ```
 npm install
@@ -25,12 +33,14 @@ npm run test
 npm run lint
 ```
 
-### Used Packages
-*  vuejs-datepicker: [doku](https://github.com/charliekassel/vuejs-datepicker#readme)
-* vue notification [doku](https://www.npmjs.com/package/vue-notification)
+## Used Technologies
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-
-Stati von state: {submitted, unsubmitted, invoiceSent, invoicePayed}
+| Technologie        | Zweck           | Dokumentation  |
+| ------------- |:-------------| -----:|
+| Vueitfy     | Material Component Framework | [doku](https://vuetifyjs.com/en/getting-started/quick-start) |
+| Vuex     | Globaler State | [doku](https://vuex.vuejs.org/guide/) |
+| Vue Router     | Zum Routen von Komponenten | [doku](https://router.vuejs.org/) |
+| Material-Icons     | Icon-Set      |   [doku](https://materialdesignicons.com/) |
+| Moment | Zum parsen, manipulieren und anzeigen von Daten      |    [doku](https://momentjs.com/) |
+| pdfMake | Client-Seitges erstellen von PDFs  |    [doku](http://pdfmake.org/#/) |
+| HotelDatePicker | Daterangepicker mit benutzerfreundlicher Ausgabe       |    [doku](https://krystalcampioni.github.io/vue-hotel-datepicker/) |

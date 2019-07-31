@@ -7,7 +7,7 @@
 </template>
 
 <script>
-    import CityDash from './city-dashboard';
+    import CityDash from './city/city-dashboard';
     import LandlordDash from './landlord-dashboard';
 
     export default {

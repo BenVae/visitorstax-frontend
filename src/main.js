@@ -5,7 +5,6 @@ import './plugins/vuetify'
 import router from './router'
 import {store} from './store'
 import BootstrapVue from 'bootstrap-vue'
-import VueGoodTablePlugin from 'vue-good-table'
 import HotelDatePicker from 'vue-hotel-datepicker'
 
 import 'bootstrap/dist/css/bootstrap.css'
@@ -19,10 +18,9 @@ Vue.use(Vuex);
 Vue.use(Vuetify);
 Vue.use(VueAxios, axios);
 Vue.use(BootstrapVue);
-Vue.use(VueGoodTablePlugin);
 Vue.use(HotelDatePicker);
 Vue.use(require('vue-moment'));
-Vue.use(require('vue-apexcharts'))
+Vue.use(require('vue-apexcharts'));
 Vue.use(require('pdfmake'));
 
 

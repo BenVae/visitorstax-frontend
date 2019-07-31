@@ -24,7 +24,8 @@
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn small block color="blue-grey" class="btn_login_custom" dark @click="saveRole">Login</v-btn>
+                        <v-btn small block color="blue-grey" class="btn_login_custom" dark @click="saveRole">Login
+                        </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -37,21 +38,22 @@
 
     export default {
         name: "Login",
-        methods:{
-            saveRole(){
-                if(checkLoginData(this.loginData)){
+        methods: {
+            saveRole() {
+                if (checkLoginData(this.loginData)) {
                     this.$store.commit('changeRole', 'landlord');
+                    this.$store.commit('changeUsername', this.loginData.username);
                     this.$router.push({path: '/start'});
-                }else{
+                } else {
                     alert("Passwort und Username sind nicht bekannt")
                 }
             }
         },
-        data(){
-            return{
-                loginData:{
-                    username:null,
-                    password:null
+        data() {
+            return {
+                loginData: {
+                    username: "",
+                    password: ""
                 }
             }
         }

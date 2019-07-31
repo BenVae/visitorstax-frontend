@@ -14,9 +14,11 @@
                 </v-layout>
                 <v-layout row justify-center pb-4>
                     <v-btn
-                            @click="generatePDF"
+                            id="printPdfButton"
+                            style="display: none"
+                            @click="downloadPDF"
                             color="blue-grey"
-                            dark>PDF erstellen
+                            dark>PDF herunteladen
                     </v-btn>
                 </v-layout>
                 <iframe id='pdfV' style="width:100%; height: 700px;" frameborder="0" scrolling="no"></iframe>
@@ -29,7 +31,7 @@
     import Layout from "../utils/StandardLayout";
     import Title from "../utils/Title";
     import {getBusinesses} from "../../script/invoiceService";
-    import {createpdf} from "../../script/billService";
+    import {createpdf, downloadPDF} from "../../script/billService";
 
     export default {
         name: "CreateInvoice",
@@ -44,13 +46,12 @@
         methods: {
             businessChanged(businessids) {
                 this.businessId = businessids;
+                document.getElementById("printPdfButton").style.display = 'block';
+                createpdf(businessids);
+
             },
-            generatePDF() {
-                if (this.businessId !== "") {
-                    createpdf(this.businessId);
-                } else {
-                    alert("bitte Betrieb auswählen")
-                }
+            downloadPDF() {
+                downloadPDF();
             }
         },
         beforeMount() {

@@ -1,6 +1,6 @@
 [
   {
-    "businessId": "1",
+    "businessId": 1,
     "businessName": "B000001",
     "type": "Privat",
     "user": {
@@ -41,12 +41,12 @@
     "contactTel": "0174532682"
   },
   {
-    "businessId": "2",
+    "businessId": 2,
     "businessName": "Harbr Hotel",
     "type": "Hotel",
     "user": {
       "id": "2",
-      "username": "654321",
+      "username": "B000003",
       "password": "test",
       "role": "Betrieb"
     },
@@ -73,13 +73,13 @@
     "contactTel": "014258625"
   },
   {
-    "businessId": "3",
+    "businessId": 3,
     "businessName": "B000003",
     "type": "Privat",
     "user": {
       "id": "3",
       "username": "B000003",
-      "password": "test3",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -114,13 +114,13 @@
     "contactTel": "0815/123"
   },
   {
-    "businessId": "4",
+    "businessId": 4,
     "businessName": "B000004",
     "type": "Privat",
     "user": {
       "id": "4",
       "username": "B000004",
-      "password": "test4",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -164,13 +164,13 @@
     "contactTel": "0815/0004"
   },
   {
-    "businessId": "5",
+    "businessId": 5,
     "businessName": "B000005",
     "type": "Privat",
     "user": {
       "id": "5",
       "username": "B000005",
-      "password": "test5",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -205,13 +205,13 @@
     "contactTel": "0152999000"
   },
   {
-    "businessId": "6",
+    "businessId": 6,
     "businessName": "B000006",
     "type": "Privat",
     "user": {
       "id": "6",
       "username": "B000006",
-      "password": "test6",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -246,13 +246,13 @@
     "contactTel": "0815/1234561"
   },
   {
-    "businessId": "7",
+    "businessId": 7,
     "businessName": "Aqua Hotel",
     "type": "Hotel",
     "user": {
       "id": "7",
-      "username": "00007",
-      "password": "test7",
+      "username": "B000007",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -278,13 +278,13 @@
     "contactTel": "77777"
   },
   {
-    "businessId": "8",
+    "businessId": 8,
     "businessName": "B000008",
     "type": "Privat",
     "user": {
       "id": "8",
       "username": "B000008",
-      "password": "test8",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -310,13 +310,13 @@
     "contactTel": "01777777777"
   },
   {
-    "businessId": "9",
+    "businessId": 9,
     "businessName": "Hotel 47°",
     "type": "Hotel",
     "user": {
       "id": "9",
-      "username": "00009",
-      "password": "test9",
+      "username": "B000009",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -342,13 +342,13 @@
     "contactTel": "0166666666"
   },
   {
-    "businessId": "10",
+    "businessId": 10,
     "businessName": "B2B Hotel",
     "type": "Hotel",
     "user": {
       "id": "10",
-      "username": "00010",
-      "password": "test10",
+      "username": "B000010",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -374,13 +374,13 @@
     "contactTel": "01763337899"
   },
   {
-    "businessId": "11",
+    "businessId": 11,
     "businessName": "B000011",
     "type": "Privat",
     "user": {
       "id": "8",
       "username": "B000011",
-      "password": "test11",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -406,13 +406,13 @@
     "contactTel": "0172229999"
   },
   {
-    "businessId": "12",
+    "businessId": 12,
     "businessName": "B000012",
     "type": "Privat",
     "user": {
       "id": "12",
       "username": "B000012",
-      "password": "test12",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -447,13 +447,13 @@
     "contactTel": "01777775555"
   },
   {
-    "businessId": "13",
+    "businessId": 13,
     "businessName": "Landgasthof",
     "type": "Hotel",
     "user": {
       "id": "13",
-      "username": "00013",
-      "password": "test13",
+      "username": "B000013",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -479,13 +479,13 @@
     "contactTel": "077732331"
   },
   {
-    "businessId": "14",
+    "businessId": 14,
     "businessName": "B000014",
     "type": "Privat",
     "user": {
       "id": "14",
       "username": "B000014",
-      "password": "test14",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -520,13 +520,13 @@
     "contactTel": "0161112233"
   },
   {
-    "businessId": "15",
+    "businessId": 15,
     "businessName": "Hagnauer Hotel",
     "type": "Hotel",
     "user": {
       "id": "15",
-      "username": "00015",
-      "password": "test15",
+      "username": "B000015",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -552,13 +552,13 @@
     "contactTel": "64321"
   },
   {
-    "businessId": "16",
+    "businessId": 16,
     "businessName": "B000016",
     "type": "Privat",
     "user": {
       "id": "16",
       "username": "B000016",
-      "password": "test16",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -584,13 +584,13 @@
     "contactTel": "1234567"
   },
   {
-    "businessId": "17",
+    "businessId": 17,
     "businessName": "Arthus Hotel",
     "type": "Hotel",
     "user": {
       "id": "17",
-      "username": "00017",
-      "password": "test17",
+      "username": "B000017",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -616,13 +616,13 @@
     "contactTel": "55555"
   },
   {
-    "businessId": "18",
-    "businessName": "Business 18",
-    "type": "Vita Wellnesshotel",
+    "businessId": 18,
+    "businessName": "Vita Wellnesshotel",
+    "type": "Hotel",
     "user": {
       "id": "18",
-      "username": "00018",
-      "password": "test18",
+      "username": "B000018",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -648,13 +648,13 @@
     "contactTel": "154400999"
   },
   {
-    "businessId": "19",
+    "businessId": 19,
     "businessName": "B000019",
     "type": "Privat",
     "user": {
       "id": "19",
       "username": "B000019",
-      "password": "test19",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -680,13 +680,13 @@
     "contactTel": "8911110"
   },
   {
-    "businessId": "20",
+    "businessId": 20,
     "businessName": "Hotel Graf Zeppelin",
     "type": "Hotel",
     "user": {
       "id": "20",
-      "username": "00020",
-      "password": "test20",
+      "username": "B000020",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -712,13 +712,13 @@
     "contactTel": "12341234"
   },
   {
-    "businessId": "21",
+    "businessId": 21,
     "businessName": "B000021",
     "type": "Privat",
     "user": {
       "id": "21",
       "username": "B000021",
-      "password": "test21",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -744,13 +744,13 @@
     "contactTel": "7788999000"
   },
   {
-    "businessId": "22",
+    "businessId": 22,
     "businessName": "B000022",
     "type": "Privat",
     "user": {
       "id": "22",
       "username": "B000022",
-      "password": "test22",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -776,13 +776,13 @@
     "contactTel": "098765"
   },
   {
-    "businessId": "23",
+    "businessId": 23,
     "businessName": "City Hotel",
     "type": "Hotel",
     "user": {
       "id": "23",
-      "username": "00023",
-      "password": "test23",
+      "username": "B000023",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -808,13 +808,13 @@
     "contactTel": "123445"
   },
   {
-    "businessId": "24",
+    "businessId": 24,
     "businessName": "B000024",
     "type": "Privat",
     "user": {
       "id": "24",
       "username": "B000024",
-      "password": "test24",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
@@ -840,13 +840,13 @@
     "contactTel": "666555"
   },
   {
-    "businessId": "25",
+    "businessId": 25,
     "businessName": "Hotel am Yachthafen",
     "type": "Hotel",
     "user": {
       "id": "25",
-      "username": "00025",
-      "password": "test25",
+      "username": "B000025",
+      "password": "test",
       "role": "Betrieb"
     },
     "address": {
