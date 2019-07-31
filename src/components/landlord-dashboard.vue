@@ -184,10 +184,10 @@
                 let distribution, tax
 
                 for (i; i >= 0; i--) {
-                    distribution = statistics.getGuestsInPeriodSortedByType(self.$moment().subtract(i, 'months').startOf('month'), self.$moment().subtract(i, 'months').endOf('month'))
+                    distribution = statistics.getGuestsInPeriod(self.$moment().subtract(i, 'months').startOf('month'), self.$moment().subtract(i, 'months').endOf('month'))
                     tax = statistics.getTaxInPeriod(self.$moment().subtract(i, 'months').startOf('month'), self.$moment().subtract(i, 'months').endOf('month'))
 
-                    self.overTimeLineChart.series[0].data.push(distribution.Privat)
+                    self.overTimeLineChart.series[0].data.push(distribution)
                     self.overTimeLineChart.series[1].data.push(tax)
                     self.overTimeLineChart.options.xaxis.categories.push(self.$moment().subtract(i, 'months').format('MMM YY'))
 
@@ -207,7 +207,7 @@
                 let bestMonth, worstMonth, tax
 
                 for (i; i >= 0; i--) {
-                    tax = statistics.getTaxInPeriodPrivate(self.$moment().subtract(i, 'months').startOf('month'), self.$moment().subtract(i, 'months').endOf('month'))
+                    tax = statistics.getTaxInPeriod(self.$moment().subtract(i, 'months').startOf('month'), self.$moment().subtract(i, 'months').endOf('month'))
 
                     if (tax > bestTax) {
                         bestTax = tax
@@ -218,9 +218,9 @@
                     }
                 }
 
-                let visiteTypeData = statistics.getNumberOfFormTypesInPeriodPrivate(this.$moment().subtract(1, "years"), this.$moment())
+                let visiteTypeData = statistics.getNumberOfFormTypesInPeriod(this.$moment().subtract(1, "years"), this.$moment())
 
-                this.lastYearGuests = statistics.getGuestsInPeriodSortedByType(this.$moment().subtract(1, "years"), this.$moment()).Privat
+                this.lastYearGuests = statistics.getGuestsInPeriod(this.$moment().subtract(1, "years"), this.$moment())
                 this.lastYearFams = visiteTypeData.Regulaer
                 this.lastYearGroups = visiteTypeData.Gruppe
                 this.lastYearBestMonth = bestMonth
