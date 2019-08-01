@@ -17,43 +17,53 @@
                 <b-navbar-nav class="ml-auto pr-5">
                     <!-- Vermieter und Stadt -->
                     <b-nav-item v-if="$store.getters.role === 'landlord' || $store.getters.role === 'city'">
-                        <router-link to="/meldescheine">Meldescheine</router-link>
+                        <v-btn :to="{name: 'Meldescheine'}">
+                            Meldescheine
+                        </v-btn>
                     </b-nav-item>
 
                     <!-- Vermieter -->
                     <b-nav-item id="new-form" v-if="$store.getters.role === 'landlord'">
-                        <router-link to="/meldeschein/anlegen">neuer Meldeschein</router-link>
+                        <v-btn :to="{name: 'MeldescheinAnlegen'}">
+                            neuer Meldeschein
+                        </v-btn>
                     </b-nav-item>
 
                     <!-- Stadt -->
                     <template v-if="$store.getters.role === 'city'">
                         <b-nav-item>
-                            <router-link to="/Betriebe">Betriebe</router-link>
+                            <v-btn :to="{name: 'Betriebe'}">
+                                Betriebe
+                            </v-btn>
                         </b-nav-item>
                         <b-nav-item>
-                            <router-link to="/Betrieb/anlegen">Betrieb anlegen</router-link>
+                            <v-btn :to="{name: 'BetriebAnlegen'}">Betrieb anlegen</v-btn>
                         </b-nav-item>
                         <b-nav-item>
-                            <router-link to="/statistiken">Statistiken</router-link>
+                            <v-btn :to="{name: 'Statistiken'}">
+                                Statistiken
+                            </v-btn>
                         </b-nav-item>
                         <b-nav-item>
-                            <router-link to="/RechnungErstellen">Rechnung erstellen</router-link>
+                            <v-btn :to="{name: 'rechnungErstellen'}">
+                                Rechnung erstellen
+                            </v-btn>
                         </b-nav-item>
                     </template>
 
                     <b-nav-item v-if="$store.getters.role === 'landlord' || $store.getters.role === 'city'">
-                        <span @click="deleteRoleInState">
-                            <router-link to="/">
-                                Abmelden
-                                </router-link>
-                        </span>
+                        <v-btn @click="deleteRoleInState" :to="{name: 'index'}">
+                            Abmelden
+                        </v-btn>
                     </b-nav-item>
                     <template v-else>
                         <b-nav-item>
-                            <router-link to="/login">Vermieter-Login</router-link>
+                            <v-btn :to="{name: 'login'}">
+                                Vermieter-Login
+                            </v-btn>
                         </b-nav-item>
                         <b-nav-item>
-                            <router-link to="/stadtlogin">Stadt-Login</router-link>
+                            <v-btn :to="{name: 'Stadtlogin'}">Stadt-Login</v-btn>
                         </b-nav-item>
                     </template>
                 </b-navbar-nav>

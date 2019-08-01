@@ -106,10 +106,10 @@
                                 <v-divider/>
                                 <v-layout row justify-center text-xs-center pb-3>
                                     <v-flex md3>
-                                        Erwachene (Urlaub): {{propform.formData.amountAdultHoliday}}
+                                        Erwachsene (Urlaub): {{propform.formData.amountAdultHoliday}}
                                     </v-flex>
                                     <v-flex md3>
-                                        Erwachene (Geschäftlich): {{propform.formData.amountAdultBusiness}}
+                                        Erwachsene (Geschäftlich): {{propform.formData.amountAdultBusiness}}
                                     </v-flex>
                                     <v-flex md3>
                                         Kinder (unter 16): {{propform.formData.amountChildren}}
