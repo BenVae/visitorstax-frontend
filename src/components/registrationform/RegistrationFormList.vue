@@ -216,17 +216,14 @@
                 if (this.arrivalDate == null && this.departureDate == null) {
                     return this.items
                 } else if (this.arrivalDate != null && this.departureDate == null) {
-                    console.log(this.items)
                     return this.items.filter(item =>
                         Date.parse(item.formData.arrivalDate) >= Date.parse(this.arrivalDate)
                     )
                 } else if (this.arrivalDate == null && this.departureDate != null) {
-                    console.log(this.items)
                     return this.items.filter(item =>
                         Date.parse(item.formData.departureDate) <= Date.parse(this.departureDate)
                     )
                 } else {
-                    console.log(this.items)
                     return this.items.filter(item =>
                         Date.parse(item.formData.arrivalDate) >= Date.parse(this.arrivalDate) && Date.parse(item.formData.departureDate) <= Date.parse(this.departureDate)
                     )

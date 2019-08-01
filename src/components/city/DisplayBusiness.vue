@@ -10,6 +10,9 @@
                         </v-card-title>
                         <v-container pt-0>
                             <v-layout row text-center>
+                                <v-flex>
+                                    {{propsbusiness.contactPersonName}} {{propsbusiness.contactPersonSurname}}
+                                </v-flex>
                                 <v-flex xs12>
                                     Mail: {{propsbusiness.contactEmail}}
                                 </v-flex>
@@ -168,7 +171,7 @@
 
         beforeMount() {
             if(typeof this.propsbusiness != "undefined") {
-                this.title = "Betrieb von " + this.propsbusiness.contactPersonName + " " + this.propsbusiness.contactPersonSurname
+                this.title = this.propsbusiness.businessName + " (" + this.propsbusiness.type + ")"
                 this.items = this.getForms()
             }
         },
@@ -177,21 +180,13 @@
             getForms() {
                 var items = this.$store.getters.registrationForms;
 
-                console.log(items)
-
                 if (this.$store.getters.role === 'city') {
                    items = items.filter(item => item.meta.state === "submitted")
                 }
 
-                console.log(items)
-
-                console.log("businessid: " + this.propsbusiness.businessId);
-
-
                 items = items.filter(form =>
                     parseInt(form.meta.businessObject.business.id) === parseInt(this.propsbusiness.businessId)
                 );
-                console.log(items)
 
                 return items
             },
