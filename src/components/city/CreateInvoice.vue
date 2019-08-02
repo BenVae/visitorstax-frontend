@@ -28,10 +28,9 @@
 </template>
 
 <script>
-    import Layout from "../utils/StandardLayout";
+    import Layout from "../utils/Layout";
     import Title from "../utils/Title";
-    import {getBusinesses} from "../../script/invoiceService";
-    import {createpdf, downloadPDF} from "../../script/billService";
+    import {createpdf, downloadPDF, getBusinesses} from "../../services/invoiceService";
 
     export default {
         name: "CreateInvoice",
@@ -57,13 +56,13 @@
         beforeMount() {
             this.businesses = getBusinesses();
             let registrationForms = [];
-            this.$store.getters.registrationForms.forEach(function(element){
-                if(element.meta.state === "submitted") {
+            this.$store.getters.registrationForms.forEach(function (element) {
+                if (element.meta.state === "submitted") {
                     registrationForms.push(element.meta.businessObject.business.id)
                 }
             });
-            this.businesses = this.businesses.filter(function(element){
-                if(registrationForms.includes(parseInt(element.value))){
+            this.businesses = this.businesses.filter(function (element) {
+                if (registrationForms.includes(parseInt(element.value))) {
                     return element
                 }
             });
@@ -71,7 +70,3 @@
 
     }
 </script>
-
-<style scoped>
-
-</style>

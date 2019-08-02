@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import Navbar from "./components/utils/Navbar";
+    import Navbar from "./components/Navbar";
 
     export default {
         components: {Navbar}
@@ -23,7 +23,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         position: fixed;
-        background: url("assets/Constance.png");
+        background: url("assets/images/Constance.png");
         background-size: cover;
         height: 100vh;
         width: 100vw;

@@ -121,7 +121,7 @@
 
 <script>
     import Title from "../utils/Title"
-    import Layout from "../utils/StandardLayout"
+    import Layout from "../utils/Layout"
 
     export default {
         name: "DisplayBusiness",
@@ -168,14 +168,12 @@
                 ]
             }
         },
-
         beforeMount() {
             if(typeof this.propsbusiness != "undefined") {
                 this.title = this.propsbusiness.businessName + " (" + this.propsbusiness.type + ")"
                 this.items = this.getForms()
             }
         },
-
         methods: {
             getForms() {
                 var items = this.$store.getters.registrationForms;
@@ -199,7 +197,3 @@
         }
     }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

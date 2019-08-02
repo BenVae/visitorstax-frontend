@@ -3,102 +3,102 @@
         <Title name="Betrieb anlegen"/>
         <v-form ref="form">
             <v-container>
-                <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                <v-layout justify-center row>
+                    <v-flex md3 sm6>
                         <v-select
-                                v-model="business.type"
                                 :items="types"
                                 label="Art"
+                                v-model="business.type"
                         ></v-select>
                     </v-flex>
-                    <v-flex sm6 md3>
+                    <v-flex md3 sm6>
                         <v-text-field
-                                v-model="business.businessName"
                                 :rules="[v => !!v || 'Bitte Betriebsname eingeben']"
                                 label="Name des Betriebs"
+                                v-model="business.businessName"
                         >
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm6 md3>
+                    <v-flex md3 sm6>
                         <v-text-field
-                                v-model="business.user.username"
                                 :rules="[v => !!v || 'Bitte Betriebsnummer eingeben']"
                                 label="Betriebsnummer"
+                                v-model="business.user.username"
                         >
                         </v-text-field>
                     </v-flex>
                 </v-layout>
-                <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                <v-layout justify-center row>
+                    <v-flex md3 sm6>
                         <v-text-field
                                 :rules="[v => !!v || 'Bitte Straße/Hausnummer eingeben']"
-                                v-model="business.address.streetAndNumber"
-                                label="Straße/Hausnummer">
+                                label="Straße/Hausnummer"
+                                v-model="business.address.streetAndNumber">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm4 md2>
+                    <v-flex md2 sm4>
                         <v-text-field
                                 :rules="[v => !!v || 'Bitte Postleihzahl eingeben']"
-                                v-model="business.address.zipCode"
-                                label="Postleizahl">
+                                label="Postleizahl"
+                                v-model="business.address.zipCode">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm4 md2>
+                    <v-flex md2 sm4>
                         <v-text-field
                                 :rules="[v => !!v || 'Bitte Wohnort eingeben']"
-                                v-model="business.address.city"
-                                label="Wohnort">
+                                label="Wohnort"
+                                v-model="business.address.city">
                         </v-text-field>
                     </v-flex>
                 </v-layout>
             </v-container>
             <row-with-description name="Kontaktperson">
-                <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                <v-layout justify-center row>
+                    <v-flex md3 sm6>
                         <v-text-field
-                                v-model="business.contactPersonName"
                                 :rules="[v => !!v || 'Bitte Vorname eingeben']"
-                                label="Vorname (nur Rufname)">
+                                label="Vorname (nur Rufname)"
+                                v-model="business.contactPersonName">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm6 md3>
+                    <v-flex md3 sm6>
                         <v-text-field
-                                v-model="business.contactPersonSurname"
                                 :rules="[v => !!v || 'Bitte Familienname eingeben']"
-                                label="Familienname">
+                                label="Familienname"
+                                v-model="business.contactPersonSurname">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm6 md3>
+                    <v-flex md3 sm6>
                         <v-text-field
                                 :rules="[v => !!v || 'Bitte E-mail Adresse eingeben']"
-                                v-model="business.contactEmail"
-                                label="E-Mail">
+                                label="E-Mail"
+                                v-model="business.contactEmail">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm6 md3>
+                    <v-flex md3 sm6>
                         <v-text-field
                                 :rules="[v => !!v || 'Bitte Telefonnummer eingeben']"
-                                v-model="business.contactTel"
-                                label="Telefonnummer">
+                                label="Telefonnummer"
+                                v-model="business.contactTel">
                         </v-text-field>
                     </v-flex>
                 </v-layout>
             </row-with-description>
             <row-with-description name="Mietobjekte">
-                <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                <v-layout justify-center row>
+                    <v-flex md3 sm6>
                         <v-text-field
-                                v-model="businessObject.address.streetAndNumber"
-                                label="Straße/Hausnummer">
+                                label="Straße/Hausnummer"
+                                v-model="businessObject.address.streetAndNumber">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm6 md3>
+                    <v-flex md3 sm6>
                         <v-select
-                                v-model="businessObject.address.zipCode"
                                 :items="zipCodes"
-                                label="Postleitzahl"
-                                append-outer-icon="add_circle"
                                 @click:append-outer="createBusinessObject"
+                                append-outer-icon="add_circle"
+                                label="Postleitzahl"
+                                v-model="businessObject.address.zipCode"
                         ></v-select>
                     </v-flex>
                 </v-layout>
@@ -111,20 +111,20 @@
                                 </v-card-title>
                                 <v-container>
                                     <v-layout row text-center>
-                                        <v-flex xs12 md3
-                                                v-for="(object,index) in business.businessObjects" :key="index">
+                                        <v-flex :key="index" md3
+                                                v-for="(object,index) in business.businessObjects" xs12>
                                             <v-card elevation="7" height="100px">
                                                 <v-container fill-height>
-                                                    <v-layout row align-center>
+                                                    <v-layout align-center row>
                                                         <v-flex>
                                                             {{object.address.streetAndNumber}}<br>{{object.address.zipCode}}
                                                         </v-flex>
                                                     </v-layout>
                                                     <close-icon
-                                                            class="show-pointer"
-                                                            v-on:click="deleteObject(index)"
                                                             :size="16"
-                                                            fill-color="#607D8B">
+                                                            class="show-pointer"
+                                                            fill-color="#607D8B"
+                                                            v-on:click="deleteObject(index)">
                                                     </close-icon>
                                                 </v-container>
                                             </v-card>
@@ -148,11 +148,11 @@
 </template>
 
 <script>
-    import Layout from "../utils/StandardLayout";
+    import Layout from "../utils/Layout";
     import Title from "../utils/Title";
     import RowWithDescription from "../utils/RowWithDescription";
     import CloseIcon from "vue-material-design-icons/Close";
-    import {createBusiness} from "../../script/businessService";
+    import {createBusiness} from "../../services/businessService";
 
     export default {
         name: "CreateBusiness",
@@ -177,7 +177,7 @@
             deleteObject(index) {
                 this.business.businessObjects.splice(index, 1);
             },
-            submitForm(){
+            submitForm() {
                 if (this.$refs.form.validate()) {
                     createBusiness(this.business);
                     this.$router.push({name: 'Betriebe'})
@@ -224,7 +224,3 @@
 
     }
 </script>
-
-<style scoped>
-
-</style>

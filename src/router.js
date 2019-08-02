@@ -1,21 +1,20 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from "./components/utils/index";
-import Start from "./components/Start";
-import Login from "./components/Login";
-import RegistraionForm from "./components/registrationform/RegistraionForm";
-import ShowRegForm from "./components/registrationform/DisplaySingularRegForm";
-import RegistrationFormList from "./components/registrationform/RegistrationFormList";
-import IdCheck from "./components/registrationform/IdCheck";
+import Index from "./components/Disclaimer";
+import Start from "./components/Dashboard";
+import Login from "./components/BusinessLogin";
+import RegistraionForm from "./components/business/RegistraionForm";
+import ShowRegForm from "./components/business/DisplayRegistrationForm";
+import RegistrationFormList from "./components/business/RegistrationFormList";
 import BusinessList from "./components/city/BusinessList";
-import GroupRegistraionForm from "./components/registrationform/GroupRegistraionForm";
+import GroupRegistraionForm from "./components/business/GroupRegistraionForm";
 import DisplayBusiness from "./components/city/DisplayBusiness";
 import LoginCity from "./components/LoginCity";
-import EditRegistraionForm from "./components/registrationform/EditRegistraionForm";
-import EditGroupRegistraionForm from "./components/registrationform/EditGroupRegistraionForm";
+import EditRegistraionForm from "./components/business/EditRegistraionForm";
+import EditGroupRegistraionForm from "./components/business/EditGroupRegistraionForm";
 import CreateInvoice from "./components/city/CreateInvoice";
 import CityStatistics from "./components/city/CityStatistics";
-import CreateBusiness from "./components/city/CreateBusiness";
+import CreateBusiness from "./components/city/BusinessForm";
 import EditBusiness from "./components/city/EditBusiness";
 
 Vue.use(Router);
@@ -26,7 +25,7 @@ export default new Router({
     routes: [
         {
             path: '/',
-            name: 'index',
+            name: 'Disclaimer.vue',
             component: Index
         },
         {
@@ -59,10 +58,6 @@ export default new Router({
             path: '/gruppenMeldeschein/anlegen',
             name: 'GruppenMeldescheinAnlegen',
             component: GroupRegistraionForm,
-        },
-        {
-            path: '/idCheck',
-            component: IdCheck,
         },
         {
             path: '/Betriebe',

@@ -22,8 +22,7 @@
                                     transition="scale-transition"
                                     offset-y
                                     full-width
-                                    min-width="290px"
-                            >
+                                    min-width="290px">
                                 <template v-slot:activator="{ on }">
                                     <v-text-field
                                             label="Ankunft"
@@ -51,8 +50,7 @@
                                     transition="scale-transition"
                                     offset-y
                                     full-width
-                                    min-width="290px"
-                            >
+                                    min-width="290px">
                                 <template v-slot:activator="{ on }">
                                     <v-text-field
                                             label="Abfahrt"
@@ -78,8 +76,7 @@
                         :items="compileSearch"
                         :pagination.sync="pagination"
                         :rows-per-page-items="['']"
-                        :search="search"
-                >
+                        :search="search">
                     <template v-slot:items="props">
                         <tr @click="displaySingleRegistrationForm(props.item)">
                             <td>
@@ -125,9 +122,9 @@
 
 
 <script>
-    import StandardLayout from "../utils/StandardLayout";
+    import StandardLayout from "../utils/Layout";
     import Title from "../utils/Title";
-    import {getBusinessIdOfLoggedInUser} from "../../script/loginService";
+    import {getBusinessIdOfLoggedInUser} from "../../services/loginService";
 
     export default {
         name: "RegistrationFormList",
@@ -242,7 +239,6 @@
             },
             mapStatus(status) {
                 let stat;
-
                 switch (status) {
                     case "submitted":
                         stat = "Abgeschickt";
@@ -257,12 +253,8 @@
                         stat = "Rechnung bezahlt";
                         break;
                 }
-
                 return stat;
             }
         }
     }
 </script>
-
-<style scoped>
-</style>

@@ -148,42 +148,15 @@
 </template>
 
 <script>
-    import Layout from "../utils/StandardLayout";
+    import Layout from "../utils/Layout";
     import Title from "../utils/Title";
     import RowWithDescription from "../utils/RowWithDescription";
     import CloseIcon from "vue-material-design-icons/Close";
-    import {updateBusiness} from "../../script/businessService";
+    import {updateBusiness} from "../../services/businessService";
 
     export default {
         name: "CreateBusiness",
         components: {CloseIcon, Title, Layout, RowWithDescription},
-        methods: {
-            createBusinessObject() {
-                if (this.businessObject.address.streetAndNumber !== "") {
-                    this.business.businessObjects.push({
-                        id: this.business.businessObjects.length + 1,
-                        address: {
-                            streetAndNumber: this.businessObject.address.streetAndNumber,
-                            zipCode: this.businessObject.address.zipCode,
-                            city: "Konstanz",
-                            country: "Germany"
-                        }
-                    });
-                    this.businessObject.address.streetAndNumber = "";
-                } else {
-                    alert("Straße/Hausnummer Feld darf nicht leer sein")
-                }
-            },
-            deleteObject(index) {
-                this.business.businessObjects.splice(index, 1);
-            },
-            submitForm(){
-                if (this.$refs.form.validate()) {
-                    updateBusiness(this.business);
-                    this.$router.push({name: 'Betriebe'})
-                }
-            }
-        },
         props: {
             businessProp: Object
         },
@@ -205,11 +178,33 @@
         },
         beforeMount() {
             this.business = this.businessProp;
+        },
+        methods: {
+            createBusinessObject() {
+                if (this.businessObject.address.streetAndNumber !== "") {
+                    this.business.businessObjects.push({
+                        id: this.business.businessObjects.length + 1,
+                        address: {
+                            streetAndNumber: this.businessObject.address.streetAndNumber,
+                            zipCode: this.businessObject.address.zipCode,
+                            city: "Konstanz",
+                            country: "Germany"
+                        }
+                    });
+                    this.businessObject.address.streetAndNumber = "";
+                } else {
+                    alert("Straße/Hausnummer Feld darf nicht leer sein")
+                }
+            },
+            deleteObject(index) {
+                this.business.businessObjects.splice(index, 1);
+            },
+            submitForm() {
+                if (this.$refs.form.validate()) {
+                    updateBusiness(this.business);
+                    this.$router.push({name: 'Betriebe'})
+                }
+            }
         }
-
     }
 </script>
-
-<style scoped>
-
-</style>

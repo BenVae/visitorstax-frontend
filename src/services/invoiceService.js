@@ -6,6 +6,7 @@ let businessName;
 let streetAndNumber;
 let city;
 let zipCode;
+
 let pdfMake = require('pdfmake/build/pdfmake.js');
 let pdfFonts = require('pdfmake/build/vfs_fonts.js');
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -25,6 +26,20 @@ export function downloadPDF(businessId) {
     getDataForBusiness(businessId);
 
     pdfMake.createPdf(getDocumentDefinition()).download(businessId + "_Rechnung_vom_" + moment().format('DD_MM_YYYY'));
+}
+
+export function getBusinesses() {
+    let businessData = store.getters.businessData;
+    let businesses = [];
+    businessData.forEach(function (business) {
+        let tmp = {
+            text: business.businessName,
+            value: business.businessId,
+        };
+        businesses.push(tmp)
+    });
+
+    return businesses;
 }
 
 function createTable() {
@@ -353,20 +368,6 @@ function getDocumentDefinition() {
 
         }
     }
-}
-
-function getBusinesses() {
-    let businessData = store.getters.businessData;
-    let businesses = [];
-    businessData.forEach(function (business) {
-        let tmp = {
-            text: business.businessName,
-            value: business.businessId,
-        };
-        businesses.push(tmp)
-    });
-
-    return businesses;
 }
 
 function getDataForBusiness(businessId) {

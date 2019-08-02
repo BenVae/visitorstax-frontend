@@ -5,7 +5,7 @@
                 <img class="pl-5"
                      id="navbar-pic"
                      height="50"
-                     src="../../assets/Constance_logo.png"
+                     src="../assets/exampleData/Constance_logo.png"
                      alt="Konstanz Logo"
                      @click="showDisclaimerOrDashboard">
             </b-navbar-brand>
@@ -52,7 +52,7 @@
                     </template>
 
                     <b-nav-item v-if="$store.getters.role === 'landlord' || $store.getters.role === 'city'">
-                        <v-btn @click="deleteRoleInState" :to="{name: 'index'}">
+                        <v-btn @click="deleteRoleInState" :to="{name: 'Disclaimer.vue'}">
                             Abmelden
                         </v-btn>
                     </b-nav-item>

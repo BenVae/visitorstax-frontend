@@ -38,13 +38,4 @@
     .row-with-description {
         border-top: 1px solid darkgray;
     }
-
-    .orders-layout {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 50%;
-        overflow: auto;
-    }
 </style>

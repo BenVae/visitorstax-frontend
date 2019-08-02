@@ -24,12 +24,24 @@
                 >
                     <template v-slot:items="props">
                         <tr @click="displaySingleBusiness(props.item)">
-                            <td><v-layout justify-center>{{ props.item.user.username}}</v-layout></td>
-                            <td><v-layout justify-center>{{ props.item.type}}</v-layout></td>
-                            <td><v-layout justify-center>{{ props.item.contactPersonSurname}}</v-layout></td>
-                            <td><v-layout justify-center>{{ props.item.contactPersonName}}</v-layout></td>
-                            <td><v-layout justify-center>{{ props.item.address.streetAndNumber}}</v-layout></td>
-                            <td><v-layout justify-center>{{ props.item.businessObjects.length}}</v-layout></td>
+                            <td>
+                                <v-layout justify-center>{{ props.item.user.username}}</v-layout>
+                            </td>
+                            <td>
+                                <v-layout justify-center>{{ props.item.type}}</v-layout>
+                            </td>
+                            <td>
+                                <v-layout justify-center>{{ props.item.contactPersonSurname}}</v-layout>
+                            </td>
+                            <td>
+                                <v-layout justify-center>{{ props.item.contactPersonName}}</v-layout>
+                            </td>
+                            <td>
+                                <v-layout justify-center>{{ props.item.address.streetAndNumber}}</v-layout>
+                            </td>
+                            <td>
+                                <v-layout justify-center>{{ props.item.businessObjects.length}}</v-layout>
+                            </td>
                         </tr>
                     </template>
                     <template v-slot:no-results>
@@ -44,47 +56,48 @@
 </template>
 
 <script>
-    import businessData from '../../assets/businessData';
-    import StandardLayout from "../utils/StandardLayout";
+    import businessData from '../../assets/images/businesses';
+    import StandardLayout from "../utils/Layout";
     import Title from "../utils/Title";
+
     export default {
         name: "BusinessList",
         components: {Title, StandardLayout},
-        data(){
-            return{
-                pagination:{rowsPerPage:8},
+        data() {
+            return {
+                pagination: {rowsPerPage: 8},
                 search: '',
                 items: null,
-                headers:[
+                headers: [
                     {
                         text: 'Betr.-Nr.',
                         value: 'businessId',
-                        align:'center'
+                        align: 'center'
                     },
                     {
                         text: 'Typ',
                         value: 'type',
-                        align:'center'
+                        align: 'center'
                     },
                     {
                         text: 'Name',
                         value: 'contactPersonSurname',
-                        align:'center'
+                        align: 'center'
                     },
                     {
                         text: 'Vorname',
                         value: 'contactPersonName',
-                        align:'center'
+                        align: 'center'
                     },
                     {
                         text: 'Adresse',
                         value: 'address',
-                        align:'center'
+                        align: 'center'
                     },
                     {
                         text: 'Anzahl Mietobjekte',
                         value: 'businessObjects',
-                        align:'center'
+                        align: 'center'
                     }
                 ]
             }
@@ -94,13 +107,9 @@
         },
 
         methods: {
-            displaySingleBusiness(itemProp) {
-                this.$router.push({name: 'Betrieb', params: {propsbusiness: itemProp}})
+            displaySingleBusiness(businessData) {
+                this.$router.push({name: 'Betrieb', params: {propsbusiness: businessData}})
             }
         }
     }
 </script>
-
-<style scoped>
-
-</style>

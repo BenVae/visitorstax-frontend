@@ -243,11 +243,11 @@
 </template>
 
 <script>
-    import Layout from "../utils/StandardLayout";
+    import Layout from "../utils/Layout";
     import Title from "../utils/Title";
     import RowWithDescription from "../utils/RowWithDescription";
     import BirthdayPicker from "../utils/BirthdayPicker";
-    import {getBusinessObjects, updateRegistrationForm} from "../../script/registrationFormService";
+    import {getBusinessObjects, updateRegistrationForm} from "../../services/registrationFormService";
     import RegularDatePicker from "../utils/RegularDatePicker";
 
     export default {

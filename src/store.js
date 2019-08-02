@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import registrationForms from './assets/sampleRegistrationForm'
-import businessData from './assets/businessData'
+import registrationForms from './assets/exampleData/registrationForms'
+import businessData from './assets/images/businesses'
 
 Vue.use(Vuex);
 

@@ -100,9 +100,9 @@
 </template>
 
 <script>
-    import Layout from "../utils/StandardLayout";
+    import Layout from "../utils/Layout";
     import Title from "../utils/Title";
-    import * as statistics from "../../script/dashboardService"
+    import * as statistics from "../../services/dashboardService"
     import apexchart from 'vue-apexcharts'
 
     export default {
@@ -190,7 +190,7 @@
                 lastDaysGuests: null,
                 lastDaysStays: null,
                 lastDaysTax: null,
-                lastYearFams: null,
+                lastYearRegular: null,
                 lastYearGroups: null,
                 lastYearAvgStay: null,
                 lastYearBestMonth: null,

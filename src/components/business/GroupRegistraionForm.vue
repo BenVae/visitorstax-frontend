@@ -3,110 +3,110 @@
         <Title name="Gruppen-Meldeschein anlegen"/>
         <v-form ref="form">
             <v-container>
-                <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                <v-layout justify-center row>
+                    <v-flex md3 sm6>
                         <v-select
-                                v-model="formData.registrationFormType"
                                 :items="types"
                                 label="Art"
+                                v-model="formData.registrationFormType"
                                 v-on:input="registrationFormTypeChanged"
                         ></v-select>
                     </v-flex>
-                    <v-flex sm6 md3>
+                    <v-flex md3 sm6>
                         <v-select
                                 :items="mietobjekte"
+                                :rules="[v => !!v || 'Bitte Mietobjekt auswählen']"
                                 @change="selectBusinessObject"
                                 item-text="text"
                                 item-value="value"
-                                :rules="[v => !!v || 'Bitte Mietobjekt auswählen']"
                                 label="Mietobjekt"
                         ></v-select>
                     </v-flex>
                 </v-layout>
-                <v-layout row justify-center>
+                <v-layout justify-center row>
                     <v-flex md6>
                         <HotelDatePicker
-                                format="DD.MM.YYYY"
                                 :i18n="rangepickerSettings"
                                 @check-in-changed="setCheckinDate"
-                                @check-out-changed="setCheckoutDate">
+                                @check-out-changed="setCheckoutDate"
+                                format="DD.MM.YYYY">
                         </HotelDatePicker>
                     </v-flex>
                 </v-layout>
             </v-container>
             <row-with-description name="Reiseleiter">
-                <v-layout row justify-center>
-                    <v-flex sm4 md3>
+                <v-layout justify-center row>
+                    <v-flex md3 sm4>
                         <v-text-field
-                                v-model="formData.guest.surname"
                                 :rules="[v => !!v || 'Bitte Vorname eingeben']"
                                 label="Vorname (nur Rufname)"
+                                v-model="formData.guest.surname"
                         >
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm4 md2>
+                    <v-flex md2 sm4>
                         <v-text-field
-                                v-model="formData.guest.name"
                                 :rules="[v => !!v || 'Bitte Familienname eingeben']"
-                                label="Familienname">
+                                label="Familienname"
+                                v-model="formData.guest.name">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm4 md2>
+                    <v-flex md2 sm4>
                         <BirthdayPicker
                                 v-model="formData.guest.dateOfBirth"/>
                     </v-flex>
                 </v-layout>
-                <v-layout row justify-center>
-                    <v-flex sm4 md3>
+                <v-layout justify-center row>
+                    <v-flex md3 sm4>
                         <v-text-field
-                                v-model="formData.guest.passportSerialNumber"
                                 :rules="[v => !!v || 'Bitte Passnummer eingeben']"
-                                label="Passnummer">
+                                label="Passnummer"
+                                v-model="formData.guest.passportSerialNumber">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm4 md2>
+                    <v-flex md2 sm4>
                         <v-text-field
                                 :rules="[v => !!v || 'Bitte Nationalität eingeben']"
-                                v-model="formData.guest.nationality"
-                                label="Nationalität">
+                                label="Nationalität"
+                                v-model="formData.guest.nationality">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm4 md2>
+                    <v-flex md2 sm4>
                         <v-text-field
                                 :rules="[v => !!v || 'Bitte Geburtsort eingeben']"
-                                v-model="formData.guest.placeOfBirth"
-                                label="Geburtsort">
+                                label="Geburtsort"
+                                v-model="formData.guest.placeOfBirth">
                         </v-text-field>
                     </v-flex>
                 </v-layout>
-                <v-layout row justify-center>
-                    <v-flex sm4 md3>
+                <v-layout justify-center row>
+                    <v-flex md3 sm4>
                         <v-text-field
-                                v-model="formData.guest.address.streetAndNumber"
                                 :rules="[v => !!v || 'Bitte Straße/Hausnummer eingeben']"
-                                label="Straße/Hausnummer">
+                                label="Straße/Hausnummer"
+                                v-model="formData.guest.address.streetAndNumber">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm4 md2>
+                    <v-flex md2 sm4>
                         <v-text-field
-                                v-model="formData.guest.address.zipCode"
                                 :rules="[v => !!v || 'Bitte Postleihzahl eingeben']"
-                                label="Postleizahl">
+                                label="Postleizahl"
+                                v-model="formData.guest.address.zipCode">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm4 md2>
+                    <v-flex md2 sm4>
                         <v-text-field
-                                v-model="formData.guest.address.city"
                                 :rules="[v => !!v || 'Bitte Wohnort eingeben']"
-                                label="Wohnort">
+                                label="Wohnort"
+                                v-model="formData.guest.address.city">
                         </v-text-field>
                     </v-flex>
                 </v-layout>
             </row-with-description>
             <row-with-description
                     name="Gruppe">
-                <v-layout row justify-center>
-                    <table id="groupDataTable" class="ma-3">
+                <v-layout justify-center row>
+                    <table class="ma-3" id="groupDataTable">
                         <tr>
                             <th style="width: 40%">
                                 Kategorie
@@ -115,8 +115,8 @@
                                 Anzahl
                             </th>
                             <th style="width: 40%">
-                                <v-tooltip slot="prepend" bottom>
-                                    <v-icon slot="activator" color="grey" dark>info</v-icon>
+                                <v-tooltip bottom slot="prepend">
+                                    <v-icon color="grey" dark slot="activator">info</v-icon>
                                     <span>Bitte geben Sie die Passnummern aller Personen kommasepariert ein.<br>
                                         Beispiel: Passnummer1, Passnummer2, ...<br>
                                     </span>
@@ -130,20 +130,20 @@
                             </td>
                             <td>
                                 <v-text-field
-                                        style="width: 100px"
-                                        placeholder="0"
-                                        v-model="formData.amountAdultHoliday"
-                                        type="number"
                                         max="100"
-                                        min="0">
+                                        min="0"
+                                        placeholder="0"
+                                        style="width: 100px"
+                                        type="number"
+                                        v-model="formData.amountAdultHoliday">
                                 </v-text-field>
                             </td>
                             <td rowspan="4">
                                 <v-textarea
-                                        solo
                                         auto-grow
-                                        v-model="formData.passportSerialNumbers"
                                         placeholder="Beispiel: Passnummer1, Passnummer2, ..."
+                                        solo
+                                        v-model="formData.passportSerialNumbers"
                                 ></v-textarea>
                             </td>
                         </tr>
@@ -153,12 +153,12 @@
                             </td>
                             <td>
                                 <v-text-field
-                                        style="width: 100px"
-                                        placeholder="0"
-                                        v-model="formData.amountAdultBusiness"
-                                        type="number"
                                         max="100"
-                                        min="0">
+                                        min="0"
+                                        placeholder="0"
+                                        style="width: 100px"
+                                        type="number"
+                                        v-model="formData.amountAdultBusiness">
                                 </v-text-field>
                             </td>
                         </tr>
@@ -168,12 +168,12 @@
                             </td>
                             <td>
                                 <v-text-field
-                                        style="width: 100px"
-                                        placeholder="0"
-                                        v-model="formData.amountChildren"
-                                        type="number"
                                         max="100"
-                                        min="0">
+                                        min="0"
+                                        placeholder="0"
+                                        style="width: 100px"
+                                        type="number"
+                                        v-model="formData.amountChildren">
                                 </v-text-field>
                             </td>
                         </tr>
@@ -183,12 +183,12 @@
                             </td>
                             <td>
                                 <v-text-field
-                                        style="width: 100px"
-                                        placeholder="0"
-                                        v-model="formData.amountHandicapped"
-                                        type="number"
                                         max="100"
-                                        min="0">
+                                        min="0"
+                                        placeholder="0"
+                                        style="width: 100px"
+                                        type="number"
+                                        v-model="formData.amountHandicapped">
                                 </v-text-field>
                             </td>
                         </tr>
@@ -197,28 +197,28 @@
             </row-with-description>
             <row-with-description name="Geschäftlichte Tätigkeit"
                                   v-if="hasBusinessVisitors">
-                <v-layout row justify-center>
-                    <v-flex sm6 md3>
+                <v-layout justify-center row>
+                    <v-flex md3 sm6>
                         <v-text-field
-                                v-model="formData.business.amountConferenceVisitors"
+                                :max="maxConferenceVisitor"
                                 label="Anzahl Tagungsbesucher"
-                                type="number"
                                 min="0"
-                                :max="maxConferenceVisitor">
+                                type="number"
+                                v-model="formData.business.amountConferenceVisitors">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm6 md3>
+                    <v-flex md3 sm6>
                         <v-text-field
-                                v-model="formData.business.fieldOfBusiness"
                                 :rules="[v => !!v || 'Bitte Tätigkeitsfeld eingeben']"
-                                label="Tätigkeitsfeld">
+                                label="Tätigkeitsfeld"
+                                v-model="formData.business.fieldOfBusiness">
                         </v-text-field>
                     </v-flex>
-                    <v-flex sm6 md3>
+                    <v-flex md3 sm6>
                         <v-text-field
-                                v-model="formData.business.company"
                                 :rules="[v => !!v || 'Bitte Auftragsfirma eingeben']"
-                                label="Auftragsfirma">
+                                label="Auftragsfirma"
+                                v-model="formData.business.company">
                         </v-text-field>
                     </v-flex>
                 </v-layout>
@@ -235,12 +235,12 @@
 </template>
 
 <script>
-    import Layout from "../utils/StandardLayout";
+    import Layout from "../utils/Layout";
     import Title from "../utils/Title";
     import RowWithDescription from "../utils/RowWithDescription";
     import HotelDatePicker from 'vue-hotel-datepicker'
     import BirthdayPicker from "../utils/BirthdayPicker";
-    import {createRegistrationForm, getBusinessObjects} from "../../script/registrationFormService";
+    import {createRegistrationForm, getBusinessObjects} from "../../services/registrationFormService";
 
     export default {
         name: "GroupRegistrationForm",

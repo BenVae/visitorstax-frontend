@@ -22,7 +22,8 @@
                         </v-form>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn small block color="blue-grey" class="btn_login_custom" dark @click="saveRole">Login</v-btn>
+                        <v-btn small block color="blue-grey" class="btn_login_custom" dark @click="saveRole">Login
+                        </v-btn>
                     </v-card-actions>
                 </v-card>
             </v-flex>
@@ -33,7 +34,7 @@
 <script>
     export default {
         name: "LoginCity",
-        methods:{
+        methods: {
             saveRole: function () {
                 this.$store.commit('changeRole', 'city');
                 this.$router.push({path: '/start'});

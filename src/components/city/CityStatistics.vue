@@ -2,32 +2,32 @@
     <standard-layout>
         <Title name="Statistiken erstellen"/>
         <v-container>
-            <v-layout row justify-center id="textRow">
+            <v-layout id="textRow" justify-center row>
                 <v-flex xs4>
                     <v-menu
-                            v-model="menu1"
                             :close-on-content-click="false"
                             :nudge-right="40"
-                            lazy
-                            transition="scale-transition"
-                            offset-y
                             full-width
-                            min-width="290px">
+                            lazy
+                            min-width="290px"
+                            offset-y
+                            transition="scale-transition"
+                            v-model="menu1">
                         <template v-slot:activator="{ on }">
                             <v-text-field
+                                    :rules="[rules.datum]"
+                                    @click:clear="deleteDate"
+                                    clearable
                                     label="Jahr"
                                     prepend-inner-icon="event"
-                                    v-on="on"
-                                    clearable
                                     v-model="computeItems2"
-                                    @click:clear="deleteDate"
-                                    :rules="[rules.datum]"
+                                    v-on="on"
                             ></v-text-field>
                         </template>
                     </v-menu>
                 </v-flex>
             </v-layout>
-            <v-layout row mt-3>
+            <v-layout mt-3 row>
                 <v-flex>
                     <v-data-table
                             :headers="headers"
@@ -54,7 +54,7 @@
             </v-layout>
 
         </v-container>
-        <v-layout v-if="this.date != null" align-center justify-center>
+        <v-layout align-center justify-center v-if="this.date != null">
             <v-btn
                     @click="downloadPDF"
                     color="blue-grey"
@@ -65,10 +65,11 @@
 </template>
 
 <script>
-    import StandardLayout from "../utils/StandardLayout";
+    import StandardLayout from "../utils/Layout";
     import Title from "../utils/Title";
-    import {statisticsService} from "../../script/statisticsService";
-    import businessData from "../../assets/businessData";
+    import {statisticsService} from "../../services/statisticsService";
+    import businessData from "../../assets/images/businesses";
+
     export default {
         name: "CityStatistics",
         components: {Title, StandardLayout},
@@ -78,8 +79,8 @@
                 date: null,
                 headers: [
                     {
-                      text: '',
-                      sortable: false
+                        text: '',
+                        sortable: false
                     },
                     {
                         text: 'Personen',
@@ -97,43 +98,43 @@
                         sortable: false
                     }
                 ],
-                items:[
+                items: [
                     {
-                        type:"Konstanz (privat)",
-                        persons:0,
-                        freeOfCharge:0,
-                        nights:0
+                        type: "Konstanz (privat)",
+                        persons: 0,
+                        freeOfCharge: 0,
+                        nights: 0
                     },
                     {
-                        type:"Konstanz (Hotel)",
-                        persons:0,
-                        freeOfCharge:0,
-                        nights:0
+                        type: "Konstanz (Hotel)",
+                        persons: 0,
+                        freeOfCharge: 0,
+                        nights: 0
                     },
                     {
-                        type:"Gesamt",
-                        persons:0,
-                        freeOfCharge:0,
-                        nights:0
+                        type: "Gesamt",
+                        persons: 0,
+                        freeOfCharge: 0,
+                        nights: 0
                     }
                 ],
-                rules:{
+                rules: {
                     datum: value => {
-                        if(value === this.$moment(value, 'YYYY').format('YYYY') || value === null){
+                        if (value === this.$moment(value, 'YYYY').format('YYYY') || value === null) {
                             return true
-                        }else{
+                        } else {
                             return 'Bitte geben Sie das Jahr im korrekten Format z.B. 2019 an.'
                         }
                     }
                 }
             }
         },
-        methods:{
-            deleteDate(){
-                this.date=null;
+        methods: {
+            deleteDate() {
+                this.date = null;
                 this.clearItems();
             },
-            clearItems(){
+            clearItems() {
                 this.items[0].persons = 0;
                 this.items[0].freeOfCharge = 0;
                 this.items[0].nights = 0;
@@ -144,17 +145,17 @@
                 this.items[2].freeOfCharge = 0;
                 this.items[2].nights = 0;
             },
-            computePrivateOrHotel(formItem, element){
+            computePrivateOrHotel(formItem, element) {
                 var dict = {};
-                businessData.forEach(function(element){
+                businessData.forEach(function (element) {
                     dict[element.businessId] = element.type;
                 });
 
-                if(dict[element.meta.businessObject.business.id] === "Privat"){
+                if (dict[element.meta.businessObject.business.id] === "Privat") {
                     this.items[0].persons += formItem.persons;
                     this.items[0].freeOfCharge += formItem.freeOfCharge;
                     this.items[0].nights += formItem.nights;
-                }else{
+                } else {
                     this.items[1].persons += formItem.persons;
                     this.items[1].freeOfCharge += formItem.freeOfCharge;
                     this.items[1].nights += formItem.nights;
@@ -164,7 +165,7 @@
                 this.items[2].freeOfCharge += formItem.freeOfCharge;
                 this.items[2].nights += formItem.nights;
             },
-            downloadPDF(){
+            downloadPDF() {
                 let pdfMake = require('pdfmake/build/pdfmake.js');
                 let pdfFonts = require('pdfmake/build/vfs_fonts.js');
                 let pdfName = "Statistiken-" + this.date;
@@ -172,56 +173,58 @@
 
                 pdfMake.createPdf(this.getDocumentDefinition()).download(pdfName);
             },
-            getDocumentDefinition(){
+            getDocumentDefinition() {
 
-               var docDefinition = {
+                var docDefinition = {
                     content: [
-                        {text: 'Übernachtungen '+this.date, fontSize: 25, bold:true,
-                            margin: [ 0, 0, 0, 20],
+                        {
+                            text: 'Übernachtungen ' + this.date, fontSize: 25, bold: true,
+                            margin: [0, 0, 0, 20],
                             alignment: 'center'
                         },
-                        {   layout: 'lightHorizontalLines',
+                        {
+                            layout: 'lightHorizontalLines',
                             table: {
                                 heights: [10, 20, 20, 20],
-                                widths: ['*','*','*','*'],
+                                widths: ['*', '*', '*', '*'],
                                 body: [
-                                    [{text:''},
-                                        {text:'Personen', style:'tableHeader', alignment:'center'},
-                                        {text:'Befreite', style:'tableHeader', alignment:'center'},
-                                        {text:'Nächte', style:'tableHeader', alignment:'center'}],
+                                    [{text: ''},
+                                        {text: 'Personen', style: 'tableHeader', alignment: 'center'},
+                                        {text: 'Befreite', style: 'tableHeader', alignment: 'center'},
+                                        {text: 'Nächte', style: 'tableHeader', alignment: 'center'}],
 
-                                    [{text:'Konstanz (privat)', alignment:'left'},
-                                        {text: this.items[0].persons, alignment:'center'},
-                                        {text: this.items[0].freeOfCharge, alignment:'center'},
-                                        {text: this.items[0].nights, alignment:'center'}],
+                                    [{text: 'Konstanz (privat)', alignment: 'left'},
+                                        {text: this.items[0].persons, alignment: 'center'},
+                                        {text: this.items[0].freeOfCharge, alignment: 'center'},
+                                        {text: this.items[0].nights, alignment: 'center'}],
 
-                                    [{text:'Konstanz (Hotel)', alignment:'left'},
-                                        {text: this.items[1].persons, alignment:'center'},
-                                        {text: this.items[1].freeOfCharge, alignment:'center'},
-                                        {text: this.items[1].nights, alignment:'center'}],
+                                    [{text: 'Konstanz (Hotel)', alignment: 'left'},
+                                        {text: this.items[1].persons, alignment: 'center'},
+                                        {text: this.items[1].freeOfCharge, alignment: 'center'},
+                                        {text: this.items[1].nights, alignment: 'center'}],
 
-                                    [{text:'Gesamt', alignment:'left', bold:true},
-                                        {text: this.items[2].persons, alignment:'center', bold:true},
-                                        {text: this.items[2].freeOfCharge, alignment:'center', bold:true},
-                                        {text: this.items[2].nights, alignment:'center', bold:true}],
+                                    [{text: 'Gesamt', alignment: 'left', bold: true},
+                                        {text: this.items[2].persons, alignment: 'center', bold: true},
+                                        {text: this.items[2].freeOfCharge, alignment: 'center', bold: true},
+                                        {text: this.items[2].nights, alignment: 'center', bold: true}],
 
                                 ]
                             }
                         },
                     ],
-                    styles:{
-                        bottomRow:{
-                            alignment:'center',
-                            bold:true
+                    styles: {
+                        bottomRow: {
+                            alignment: 'center',
+                            bold: true
                         }
                     }
                 };
 
-               return docDefinition;
+                return docDefinition;
             }
         },
-        computed:{
-            computeItems2:{
+        computed: {
+            computeItems2: {
                 set: function (date) {
                     if (this.$moment(date, 'YYYY', true).isValid()) {
                         this.date = date;
@@ -253,7 +256,7 @@
                         });
                     }
                 },
-                get:function () {
+                get: function () {
                     return '';
                 }
             }
@@ -262,10 +265,11 @@
 </script>
 
 <style scoped>
-    #textRow{
+    #textRow {
         min-height: 70px;
     }
-    iframe{
+
+    iframe {
         width: 100%;
     }
 </style>

@@ -170,15 +170,15 @@
         <v-container v-else>
             <h1>Leider wurde kein Meldeschein ausgewählt.</h1>
         </v-container>
-        <img id='imgToExport' src='../../assets/Constance_logo.png' style='display:none'/>
+        <img id='imgToExport' src='../../assets/exampleData/Constance_logo.png' style='display:none'/>
     </Layout>
 </template>
 
 <script>
 
-    import Layout from "../utils/StandardLayout";
+    import Layout from "../utils/Layout";
     import Title from "../utils/Title"
-    import {setSubmittedFlag,setUnsubmittedFlag} from "../../script/registrationFormService";
+    import {setSubmittedFlag, setUnsubmittedFlag} from "../../services/registrationFormService";
 
     export default {
         name: "singularRegForm",
@@ -200,7 +200,7 @@
             }
         },
         methods: {
-            unsubmitRegistrationForm(){
+            unsubmitRegistrationForm() {
                 setUnsubmittedFlag(this.propform.meta.registrationNumber);
                 this.$router.push({name: 'Meldescheine'});
             },
@@ -285,7 +285,7 @@
                     fontSize: 11
                 };
             },
-            groupGuestcardBody(){
+            groupGuestcardBody() {
                 return {
                     stack: [
                         '\n \n',
@@ -297,24 +297,24 @@
                     fontSize: 11
                 };
             },
-            getAmountTaxpayers(){
+            getAmountTaxpayers() {
                 return "Anzahl Personen: " + this.propform.formData.amountAdultHoliday;
             },
-            getGuest(){
+            getGuest() {
                 let guest = this.propform.formData.guest;
 
                 return guest.surname + " " + guest.name;
             },
-            getSpouse(){
+            getSpouse() {
                 let spouse = this.propform.formData.spouse;
 
                 if (spouse.name !== "") {
                     return "Lebenspartner/in: " + spouse.surname + " " + spouse.name;
-                }else{
+                } else {
                     return "";
                 }
             },
-            getPeriod(){
+            getPeriod() {
                 return this.$moment(this.propform.formData.arrivalDate).format('DD.MM.YYYY') + ' - ' +
                     this.$moment(this.propform.formData.departureDate).format('DD.MM.YYYY')
             }
@@ -323,9 +323,7 @@
 </script>
 
 <style lang="scss" scoped>
-
     .top-buffer {
         margin-top: 10px;
     }
-
 </style>

@@ -22,12 +22,12 @@
             <v-layout row align-center justify-space-around class="mt-3">
                 <v-flex xs12 md4>
                     <img style="max-width: 100%"
-                         src="../../assets/Constance_logo.png"
+                         src="../assets/exampleData/Constance_logo.png"
                          alt="Konstanz Logo">
                 </v-flex>
                 <v-flex xs12 md4>
                     <img style="max-width: 100%"
-                         src="../../assets/htwg_logo.png"
+                         src="../assets/images/htwg_logo.png"
                          alt="HTWG Logo">
                 </v-flex>
             </v-layout>
@@ -36,8 +36,8 @@
 </template>
 
 <script>
-    import Title from "./Title";
-    import StandardLayout from "./StandardLayout";
+    import Title from "./utils/Title";
+    import StandardLayout from "./utils/Layout";
 
     export default {
         name: "index",

@@ -6,7 +6,7 @@
                 <v-flex xs12>
                     <v-card>
                         <v-card-title>
-                            <span class="title mx-auto">Offene Scheine</span>
+                            <span class="title mx-auto">Offene Meldescheine</span>
                         </v-card-title>
                         <v-data-table
                                 :headers="unsubmitted.headers"
@@ -51,7 +51,7 @@
                                         </v-flex>
                                         <v-flex>
                                             <div class="font-weight-thin title grey--text">Familien:</div>
-                                            <div class="font-weight-light headline mt-2">{{lastYearFams}}</div>
+                                            <div class="font-weight-light headline mt-2">{{lastYearRegular}}</div>
                                         </v-flex>
                                         <v-flex>
                                             <div class="font-weight-thin title grey--text">Gruppen:</div>
@@ -81,11 +81,11 @@
 </template>
 
 <script>
-    import Layout from "./utils/StandardLayout";
-    import Title from "./utils/Title";
-    import * as statistics from "../script/dashboardService";
+    import Layout from "../utils/Layout";
+    import Title from "../utils/Title";
+    import * as statistics from "../../services/dashboardService";
     import apexchart from 'vue-apexcharts';
-    import {getBusinessIdOfLoggedInUser} from "../script/loginService";
+    import {getBusinessIdOfLoggedInUser} from "../../services/loginService";
 
     export default {
         name: "landlordStart",
@@ -161,7 +161,7 @@
                 lastYearBestTax: null,
                 lastYearWorstMonth: null,
                 lastYearWorstTax: null,
-                lastYearFams: null,
+                lastYearRegular: null,
                 lastYearGroups: null,
                 lastYearGuests: null
             }
@@ -186,12 +186,6 @@
 
                 return items;
             },
-
-            getSubmittedForms() {
-                let items = this.$store.getters.registrationForms.filter(form => form.meta.state === "submitted");
-                return items;
-            },
-
             makeLineChart() {
                 let self = this
                 let i = 11
@@ -208,11 +202,9 @@
 
                 }
             },
-
             displaySingleRegistrationForm(itemProp) {
                 this.$router.push({name: 'Meldeschein', params: {propform: itemProp}})
             },
-
             getLastYearData() {
                 let self = this
 
@@ -236,7 +228,7 @@
                 let visiteTypeData = statistics.getNumberOfFormTypesInPeriod(this.$moment().subtract(1, "years"), this.$moment())
 
                 this.lastYearGuests = statistics.getGuestsInPeriod(this.$moment().subtract(1, "years"), this.$moment())
-                this.lastYearFams = visiteTypeData.Regulaer
+                this.lastYearRegular = visiteTypeData.Regulaer
                 this.lastYearGroups = visiteTypeData.Gruppe
                 this.lastYearBestMonth = bestMonth
                 this.lastYearBestTax = bestTax.toFixed(2)
@@ -246,7 +238,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>

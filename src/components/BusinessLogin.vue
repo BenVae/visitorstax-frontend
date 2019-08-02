@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import {checkLoginData} from "../script/loginService";
+    import {checkLoginData} from "../services/loginService";
 
     export default {
         name: "Login",
